@@ -1,8 +1,11 @@
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
+const port = 3000
 
-app.use((req, res, next) => {
-    res.status(200).json({ message: 'Hello World' });
-});
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 
-module.exports = app;
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`)
+})

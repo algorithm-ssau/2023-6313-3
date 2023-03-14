@@ -2,7 +2,7 @@
   "name": "auto.ru.web",
   "version": "0.0.0",
   "description": "Auto.Ru.Web",
-  "main": "server.js",
+  "main": "app.js",
   "author": {
     "name": ""
   },
