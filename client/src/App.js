@@ -1,5 +1,11 @@
+import HomePage from "./Pages/Home";
+
 function App() {
-  return <div>Ser - Alone</div>;
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 }
 
 export default App;
