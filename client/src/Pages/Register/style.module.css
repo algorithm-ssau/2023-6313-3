@@ -1,0 +1,14 @@
+* {
+	box-sizing: border-box
+}
+
+input {
+	display: block;
+}
+
+.layout {}
+
+.container {
+	padding: auto auto;
+	color: red;
+}
