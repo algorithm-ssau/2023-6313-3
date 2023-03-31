@@ -1,6 +1,7 @@
 import "./style.css";
 
 export default function HomePage() {
+  const j = "ahil";
   return (
     <>
       <nav class="navbar">
