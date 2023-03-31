@@ -1,7 +1,10 @@
-from flask import Flask
+from flask import Flask, request
+import json
+import hashlib
+
+import  authModel
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def hello_world():  # put application's code here
