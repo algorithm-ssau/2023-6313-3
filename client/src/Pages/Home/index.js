@@ -1,15 +1,22 @@
+import Navbar from "../../components/Navbar.js";
+import Card from "../../components/Card.js";
+import SearchField from "../../components/SearchField.js";
+
 import "./style.css";
 
-export default function HomePage({ children }) {
+export default function HomePage() {
   return (
     <>
-      <form class='searching-line'>
-        <input type="search" placeholder="Искать здесь..." />
-        <button class='find' type="submit">Найти</button>
-      </form>
-
+      <Navbar />
+      <SearchField />
       <div class="container mt-5">
-        <div class="row">{children}</div>
+        <div class="row">
+          <Card title={"Марка и модель"} price={2000000} />
+          <Card title={"Марка и модель"} price={2000000} />
+          <Card title={"Марка и модель"} price={2000000} />
+          <Card title={"Марка и модель"} price={2000000} />
+          <Card title={"Марка и модель"} price={2000000} />
+        </div>
       </div>
     </>
   );
