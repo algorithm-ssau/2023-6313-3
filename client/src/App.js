@@ -1,5 +1,5 @@
 function App() {
-  return <div>Ser - Alone</div>;
+  return <div></div>;
 }
 
 export default App;
