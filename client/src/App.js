@@ -7,10 +7,10 @@ function App() {
     <>
       <Navbar />
       <HomePage>
-        <Card title={"Марка и модель"} price={2000000} />
-        <Card title={"Марка и модель"} price={2000000} />
-        <Card title={"Марка и модель"} price={2000000} />
-        <Card title={"Марка и модель"} price={2000000} />
+        <Card title={"Марка и модель"} price={"2 000 000"} />
+        <Card title={"Марка и модель"} price={"2 000 000"} />
+        <Card title={"Марка и модель"} price={"2 000 000"} />
+        <Card title={"Марка и модель"} price={"2 000 000"} />
       </HomePage>
     </>
   );

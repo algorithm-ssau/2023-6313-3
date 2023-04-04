@@ -1,5 +1,6 @@
 export default function Card({ title, price }) {
   return (
+    
     <div class="col-md-3">
       <div class="product">
         <div class="image">

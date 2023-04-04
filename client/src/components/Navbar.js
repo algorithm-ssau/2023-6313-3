@@ -17,7 +17,7 @@ export default function Navbar() {
               <a href="#">Контакты</a>
             </li>
           </ul>
-          <a href="#" class="callback">
+          <a href="#" class="profile">
             Личный кабинет
           </a>
         </div>
