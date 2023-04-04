@@ -1,9 +1,7 @@
-import RegisterPage from "./Pages/Register";
-
 function App() {
   return (
     <>
-      <RegisterPage />
+     <div></div>
     </>
   );
 }
