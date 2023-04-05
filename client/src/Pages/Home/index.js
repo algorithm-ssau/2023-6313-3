@@ -1,16 +1,16 @@
-import Navbar from "../../components/Navbar.js";
-import Card from "../../components/Card.js";
-import SearchField from "../../components/SearchField.js";
+import Navbar from "../../components/Navbar";
+import Card from "../../components/Card";
+import SearchField from "../../components/SearchField";
 
-import "./style.css";
+import styles from "./style.module.css";
 
 export default function HomePage() {
   return (
-    <>
+    <div className={styles["body"]}>
       <Navbar />
       <SearchField />
-      <div class="container mt-5">
-        <div class="row">
+      <div className="container mt-5">
+        <div className="row">
           <Card title={"Марка и модель"} price={2000000} />
           <Card title={"Марка и модель"} price={2000000} />
           <Card title={"Марка и модель"} price={2000000} />
@@ -18,6 +18,6 @@ export default function HomePage() {
           <Card title={"Марка и модель"} price={2000000} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
