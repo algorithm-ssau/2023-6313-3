@@ -1,15 +1,16 @@
+import styles from "./style.module.css";
+
 export default function Card({ title, price }) {
   return (
-    
-    <div class="col-md-3">
-      <div class="product">
-        <div class="image">
+    <div className="col-md-3">
+      <div className={styles["product"]}>
+        <div className={styles["image"]}>
           <img src="http://placehold.it/300x400" alt="" />
         </div>
 
-        <div class="info">
+        <div className={styles["info"]}>
           <h3>{title}</h3>
-          <ul class="rating">
+          <ul className={styles["rating"]}>
             <li>
               <ion-icon name="star"></ion-icon>
             </li>
@@ -26,12 +27,12 @@ export default function Card({ title, price }) {
               <ion-icon name="star-half-outline"></ion-icon>
             </li>
           </ul>
-          <div class="info-price">
-            <span class="price">
+          <div className={styles["info-price"]}>
+            <span className={styles["price"]}>
               {price}
               <small>₽</small>
             </span>
-            <button class="add-to-favourites">
+            <button className={styles["add-to-favourites"]}>
               <ion-icon name="heart-outline"></ion-icon>
             </button>
           </div>

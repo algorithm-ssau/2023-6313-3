@@ -1,12 +1,14 @@
+import styles from "./style.module.css";
+
 export default function Navbar() {
   return (
-    <nav class="navbar">
-      <div class="container">
-        <a href="#" class="navbar-brand">
+    <nav className={"navbar " + styles["navbar"]}>
+      <div className={"container " + styles["container"]}>
+        <a href="#" className={"navbar-brand " + styles["navbar-brand"]}>
           Auto.Ru
         </a>
-        <div class="navbar-wrap">
-          <ul class="navbar-menu">
+        <div className={"navbar-wrap " + styles["navbar-wrap"]}>
+          <ul className={"navbar-menu " + styles["navbar-menu"]}>
             <li>
               <a href="#">О нас</a>
             </li>
@@ -17,7 +19,7 @@ export default function Navbar() {
               <a href="#">Контакты</a>
             </li>
           </ul>
-          <a href="#" class="profile">
+          <a href="#" className={"profile " + styles["profile"]}>
             Личный кабинет
           </a>
         </div>
