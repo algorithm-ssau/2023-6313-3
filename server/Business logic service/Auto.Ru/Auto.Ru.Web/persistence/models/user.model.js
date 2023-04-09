@@ -6,13 +6,16 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         email: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull : false
         },
         login: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull : false
         },
         password: {
-            type: Sequelize.BOOLEAN
+            type: Sequelize.STRING,
+            allowNull : false
         }
     });
 
