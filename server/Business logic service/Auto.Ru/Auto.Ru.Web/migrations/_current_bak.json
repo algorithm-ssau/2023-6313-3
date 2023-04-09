@@ -19,9 +19,9 @@
                     "field": "login",
                     "seqType": "Sequelize.STRING"
                 },
-                "password": {
+                "password_hash": {
                     "allowNull": false,
-                    "field": "password",
+                    "field": "password_hash",
                     "seqType": "Sequelize.STRING"
                 },
                 "createdAt": {
@@ -36,10 +36,45 @@
                 }
             },
             "indexes": []
+        },
+        "roles": {
+            "tableName": "roles",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "allowNull": false,
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "createdAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updatedAt",
+                    "seqType": "Sequelize.DATE"
+                },
+                "userId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "users",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "userId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
         }
     },
-    "path": ".\\_current.json",
-    "backupPath": ".\\_current_bak.json",
-    "exists": false,
-    "revision": 1
+    "revision": 3
 }

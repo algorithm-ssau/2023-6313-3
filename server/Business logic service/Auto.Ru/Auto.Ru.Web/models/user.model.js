@@ -19,5 +19,11 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
+    const Role = require('./user.role')
+    User.associate = (models) => {
+        User.hasOne(models.role);
+        models.role.belongsTo(User)
+    };
+
     return User;
 };
