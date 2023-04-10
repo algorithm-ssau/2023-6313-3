@@ -1,9 +1,8 @@
 module.exports.persistence = { //todo: update
   development: {
-    connectionString: "localhost",
-    USER: "root",
-    PASSWORD: "123456",
-    DB: "testdb",
+    connectionString: "data source=I-NUC-4250;initial catalog=master;trusted_connection=true",
+    USER: "auto-ru",
+    DB: "Auto.Ru",
     dialect: "sql-server",
     pool: {
       max: 5,

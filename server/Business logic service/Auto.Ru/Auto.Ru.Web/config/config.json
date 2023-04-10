@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
+    "connectionString": "data source=I-NUC-4250;initial catalog=master;trusted_connection=true",
+    "username": "auto-ru",
     "password": null,
-    "database": "database_development",
-    "host": "localhost",
+    "database": "Auto.Ru",
     "dialect": "mssql"
   }
 }
