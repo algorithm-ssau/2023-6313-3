@@ -1,7 +1,9 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/README.md
+/.name
+/2023-6313-3/README.md
+
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
