@@ -1,13 +1,34 @@
-const express = require('express')
-const app = express()
-const port = 3000
+import Express from "express";
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+import { db, User } from "./persistence/index.js";
 
-module.exports.env = app.get('env');
+const app = Express();
+const port = 3000;
 
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`)
-})
+app.get("/create-user", async (req, res) => {
+  console.log(req.query);
+  const { username, email, login, password } = req.body;
+  if (username && email && login && password) {
+    await User.create({
+      username: username,
+      email: email,
+      login: login,
+      password: password,
+    });
+  }
+  res.status(200).send("User was created");
+});
+
+app.get("/users", async (req, res) => {
+  const users = await User.findAll();
+  res.send(users);
+});
+
+// синхронизация с бд, после успшной синхронизации запускаем сервер
+db.sync()
+  .then(() => {
+    app.listen(port, function () {
+      console.log("Server is running...");
+    });
+  })
+  .catch((err) => console.log(err));
