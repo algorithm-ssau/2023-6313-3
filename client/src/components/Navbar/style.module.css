@@ -30,13 +30,9 @@
 	transition: all 0.07s ease-in-out;
 }
 
-.navbar-menu li a:hover {
-	opacity: 1;
-}
-
 .navbar-wrap {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: wrap;
 }
 
 .profile {
