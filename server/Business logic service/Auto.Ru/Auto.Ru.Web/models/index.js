@@ -10,11 +10,15 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config);
-}
+sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
+  host: config.host,
+  dialect: "mssql",
+  dialectOptions: {
+      options: {
+        trustServerCertificate: true
+      }, 
+    }
+});
 
 fs
   .readdirSync(__dirname)

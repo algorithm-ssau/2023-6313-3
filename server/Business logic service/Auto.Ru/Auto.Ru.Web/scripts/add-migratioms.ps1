@@ -5,7 +5,7 @@ $CurrentDirectory = Get-Location
 Write-Output $CurrentDirectory
 
 npm install sequelize-cli sequelize-auto-migrations --save
-node './node_modules/sequelize-auto-migrations/bin/makemigration.js' --name add-user-role
+node './node_modules/sequelize-auto-migrations/bin/makemigration.js' --name initial
 
 Set-Location '../../'
 $CurrentDirectory = Get-Location

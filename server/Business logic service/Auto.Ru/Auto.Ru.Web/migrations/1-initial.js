@@ -5,21 +5,52 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "roles", deps: [users]
+ * createTable "users", deps: []
+ * createTable "roles", deps: []
  *
  **/
 
 var info = {
-    "revision": 3,
-    "name": "add-user-role",
-    "created": "2023-04-09T15:11:02.081Z",
+    "revision": 1,
+    "name": "initial",
+    "created": "2023-04-16T10:20:15.927Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-    fn: "createTable",
-    params: [
-        "roles",
+        fn: "createTable",
+        params: [
+            "users",
+            {
+                "id": {
+                    "type": Sequelize.INTEGER,
+                    "field": "id",
+                    "autoIncrement": true,
+                    "primaryKey": true
+                },
+                "email": {
+                    "type": Sequelize.STRING,
+                    "field": "email",
+                    "allowNull": false
+                },
+                "login": {
+                    "type": Sequelize.STRING,
+                    "field": "login",
+                    "allowNull": false
+                },
+                "passwordHash": {
+                    "type": Sequelize.STRING,
+                    "field": "password_hash",
+                    "allowNull": false
+                },
+            },
+            {}
+        ]
+    },
+    {
+        fn: "createTable",
+        params: [
+            "roles",
         {
             "id": {
                 "type": Sequelize.INTEGER,
@@ -30,16 +61,6 @@ var migrationCommands = [{
             "name": {
                 "type": Sequelize.STRING,
                 "field": "name",
-                "allowNull": false
-            },
-            "createdAt": {
-                "type": Sequelize.DATE,
-                "field": "createdAt",
-                "allowNull": false
-            },
-            "updatedAt": {
-                "type": Sequelize.DATE,
-                "field": "updatedAt",
                 "allowNull": false
             },
             "userId": {
@@ -54,9 +75,10 @@ var migrationCommands = [{
                 "allowNull": true
             }
         },
-        {}
-    ]
-}];
+            {}
+        ]
+    }
+];
 
 module.exports = {
     pos: 0,
