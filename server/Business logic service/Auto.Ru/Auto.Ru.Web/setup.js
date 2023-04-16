@@ -3,9 +3,14 @@ const dbConfig = require("./db.config.js");
 const Sequelize = require("sequelize");
 var config = dbConfig.development;
 
-const sequelize = new Sequelize(config, {
+const sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
   host: config.host,
-  dialect: config.dialect
+  dialect: "mssql",
+  dialectOptions: {
+      options: {
+        trustServerCertificate: true
+      }, 
+    }
 });
 
 const db = {};
