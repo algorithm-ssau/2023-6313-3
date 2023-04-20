@@ -11,60 +11,13 @@
 
 /* Footer */
 
-.footer{ 
-  padding: 20px;
-  flex-direction: column;
-  background-color: #969696;
-}
-
-.footer-content{
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  display: flex;
-  flex-flow: row nowrap;
-  flex-direction: column;
-  color: rgb(0, 0, 0);
-  font-family: "Arial black";
-  text-decoration: none;
-}
-
-.brand{
-  color: rgb(0, 0, 0);
-  font-family: "Arial black";
-  font-size: 25px;
-  text-decoration: none;
-  transition: all 0.1s ease-out;
-  justify-content: center;
-  position: relative;
-  
-}
-
-.brand:hover{
-  color: red;
-  transform: scale(1.04);
-}
-
-.footer-menu li a{
-  color:#000;
-  text-decoration: none;
-}
-
-.footer-menu li a:hover {
-  color: red;
-}
-
-.contacts{
-  text-decoration: none;
-  font-size: 17px;
-  color: red;
-}
 
 
-.hr{
+.hr1{
   border: none;
-  background-color: rgb(255, 0, 0);
-  height: 2px;
+  background-color: rgb(212, 212, 212);
+  height: 1px;
+  width: 1300px;
 }
 
 
@@ -75,12 +28,12 @@ footer{
   position: relative;/*относительное позиционирование*/
   width: 100%;/*на всю ширину*/
   padding: 20px 50px;/*поля для контента*/
-  background: #3586ff;/*цвет футера*/
+  background: #ffffff;/*цвет футера*/
   display: flex;
   justify-content: center;/*в центре по горизонтали*/
   align-items: center;/*в центре по вертикали*/
   flex-direction: column;
-  margin-top: 100px;/*отступ сверху*/
+  
 }
 
 .social,
@@ -100,14 +53,16 @@ footer{
 
 .social li a {
   font-size: 2em;/*размер иконок*/
-  color: #fff;/*цвет иконок*/
+  color: #5e5e5e;/*цвет иконок*/
   margin: 0 10px;
   display: inline-block;/*отображать как строчно-блочный элемент*/
   transition: 0.5s;/*плавный переход*/
 }
+
+
 .menu li a {
   font-size: 1.2em;/*размер ссылок меню*/
-  color: #fff;/*цвет ссылок меню*/
+  color:  #5e5e5e;/*цвет ссылок меню*/
   opacity: 0.75;/*значение прозрачности*/
   margin: 0 15px;
   text-decoration: none;/*ссылка без подчеркивания*/
@@ -116,10 +71,27 @@ footer{
 
 .menu li a:hover {
   opacity: 1;
+  color: red;
 }
 footer p {
-  color: #fff;
+  color:  #5e5e5e;
   text-align: center;
   margin-top: 15px;
   font-size: 1.1em;
+}
+
+.facebook:hover{
+  color: rgb(0, 103, 187);
+}
+
+.twitter:hover{
+  color: rgb(55, 161, 248);
+}
+
+.vk:hover{
+  color: rgb(0, 110, 201);
+}
+
+.instagram:hover{
+  color: rgb(223, 90, 2);
 }
