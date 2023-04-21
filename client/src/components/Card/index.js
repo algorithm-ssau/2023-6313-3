@@ -5,7 +5,7 @@ export default function Card({ title, price }) {
     <div className="col-md-3">
       <div className={styles["product"]}>
         <div className={styles["image"]}>
-          <img src="http://placehold.it/300x400" alt="" />
+          <img src="http://placehold.it/400x300" alt="" />
         </div>
 
         <div className={styles["info"]}>

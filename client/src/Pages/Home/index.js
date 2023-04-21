@@ -7,15 +7,16 @@ import styles from "./style.module.css";
 export default function HomePage() {
   return (
     <div className={styles["body"]}>
+      <div className={styles["hr"]}></div>
       <Navbar />
       <SearchField />
       <div className="container mt-5">
         <div className="row">
-          <Card title={"Марка и модель"} price={2000000} />
-          <Card title={"Марка и модель"} price={2000000} />
-          <Card title={"Марка и модель"} price={2000000} />
-          <Card title={"Марка и модель"} price={2000000} />
-          <Card title={"Марка и модель"} price={2000000} />
+          <Card title={"Марка и модель"} price={"2 000 000"} />
+          <Card title={"Марка и модель"} price={"2 000 000"} />
+          <Card title={"Марка и модель"} price={"2 000 000"} />
+          <Card title={"Марка и модель"} price={"2 000 000"} />
+          <Card title={"Марка и модель"} price={"2 000 000"} />
         </div>
       </div>
 
