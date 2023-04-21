@@ -95,3 +95,10 @@ footer p {
 .instagram:hover{
   color: rgb(223, 90, 2);
 }
+
+.hr{
+  border: none; /* Убираем границу */
+  background-color: rgb(219,55,39); /* Цвет линии */
+  color: rgb(219,55,39); /* Цвет линии для IE6-7 */
+  height: 10px; /* Толщина линии */
+}
