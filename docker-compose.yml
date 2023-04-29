@@ -1,12 +1,16 @@
-version: "3"
+version: '3.8'
 services:
   server:
-    build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
-    ports:
-      - "8080:8080"
     container_name: backend
-  client:
-    build: ./client 
+    build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
+    restart: always
     ports:
-      - "80:80"
+      - '5000:3000'
+    
+  client:
     container_name: frontend
+    build: ./client/
+    restart: always
+    ports:
+      - '3000:3000'
+    

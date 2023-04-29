@@ -6,3 +6,4 @@ build
 .dockerignore
 Dockerfile
 Dockerfile.prod
+Auto.Ru.Web.njsproj
