@@ -2,9 +2,12 @@ FROM node:alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm install
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm i
 
 COPY . .
 

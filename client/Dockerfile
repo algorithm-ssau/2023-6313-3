@@ -8,6 +8,6 @@ COPY package.json ./
 COPY package-lock.json ./
 RUN npm i
 
-COPY . ./
+COPY . .
 
 CMD ["npm", "start"]
