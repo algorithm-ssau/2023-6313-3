@@ -8,6 +8,7 @@ import { cars } from "../../fake-db/fakeCars";
 export default function HomePage() {
   return (
     <div className={styles["body"]}>
+      <div className={styles["hr"]}></div>
       <Navbar />
       <SearchField />
       <div className="container mt-5">
@@ -18,31 +19,25 @@ export default function HomePage() {
           )}
         </div>
       </div>
-      <div className={styles["hr"]}></div>
       <footer className={styles["footer"]}>
-
-
-        <a href="#" className={styles["brand"]}>
-          Auto.Ru
-        </a>
+        <div className={styles["hr1"]}></div>
 
         <ul className={styles["social"]}>
           <li>
-            <a href="#">
+            <a href="#" className={styles["facebook"]}>
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
-            <a href="#">
+            <a href="#" className={styles["twitter"]}>
               <ion-icon name="logo-twitter"></ion-icon>
             </a>
-            <a href="#">
-              <ion-icon name="logo-linkedin"></ion-icon>
+            <a href="#" className={styles["vk"]}>
+              <ion-icon name="logo-vk"></ion-icon>
             </a>
-            <a href="#">
+            <a href="#" className={styles["instagram"]}>
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
         </ul>
-
         <ul className={styles["menu"]}>
           <li>
             <a href="#">Главная</a>
@@ -60,12 +55,8 @@ export default function HomePage() {
             <a href="#">Контакты</a>
           </li>
         </ul>
-
         <p>©2023 Auto.Ru | All Rights Reserved</p>
-
-
       </footer>
-      <div className={styles["hr"]}></div>
     </div>
   );
 }
