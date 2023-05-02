@@ -20,8 +20,8 @@ export default function HomePage() {
       </div>
       <div className={styles["hr"]}></div>
       <footer className={styles["footer"]}>
-        
-         
+
+
         <a href="#" className={styles["brand"]}>
           Auto.Ru
         </a>
@@ -63,7 +63,7 @@ export default function HomePage() {
 
         <p>©2023 Auto.Ru | All Rights Reserved</p>
 
-       
+
       </footer>
       <div className={styles["hr"]}></div>
     </div>
