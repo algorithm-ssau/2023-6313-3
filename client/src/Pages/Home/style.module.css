@@ -1,19 +1,12 @@
-.body{
+.body {
   position: relative;
   font-family: "Noto Sans", sans-serif;
   font-size: 16px;
-  line-height: 1.4;
-  color: #000;
-  min-width: 320px;
   overflow-x: hidden;
   height: auto;
 }
 
-/* Footer */
-
-
-
-.hr1{
+.hr1 {
   border: none;
   background-color: rgb(212, 212, 212);
   height: 1px;
@@ -24,48 +17,48 @@
 
 
 
-footer{
-  position: relative;/*относительное позиционирование*/
-  width: 100%;/*на всю ширину*/
-  padding: 20px 50px;/*поля для контента*/
-  background: #ffffff;/*цвет футера*/
+footer {
+  position: relative;
+  width: 100%;
+  padding: 20px 50px;
+  background: #ffffff;
   display: flex;
-  justify-content: center;/*в центре по горизонтали*/
-  align-items: center;/*в центре по вертикали*/
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  
+
 }
 
 .social,
-.menu{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
-    flex-wrap: wrap;/*разрешен перенос на новую строку*/
+.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
 }
 
 .social li,
-.menu li{
-    list-style: none;/*удалить черные маркеры*/
+.menu li {
+  list-style: none;
 }
 
 .social li a {
-  font-size: 2em;/*размер иконок*/
-  color: #5e5e5e;/*цвет иконок*/
+  font-size: 2em;
+  color: #5e5e5e;
   margin: 0 10px;
-  display: inline-block;/*отображать как строчно-блочный элемент*/
-  transition: 0.5s;/*плавный переход*/
+  display: inline-block;
+  transition: 0.5s;
 }
 
 
 .menu li a {
-  font-size: 1.2em;/*размер ссылок меню*/
-  color:  #5e5e5e;/*цвет ссылок меню*/
-  opacity: 0.75;/*значение прозрачности*/
+  font-size: 1.2em;
+  color: #5e5e5e;
+  opacity: 0.75;
   margin: 0 15px;
-  text-decoration: none;/*ссылка без подчеркивания*/
+  text-decoration: none;
   display: inline-block;
 }
 
@@ -73,32 +66,33 @@ footer{
   opacity: 1;
   color: red;
 }
+
 footer p {
-  color:  #5e5e5e;
+  color: #5e5e5e;
   text-align: center;
   margin-top: 15px;
   font-size: 1.1em;
 }
 
-.facebook:hover{
+.facebook:hover {
   color: rgb(0, 103, 187);
 }
 
-.twitter:hover{
+.twitter:hover {
   color: rgb(55, 161, 248);
 }
 
-.vk:hover{
+.vk:hover {
   color: rgb(0, 110, 201);
 }
 
-.instagram:hover{
+.instagram:hover {
   color: rgb(223, 90, 2);
 }
 
-.hr{
-  border: none; /* Убираем границу */
-  background-color: rgb(219,55,39); /* Цвет линии */
-  color: rgb(219,55,39); /* Цвет линии для IE6-7 */
-  height: 10px; /* Толщина линии */
+.hr {
+  border: none;
+  background-color: rgb(219, 55, 39);
+  color: rgb(219, 55, 39);
+  height: 10px;
 }

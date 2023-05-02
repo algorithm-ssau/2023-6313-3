@@ -3,6 +3,7 @@ import Card from "../../components/Card";
 import SearchField from "../../components/SearchField";
 
 import styles from "./style.module.css";
+import { cars } from "../../fake-db/fakeCars";
 
 export default function HomePage() {
   return (
@@ -11,20 +12,14 @@ export default function HomePage() {
       <Navbar />
       <SearchField />
       <div className="container mt-5">
-        <div className="row">
-          <Card title={"Марка и модель"} price={"2 000 000"} />
-          <Card title={"Марка и модель"} price={"2 000 000"} />
-          <Card title={"Марка и модель"} price={"2 000 000"} />
-          <Card title={"Марка и модель"} price={"2 000 000"} />
-          <Card title={"Марка и модель"} price={"2 000 000"} />
+        <div className={'row'} >
+          {cars.map((car) => (
+            <Card key={car.id} title={car.name} price={car.price} imageUrl={car.imageUrl} />
+          )
+          )}
         </div>
       </div>
-
-      
-      
       <footer className={styles["footer"]}>
-        
-
         <div className={styles["hr1"]}></div>
 
         <ul className={styles["social"]}>
@@ -43,7 +38,6 @@ export default function HomePage() {
             </a>
           </li>
         </ul>
-
         <ul className={styles["menu"]}>
           <li>
             <a href="#">Главная</a>
@@ -61,12 +55,8 @@ export default function HomePage() {
             <a href="#">Контакты</a>
           </li>
         </ul>
-
         <p>©2023 Auto.Ru | All Rights Reserved</p>
-
-       
       </footer>
-      
     </div>
   );
 }
