@@ -1,5 +1,6 @@
 import styles from "./style.module.css";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 export default function ProfilePage() {
   return (
@@ -31,6 +32,7 @@ export default function ProfilePage() {
           <h1 className={styles["favourites"]}>Избранное</h1>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

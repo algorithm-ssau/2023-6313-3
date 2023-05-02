@@ -31,6 +31,11 @@
 	transition: all 0.07s ease-in-out;
 }
 
+.navbar-menu li a:hover {
+	opacity: 1;
+    color: red;
+}
+
 .navbar-wrap {
 	display: flex;
 	flex-flow: wrap;
@@ -45,7 +50,7 @@
 	text-decoration: none;
 	box-shadow: 0 4px 6px rgba(128, 128, 128, 0.2);
 	transition: all 0.1s ease-out;
-
+	margin-bottom: 15px;
 }
 
 .profile:hover {
@@ -63,9 +68,16 @@
 	background-color: rgb(219,55,39);
 	border-radius: 100px;
 	transition: all 0.07 ease-in-out;
+	margin-bottom: 15px;
 }
 
 .navbar-brand:hover {
 	color: white;
 }
 
+.hr {
+	border: none;
+	background-color: rgb(219, 55, 39);
+	color: rgb(219, 55, 39);
+	height: 10px;
+  }

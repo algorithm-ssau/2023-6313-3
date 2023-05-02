@@ -20,6 +20,7 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import Navbar from '../../components/Navbar'
 import { images } from '../../fake-db/fakeImages';
 import { car } from '../../fake-db/fakeCarData';
+import Footer from '../../components/Footer';
 
 
 export default function CarPage() {
@@ -122,7 +123,8 @@ export default function CarPage() {
                 </Card>
             </Container>
 
-
+            <Footer />
         </ChakraProvider>
+        
     )
 }
