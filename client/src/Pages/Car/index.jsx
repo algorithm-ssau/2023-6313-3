@@ -9,7 +9,6 @@ import {
     Center,
     Table,
     Tr,
-    Th,
     Td,
     Card,
     Heading
@@ -30,7 +29,7 @@ export default function CarPage() {
     return (
         <ChakraProvider resetCSS>
             <Navbar />
-            <Container maxW={900} mt={50}>
+            <Container maxW={1320} mt={50}>
                 <Card p={10}>
                     <Flex>
                         <Box>
@@ -53,9 +52,9 @@ export default function CarPage() {
                         </Center>
 
                     </Flex>
-                    <Flex mt={10}>
+                    <Flex mt={10} justifyContent={'space-around'}>
                         <Card p={3}>
-                            <Table size={'sm'} variant={'unstyled'} fontSize={15}>
+                            <Table size={'md'} fontSize={16} variant={'unstyled'} >
                                 <Tr>
                                     <Td>Наличие</Td>
                                     <Td>{car.availability}</Td>
@@ -106,17 +105,19 @@ export default function CarPage() {
                                 </Tr>
                             </Table>
                         </Card>
-                        <Card p={5} flexGrow={1} ml={5}>
-                            <Center>
-                                <SimpleImageSlider
-                                    width={500}
-                                    height={400}
-                                    images={images}
-                                    showBullets={true}
-                                    showNavs={false}
-                                />
-                            </Center>
-                        </Card>
+                        <Center>
+                            <Card p={5} ml={5}>
+                                <Center>
+                                    <SimpleImageSlider
+                                        width={700}
+                                        height={500}
+                                        images={images}
+                                        showBullets={true}
+                                        showNavs={false}
+                                    />
+                                </Center>
+                            </Card>
+                        </Center>
                     </Flex>
                 </Card>
             </Container>
