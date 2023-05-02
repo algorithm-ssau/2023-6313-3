@@ -25,7 +25,7 @@ export default function ProfilePage() {
         </div>
 
         <div className={styles["container_center"]}>
-          <h1 className={styles["chat"]}>Сообщения</h1>
+          
         </div>
 
         <div className={styles["container"]}>
