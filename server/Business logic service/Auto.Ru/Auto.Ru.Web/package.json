@@ -6,11 +6,22 @@
   "author": {
     "name": ""
   },
+  "scripts": {
+    "start": "node app.js",
+    "migrate": "sequelize db:migrate",
+    "prestart": "npm run migrate"
+  },
   "devDependencies": {
-    "eslint": "^8.21.0"
+    "eslint": "^8.21.0",
+    "sequelize-cli": "^6.6.0"
   },
   "eslintConfig": {},
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mssql": "^9.1.1",
+    "sequelize": "^6.31.0",
+    "sequelize-auto-migrations": "^1.0.3",
+    "sequelize-mig": "^3.1.3",
+    "tedious": "^16.0.0"
   }
 }

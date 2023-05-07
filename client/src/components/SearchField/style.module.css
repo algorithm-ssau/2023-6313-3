@@ -28,7 +28,7 @@
 	border-radius: 10px;
 	height: 40px;
 	text-decoration: none;
-	background-color: red;
+	background-color: rgb(219,55,39);
 	color: white;
 	border: none;
 	width: 100px;
@@ -39,5 +39,4 @@
 	transform: scale(1.01);
 	box-shadow: 0 7px 7px rgba(128, 128, 128, 0.5);
 	color: rgb(0, 0, 0);
-	border-radius: 20px;
 }

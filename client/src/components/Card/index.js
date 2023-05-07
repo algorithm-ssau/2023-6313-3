@@ -1,13 +1,12 @@
 import styles from "./style.module.css";
 
-export default function Card({ title, price }) {
+export default function Card({ title, price, imageUrl }) {
   return (
     <div className="col-md-3">
       <div className={styles["product"]}>
         <div className={styles["image"]}>
-          <img src="http://placehold.it/300x400" alt="" />
+          <img src={imageUrl} alt="car" />
         </div>
-
         <div className={styles["info"]}>
           <h3>{title}</h3>
           <ul className={styles["rating"]}>
