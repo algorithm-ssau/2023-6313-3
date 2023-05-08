@@ -18,12 +18,7 @@ const Sequelize = require('sequelize');
     config.development.password, {
     host: config.development.host,
     dialect: config.development.dialect,
-    dialectOptions: {
-        options: {
-          trustServerCertificate: true,
-          instanceName: 'MSSQLSERVER01'
-        }, 
-      }
+    port:'3307'
   });
 
   console.log(config.development.username);

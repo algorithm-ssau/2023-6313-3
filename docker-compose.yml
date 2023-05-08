@@ -1,22 +1,21 @@
 version: '3.8'
 services:
-  mssqldb:
-    image: mcr.microsoft.com/mssql/server
+  mysqldb:
+    image: mysql
     environment:
-      - ACCEPT_EULA=Y
+      MYSQL_DATABASE: auto.ru
+      MYSQL_ROOT_PASSWORD: "*K^rb%kVQH5$1I8WvL1CQerr"
     restart: unless-stopped
     networks:
       - backend
     ports:
-      - 1433:1433
-    expose:
-      - "1433"
+      - '3307:3306'
     volumes:
-      - db:/var/lib/mssql
+      - db:/var/lib/mysql
 
   server:
     depends_on:
-      - mssqldb
+      - mysqldb
     container_name: backend
     build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
     restart: always
