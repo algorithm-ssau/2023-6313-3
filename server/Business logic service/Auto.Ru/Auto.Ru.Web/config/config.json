@@ -1,6 +1,6 @@
 {
   "development": {
-    "host" : "localhost",
+    "host" : "mysqldb",
     "database": "auto.ru",
     "dialect": "mysql",
     "username": "root",
