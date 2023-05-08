@@ -1,6 +1,33 @@
+import { useFormik } from "formik";
+
 import styles from "./style.module.css";
+import validateSchema from "./validationSchema.js";
 
 export default function RegisterPage() {
+
+  const registerFormik = useFormik({
+    initialValues: {
+      username: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: validateSchema,
+    onSubmit: values => {
+      console.log(values);
+    },
+  });
+
+  const loginFormik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validateSchema,
+    onSubmit: values => {
+      console.log(values);
+    },
+  });
+
   return (
     <div className={styles["body"]}>
       <div className={styles["main"]}>
@@ -12,7 +39,7 @@ export default function RegisterPage() {
         />
 
         <div className={styles["signup"]}>
-          <form>
+          <form onSubmit={registerFormik.handleSubmit}>
             <label
               className={styles["label"]}
               htmlFor={styles["chk"]}
@@ -22,30 +49,37 @@ export default function RegisterPage() {
             </label>
             <input
               className={styles.input}
-              type="text"
-              name="txt"
+              name="username"
               placeholder="Имя пользователя"
-              required=""
+              onChange={registerFormik.handleChange}
+              value={registerFormik.values.username}
             />
+            <label className={styles['error_label']}>{registerFormik.errors.username ? registerFormik.errors.username : ''}</label>
+
             <input
               className={styles.input}
-              type="email"
               name="email"
               placeholder="Почта"
-              required=""
+              onChange={registerFormik.handleChange}
+              value={registerFormik.values.email}
             />
+            <label className={styles['error_label']}>{registerFormik.errors.email ? registerFormik.errors.email : ''}</label>
+
             <input
               className={styles.input}
               type="password"
-              name="pswd"
+              name="password"
               placeholder="Пароль"
-              required=""
+              onChange={registerFormik.handleChange}
+              value={registerFormik.values.password}
             />
-            <button className={styles["button"]}>Регистрация</button>
+            <label className={styles['error_label']}>{registerFormik.errors.password ? registerFormik.errors.password : ''}</label>
+
+            <button className={styles["button"]} type="submit">Регистрация</button>
           </form>
         </div>
         <div className={styles["login"]}>
-          <form>
+          <form onSubmit={loginFormik.handleSubmit}>
             <label
               className={styles["label"]}
               htmlFor={styles["chk"]}
@@ -58,19 +92,25 @@ export default function RegisterPage() {
               type="email"
               name="email"
               placeholder="Почта"
-              required=""
+              onChange={loginFormik.handleChange}
+              value={loginFormik.values.email}
             />
+            <label className={styles['error_label']} >{loginFormik.errors.email ? loginFormik.errors.email : ''}</label>
+
             <input
               className={styles.input}
               type="password"
-              name="pswd"
+              name="password"
               placeholder="Пароль"
-              required=""
+              onChange={loginFormik.handleChange}
+              value={loginFormik.values.password}
             />
-            <button className={styles["button"]}>Вход</button>
+            <label className={styles['error_label']}>{loginFormik.errors.password ? loginFormik.errors.password : ''}</label>
+
+            <button type="submit" className={styles["button"]}>Вход</button>
           </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

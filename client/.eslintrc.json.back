@@ -17,6 +17,15 @@
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "quiet": true
+        "react/no-unknown-property": [
+            "error",
+            {
+                "ignore": [
+                    "jsx",
+                    "js"
+                ]
+            }
+        ],
+        "no-console": "off"
     }
 }
