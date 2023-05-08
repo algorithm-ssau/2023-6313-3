@@ -1,6 +1,22 @@
 version: '3.8'
 services:
+  mssqldb:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+    restart: unless-stopped
+    networks:
+      - backend
+    ports:
+      - 1433:1433
+    expose:
+      - "1433"
+    volumes:
+      - db:/var/lib/mssql
+
   server:
+    depends_on:
+      - mssqldb
     container_name: backend
     build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
     restart: always
@@ -8,9 +24,19 @@ services:
       - '5000:3000'
     
   client:
+    depends_on:
+      - server  
     container_name: frontend
     build: ./client/
     restart: always
     ports:
       - '3000:3000'
+
+volumes: 
+  db:
+
+networks:
+  backend:
+  frontend:
+
     
