@@ -17,8 +17,7 @@ const Sequelize = require('sequelize');
     config.development.username,
     config.development.password, {
     host: config.development.host,
-    dialect: config.development.dialect,
-    port:'3307'
+    dialect: config.development.dialect
   });
 
   console.log(config.development.username);
