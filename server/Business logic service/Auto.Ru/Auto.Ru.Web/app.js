@@ -8,19 +8,25 @@ app.get('/', (req, res) => {
 
 module.exports.env = app.get('env');
 
-const config = require('./config/config.json').development
+const config = require('./config/config.json')
 
 const Sequelize = require('sequelize');
 
-  const sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
-    host: config.host,
-    dialect: "mssql",
+  const sequelize = new Sequelize(
+    config.development.database, 
+    config.development.username,
+    config.development.password, {
+    host: config.development.host,
+    dialect: config.development.dialect,
     dialectOptions: {
         options: {
-          trustServerCertificate: true
+          trustServerCertificate: true,
+          instanceName: 'MSSQLSERVER01'
         }, 
       }
   });
+
+  console.log(config.development.username);
 
 sequelize
   .authenticate()

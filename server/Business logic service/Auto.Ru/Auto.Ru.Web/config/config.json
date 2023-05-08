@@ -1,10 +1,10 @@
 {
   "development": {
     "connectionString": "data source=I-NUC-4250;initial catalog=master;trusted_connection=true",
-    "host" : "I-NUC-4250",
+    "host" : "localhost",
     "database": "Auto.Ru",
     "dialect": "mssql",
-    "username": "auto-ru-client",
-    "password": "12345"
+    "username": "sa",
+    "password": "RPSsql12345"
   }
 }
