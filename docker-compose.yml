@@ -4,7 +4,7 @@ services:
     image: mysql
     environment:
       MYSQL_DATABASE: auto.ru
-      MYSQL_ROOT_PASSWORD: "*K^rb%kVQH5$1I8WvL1CQerr"
+      MYSQL_ROOT_PASSWORD: K^rb%kVQH5$1I8WvL1CQerr
     restart: unless-stopped
     networks:
       - backend
