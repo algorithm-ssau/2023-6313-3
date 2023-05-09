@@ -1,24 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-}
+import { saveToken, removeToken, getToken } from '../../utils/auth.js';
 
-export const counterSlice = createSlice({
-  name: 'car',
-  initialState,
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: {
+    token: getToken(),
+  },
   reducers: {
-    increment: (state) => {
-      state.value += 1
+    setCredentials: (state, { payload }) => {
+      state.user = payload.token;
+      saveToken(payload.token);
     },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    logout: (state) => {
+      state.token = null;
+      removeToken();
     },
   },
-})
+});
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { setCredentials, logout } = authSlice.actions;
 
-export default counterSlice.reducer
+export default authSlice.reducer;
+
+export const selectCurrentUser = (state) => state.auth.user;
+export const selectCurrentToken = (state) => state.auth.token;
