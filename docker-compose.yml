@@ -17,18 +17,29 @@ services:
     volumes:
       - ./tmp/db:/var/lib/mysql
 
-  server:
+  server-business-logic:
     depends_on:
       - mysqldb
-    container_name: backend
+    container_name: backend-business-logic
     build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
     restart: always
     ports:
       - 5000:3000
+
+  server-auth:
+    depends_on:
+      - server-business-logic
+    container_name: backend-auth
+    build: ./server/Auth service/
+    restart: always
+    environment:
+      PORT: 8000
+    ports:
+      - 8000:8000
     
   client:
     depends_on:
-      - server  
+      - server-auth
     container_name: frontend
     build: ./client/
     restart: always
