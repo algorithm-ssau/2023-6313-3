@@ -5,6 +5,8 @@ from UsersWork import hide_password
 
 app = FastAPI()
 
+print('Started')
+
 
 @app.post("/registration")
 async def get_tokens(data: dict):
