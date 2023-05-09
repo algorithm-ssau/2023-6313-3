@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
-from config import ALGORITHM, TIME_DELTA_FOR_ACCESS, TIME_DELTA_FOR_REFRESH, SECRET_KEY
+from config import ALGORITHM, TIME_DELTA_FOR_ACCESS, TIME_DELTA_FOR_REFRESH, SECRET_KEY, SYMBOLS_REFRESH_TOKEN
 import random
 import string
 
@@ -18,7 +18,7 @@ def create_access_token(data: dict):
 def create_refresh_token():
     to_encode = {}
 
-    token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(16))
+    token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(SYMBOLS_REFRESH_TOKEN))
     to_encode.update({"refresh_token": token})
 
     expire = datetime.utcnow() + timedelta(days=TIME_DELTA_FOR_REFRESH)
