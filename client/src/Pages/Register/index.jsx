@@ -4,26 +4,25 @@ import styles from "./style.module.css";
 import validateSchema from "./validationSchema.js";
 
 export default function RegisterPage() {
-
   const registerFormik = useFormik({
     initialValues: {
-      username: '',
-      email: '',
-      password: '',
+      username: "",
+      email: "",
+      password: "",
     },
     validationSchema: validateSchema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       console.log(values);
     },
   });
 
   const loginFormik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     validationSchema: validateSchema,
-    onSubmit: values => {
+    onSubmit: (values) => {
       console.log(values);
     },
   });
@@ -50,20 +49,28 @@ export default function RegisterPage() {
             <input
               className={styles.input}
               name="username"
+              type="text"
               placeholder="Имя пользователя"
               onChange={registerFormik.handleChange}
               value={registerFormik.values.username}
             />
-            <label className={styles['error_label']}>{registerFormik.errors.username ? registerFormik.errors.username : ''}</label>
+            <label className={styles["error_label"]}>
+              {registerFormik.errors.username
+                ? registerFormik.errors.username
+                : ""}
+            </label>
 
             <input
               className={styles.input}
+              type="email"
               name="email"
               placeholder="Почта"
               onChange={registerFormik.handleChange}
               value={registerFormik.values.email}
             />
-            <label className={styles['error_label']}>{registerFormik.errors.email ? registerFormik.errors.email : ''}</label>
+            <label className={styles["error_label"]}>
+              {registerFormik.errors.email ? registerFormik.errors.email : ""}
+            </label>
 
             <input
               className={styles.input}
@@ -73,9 +80,15 @@ export default function RegisterPage() {
               onChange={registerFormik.handleChange}
               value={registerFormik.values.password}
             />
-            <label className={styles['error_label']}>{registerFormik.errors.password ? registerFormik.errors.password : ''}</label>
+            <label className={styles["error_label"]}>
+              {registerFormik.errors.password
+                ? registerFormik.errors.password
+                : ""}
+            </label>
 
-            <button className={styles["button"]} type="submit">Регистрация</button>
+            <button className={styles["button"]} type="submit">
+              Регистрация
+            </button>
           </form>
         </div>
         <div className={styles["login"]}>
@@ -95,7 +108,9 @@ export default function RegisterPage() {
               onChange={loginFormik.handleChange}
               value={loginFormik.values.email}
             />
-            <label className={styles['error_label']} >{loginFormik.errors.email ? loginFormik.errors.email : ''}</label>
+            <label className={styles["error_label"]}>
+              {loginFormik.errors.email ? loginFormik.errors.email : ""}
+            </label>
 
             <input
               className={styles.input}
@@ -105,12 +120,16 @@ export default function RegisterPage() {
               onChange={loginFormik.handleChange}
               value={loginFormik.values.password}
             />
-            <label className={styles['error_label']}>{loginFormik.errors.password ? loginFormik.errors.password : ''}</label>
+            <label className={styles["error_label"]}>
+              {loginFormik.errors.password ? loginFormik.errors.password : ""}
+            </label>
 
-            <button type="submit" className={styles["button"]}>Вход</button>
+            <button type="submit" className={styles["button"]}>
+              Вход
+            </button>
           </form>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
