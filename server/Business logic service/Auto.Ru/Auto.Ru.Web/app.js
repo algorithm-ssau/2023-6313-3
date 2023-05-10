@@ -8,18 +8,16 @@ app.get('/', (req, res) => {
 
 module.exports.env = app.get('env');
 
-const config = require('./config/config.json').development
+const config = require('./config/config.json')
 
 const Sequelize = require('sequelize');
 
-  const sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
-    host: config.host,
-    dialect: "mssql",
-    dialectOptions: {
-        options: {
-          trustServerCertificate: true
-        }, 
-      }
+  const sequelize = new Sequelize(
+    config.development.database, 
+    config.development.username,
+    config.development.password, {
+    host: config.development.host,
+    dialect: config.development.dialect
   });
 
 sequelize

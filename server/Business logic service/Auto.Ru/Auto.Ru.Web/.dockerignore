@@ -1,0 +1,9 @@
+npm-debug.log
+Auto.Ru.Web.njsproj
+node_modules
+npm-debug.log
+build
+.dockerignore
+Dockerfile
+Dockerfile.prod
+Auto.Ru.Web.njsproj

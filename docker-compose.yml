@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    container_name: mysqldb
+    hostname: mysqldb
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    environment:
+      MYSQL_DATABASE: auto.ru
+      MYSQL_ROOT_PASSWORD: K^rb%kVQH5$1I8WvL1CQerr
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    ports:
+      - 3307:3306
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    networks:
+      backend:
+
+  server-business-logic:
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    container_name: backend-business-logic
+    build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
+    restart: always
+    ports:
+      - 5000:3000
+    networks:
+      backend:
+
+  server-auth:
+    depends_on:
+      - server-business-logic
+    container_name: backend-auth
+    build: ./server/Auth service/
+    restart: always
+    environment:
+      PORT: 8000
+    ports:
+      - 8000:8000
+    networks:
+      backend:
+    
+  client:
+    depends_on:
+      - server-auth
+    container_name: frontend
+    build: ./client/
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      frontend:
+
+volumes: 
+  db:
+
+networks:
+  backend:
+  frontend:
+
+    
