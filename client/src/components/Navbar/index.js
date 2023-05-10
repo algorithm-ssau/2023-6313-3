@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import styles from "./style.module.css";
 
 export default function Navbar() {
@@ -7,9 +9,9 @@ export default function Navbar() {
       <nav className={"navbar " + styles["navbar"]}>
 
         <div className={"container " + styles["container"]}>
-          <a href="#" className={"navbar-brand " + styles["navbar-brand"]}>
+          <NavLink to="/home" className={"navbar-brand " + styles["navbar-brand"]}>
             Auto.Ru
-          </a>
+          </NavLink>
           <div className={"navbar-wrap " + styles["navbar-wrap"]}>
             <ul className={"navbar-menu " + styles["navbar-menu"]}>
               <li>
@@ -22,9 +24,9 @@ export default function Navbar() {
                 <a href="#">Контакты</a>
               </li>
             </ul>
-            <a href="#" className={"profile " + styles["profile"]}>
+            <NavLink to="/profile" className={"profile " + styles["profile"]}>
               Личный кабинет
-            </a>
+            </NavLink>
           </div>
         </div>
       </nav>
