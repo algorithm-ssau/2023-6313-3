@@ -20,8 +20,6 @@ const Sequelize = require('sequelize');
     dialect: config.development.dialect
   });
 
-  console.log(config.development.username);
-
 sequelize
   .authenticate()
   .then(() => {
