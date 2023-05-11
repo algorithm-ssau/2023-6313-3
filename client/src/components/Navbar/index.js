@@ -7,9 +7,11 @@ export default function Navbar() {
     <div>
       <div className={styles["hr"]}></div>
       <nav className={"navbar " + styles["navbar"]}>
-
         <div className={"container " + styles["container"]}>
-          <NavLink to="/home" className={"navbar-brand " + styles["navbar-brand"]}>
+          <NavLink
+            to="/cars"
+            className={"navbar-brand " + styles["navbar-brand"]}
+          >
             Auto.Ru
           </NavLink>
           <div className={"navbar-wrap " + styles["navbar-wrap"]}>

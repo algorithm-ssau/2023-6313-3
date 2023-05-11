@@ -1,8 +1,12 @@
+import { useState } from "react";
 import styles from "./style.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Card({ title, price, imageUrl }) {
+  const navigate = useNavigate();
+  const [favCar, setFavCar] = useState(false);
   return (
-    <div className="col-md-3">
+    <div className="col-md-3" onClick={() => navigate(`/cars/${title}`)}>
       <div className={styles["product"]}>
         <div className={styles["image"]}>
           <img src={imageUrl} alt="car" />
@@ -31,8 +35,11 @@ export default function Card({ title, price, imageUrl }) {
               {price}
               <small>₽</small>
             </span>
-            <button className={styles["add-to-favourites"]}>
-              <ion-icon name="heart-outline"></ion-icon>
+            <button
+              className={styles["add-to-favourites"]}
+              onClick={() => setFavCar(!favCar)}
+            >
+              <ion-icon name={favCar ? "heart" : "heart-outline"}></ion-icon>
             </button>
           </div>
         </div>
