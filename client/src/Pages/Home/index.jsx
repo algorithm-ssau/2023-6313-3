@@ -9,7 +9,6 @@ import styles from "./style.module.css";
 import { cars } from "../../fake-db/fakeCars";
 
 export default function HomePage() {
-
   const [searchValue, setSearchValue] = useState("");
 
   const filteredCars = cars.filter((car) =>
@@ -19,15 +18,16 @@ export default function HomePage() {
   return (
     <div className={styles["body"]}>
       <Navbar />
-      <SearchField searchFn={e => setSearchValue(e.target.value)} />
+      <SearchField searchFn={(e) => setSearchValue(e.target.value)} />
       <div className="container mt-5">
-        <div className={'row'} >
+        <div className={"row"}>
           {filteredCars.map((car) => (
             <Card
               key={car.id}
               title={car.name}
               price={car.price}
-              imageUrl={car.imageUrl} />
+              imageUrl={car.imageUrl}
+            />
           ))}
         </div>
       </div>
