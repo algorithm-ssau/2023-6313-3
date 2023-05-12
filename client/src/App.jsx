@@ -8,15 +8,17 @@ import RequireAuth from './utils/requireAuth.jsx';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<HomePage />} />
-      <Route path='/register' element={<RegisterPage />} />
-      <Route element={<RequireAuth />}>
-        <Route path='/profile' element={<ProfilePage />} />
-      </Route>
-      <Route path='/cars' element={<HomePage />} />
-      <Route path='/cars/:id' element={<CarPage />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/register' element={<RegisterPage />} />
+        <Route element={<RequireAuth />}>
+          <Route path='/profile' element={<ProfilePage />} />
+        </Route>
+        <Route path='/cars' element={<HomePage />} />
+        <Route path='/cars/:id' element={<CarPage />} />
+      </Routes>
+    </>
   );
 }
 

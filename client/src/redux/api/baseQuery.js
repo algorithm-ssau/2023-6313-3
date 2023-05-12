@@ -1,5 +1,4 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setCredentials, logout } from '../slices/authSlice';
 
 export const baseQuery = (url) =>
   fetchBaseQuery({

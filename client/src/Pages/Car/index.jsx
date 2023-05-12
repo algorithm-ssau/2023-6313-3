@@ -12,16 +12,16 @@ import {
   Td,
   Card,
   Heading,
-} from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import SimpleImageSlider from "react-simple-image-slider";
-import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { useParams } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import SimpleImageSlider from 'react-simple-image-slider';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
 
-import Navbar from "../../components/Navbar";
-import { images } from "../../fake-db/fakeImages";
-import { car } from "../../fake-db/fakeCarData";
-import Footer from "../../components/Footer";
+import Navbar from '../../components/Navbar';
+import { images } from '../../fake-db/fakeImages';
+import { car } from '../../fake-db/fakeCarData';
+import Footer from '../../components/Footer';
 
 export default function CarPage() {
   const [fav, setFav] = useState(false);
@@ -38,10 +38,10 @@ export default function CarPage() {
         <Card p={10}>
           <Flex>
             <Box>
-              <Heading color={"black"} fontSize={30}>
+              <Heading color={'black'} fontSize={30}>
                 Porsche Panamera GTS
               </Heading>
-              <Text color={"black"} fontSize={20}>
+              <Text color={'black'} fontSize={20}>
                 2 000 000 <small>₽</small>
               </Text>
             </Box>
@@ -51,7 +51,7 @@ export default function CarPage() {
                 {fav ? (
                   <MdFavorite
                     size={50}
-                    color="red"
+                    color='red'
                     onClick={() => setFav((prev) => !prev)}
                   />
                 ) : (
@@ -61,14 +61,14 @@ export default function CarPage() {
                   />
                 )}
               </Box>
-              <Button size={"lg"} bgColor={"red"} ml={7}>
+              <Button size={'lg'} bgColor={'red'} ml={7}>
                 Связаться с нами
               </Button>
             </Center>
           </Flex>
-          <Flex mt={10} justifyContent={"space-around"}>
+          <Flex mt={10} justifyContent={'space-around'}>
             <Card p={3}>
-              <Table size={"md"} fontSize={16} variant={"unstyled"}>
+              <Table size={'md'} fontSize={16} variant={'unstyled'}>
                 <Tr>
                   <Td>Наличие</Td>
                   <Td>{car.availability}</Td>
