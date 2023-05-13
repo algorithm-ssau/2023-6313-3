@@ -25,6 +25,9 @@ export default function Navbar() {
               <li>
                 <a href='#'>Контакты</a>
               </li>
+              <li>
+                <NavLink to='/adding'>Разместить объявление</NavLink>
+              </li>
             </ul>
             <NavLink to='/profile' className={'profile ' + styles['profile']}>
               Личный кабинет
