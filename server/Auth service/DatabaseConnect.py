@@ -2,11 +2,11 @@ import mysql.connector
 from config import HOST, PORT, USER, PASSWORD, DATABASE
 from UsersWork import hide_password
 
-class Database():
 
-    connection = None
+class Database(object):
+    def __init__(self):
+        self.connection = None
 
-    @staticmethod
     def open_connection(self):
         try:
             self.connection = mysql.connector.connect(
@@ -21,7 +21,6 @@ class Database():
         except Exception as ex:
             print("No connection to database.")
 
-    @staticmethod
     def close_connection(self):
         try:
             self.connection.close()
@@ -29,7 +28,6 @@ class Database():
 
         except Exception as ex:
             print("There is no connected database.")
-
 
     def set_new_user(self, data: dict):
         username = data.get("username")
