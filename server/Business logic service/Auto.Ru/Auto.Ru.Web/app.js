@@ -29,6 +29,9 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+console.log("Db sync...")
+await sequelize.sync({force: true});
+console.log("All models were synchronized successfully.")
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`)
