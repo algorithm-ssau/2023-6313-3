@@ -10,9 +10,10 @@ print('Started')
 
 @app.post("/registration")
 async def get_tokens(data: dict):
-    Database.open_connection()
-    Database.set_new_user(data)
-    Database.close_connection()
+    db = Database()
+    db.open_connection()
+    db.set_new_user(data)
+    db.close_connection()
     return {
         "access_token": create_access_token(data=data),
         "refresh_token": create_refresh_token()
