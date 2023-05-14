@@ -10,6 +10,20 @@ def hide_password(password: str):
     return key
 
 
+def validate_password(password: str):
+    result = True
+
+    if len(password) < 8:
+        result = False
+    else:
+        for char in password:
+            if not ((48 <= ord(char) <= 57) or (65 <= ord(char) <= 90) or (97 <= ord(char) <= 122)):
+                result = False
+                break
+
+    return result
+
+
 def verify_password(password: str):
     # SELECT password FROM database
     key = "password from db"
