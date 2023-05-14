@@ -1,6 +1,8 @@
 import mysql.connector
+from fastapi import HTTPException
+
 from config import HOST, PORT, USER, PASSWORD, DATABASE
-from UsersWork import hide_password
+from UsersWork import hide_password, validate_password
 
 
 class Database(object):
@@ -31,8 +33,13 @@ class Database(object):
 
     def set_new_user(self, data: dict):
         username = data.get("username")
-        password = hide_password(data.get("password"))
         email = data.get("email")
+        password = data.get("password")
+
+        if validate_password(password):
+            password = hide_password(password)
+        else:
+            raise HTTPException(status_code=400, detail="Password is not valid.")
 
         cursor = self.connection.cursor()
 
@@ -43,7 +50,7 @@ class Database(object):
             self.connection.commit()
             print("User has been added.")
         else:
-            print("User exists in database.")
+            raise HTTPException(status_code=400, detail="User exists in database.")
 
     @staticmethod
     def check_existed_username(cursor, username):
