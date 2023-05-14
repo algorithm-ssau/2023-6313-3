@@ -36,10 +36,25 @@ class Database(object):
 
         cursor = self.connection.cursor()
 
-        sql_request = "INSERT INTO users (email, login, password_hash) VALUES (%s, %s, %s)"
-        val = (email, username, password)
+        if not self.check_existed_username(cursor, username):
+            sql_request = "INSERT INTO users (email, login, password_hash) VALUES (%s, %s, %s)"
+            val = (email, username, password)
+            cursor.execute(sql_request, val)
+            self.connection.commit()
+            print("User has been added.")
+        else:
+            print("User exists in database.")
 
-        cursor.execute(sql_request, val)
+    @staticmethod
+    def check_existed_username(cursor, username):
+        user_exists = False
+        cursor.execute("SELECT login FROM users")
+        rows = cursor.fetchall()
 
-        self.connection.commit()
+        for row in rows:
+            if row[0] == username:
+                user_exists = True
+                break
+
+        return user_exists
 
