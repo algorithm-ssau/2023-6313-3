@@ -27,6 +27,7 @@ db.Sequelize = Sequelize;
   
 // create the modal instance 
 db.users = require('./models/user.model')(sequelize, Sequelize);
+db.cars = require('./models/car.model')(sequelize, Sequelize);
 
 sequelize
   .authenticate()
