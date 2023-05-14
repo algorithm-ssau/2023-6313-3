@@ -60,7 +60,7 @@ services:
       frontend:
 
 volumes: 
-  db:
+  mysqldb:
 
 networks:
   backend:
