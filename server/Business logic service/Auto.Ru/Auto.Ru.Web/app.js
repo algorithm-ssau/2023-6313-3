@@ -20,6 +20,14 @@ const Sequelize = require('sequelize');
     dialect: config.development.dialect
   });
 
+
+const db = {};
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+  
+// create the modal instance 
+db.users = require('./models/user.model')(sequelize, Sequelize);
+
 sequelize
   .authenticate()
   .then(() => {
@@ -30,9 +38,18 @@ sequelize
   });
 
 console.log("Db sync...")
-await sequelize.sync({force: true});
-console.log("All models were synchronized successfully.")
+  dbSync(sequelize)
+  .then(() => {
+    console.log("All models were synchronized successfully.")
+  })
+  .catch((err) => {
+    console.error('Error:', err);
+  });
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`)
 })
+
+async function dbSync(sequelize){
+  await sequelize.sync({force: true});
+}
