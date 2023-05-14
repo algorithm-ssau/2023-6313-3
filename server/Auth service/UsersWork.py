@@ -1,6 +1,8 @@
 import os
 import hashlib
-from config import ALGORITHM, ENCODING, HASH_ITERATIONS, SALT_RANDOM_BYTES
+import pymysql
+from config import ALGORITHM, ENCODING, HASH_ITERATIONS, SALT_RANDOM_BYTES, \
+                   HOST, PORT, USER, PASSWORD, DATABASE
 
 
 def hide_password(password: str):
