@@ -88,14 +88,6 @@
     margin-bottom: 40px;
 }
 
-.add{
-    margin-left: 10px;
-    font-family: "Open Sans";
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
 .info {
     margin-left: 83px;
     padding: 15px 20px;
@@ -124,42 +116,4 @@
     font-weight: bolder;
     font-size: 30px;
     margin-left: 30px;
-}
-
-.favourite{
-    margin: 20px;
-    background-color: #ffffff;
-}
-
-.photo-favourite{
-    display: inline-block;
-    vertical-align: bottom;
-}
-
-.info-favourite{
-    display: inline-block;
-    margin-left: 10px;
-    height: 200px;
-    background-color: #ffffff;
-    vertical-align: bottom;
-}
-
-h3{
-    font-weight: bolder;
-    font-size: 25px;
-}
-
-.buttons-favourite{
-    display: inline-block;
-    margin-left: 70px;
-    vertical-align: bottom;
-}
-
-.best-price{
-    background-color: #69fa4c;
-    padding: 15px 20px;
-    font-size: 20px;
-    font-weight: bolder;
-    border-radius: 10px;
-    border: 3px solid #000000;
 }

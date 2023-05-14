@@ -1,6 +1,7 @@
 import styles from "./style.module.css";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Favourite from "../../components/Favourite";
 
 export default function ProfilePage() {
   return (
@@ -30,64 +31,15 @@ export default function ProfilePage() {
 
           <div className={styles["wrap-favourite"]}>
 
-            <div className={styles["favourite"]}>
-              <div className={styles["photo-favourite"]}>
-                <img src="http://placehold.it/300x200" alt="" />
-              </div>
-              <div className={styles["info-favourite"]}>
-                <h3>Марка и модель</h3>
-                <h3>2.000.000</h3>
-              </div>
-              <div className={styles["buttons-favourite"]}>
-                <h1 className={styles["best-price"]}>Справедливая цена</h1>
-              </div>
-            </div>
+          <Favourite />
 
-            <div className={styles["favourite"]}>
-              <div className={styles["photo-favourite"]}>
-                <img src="http://placehold.it/300x200" alt="" />
-              </div>
-              <div className={styles["info-favourite"]}>
-                <h3>Марка и модель</h3>
-                <h3>2.000.000</h3>
-              </div>
-              <div className={styles["buttons-favourite"]}>
-                <h1 className={styles["best-price"]}>Справедливая цена</h1>
-              </div>
-            </div>
+          <Favourite />
 
-            <div className={styles["favourite"]}>
-              <div className={styles["photo-favourite"]}>
-                <img src="http://placehold.it/300x200" alt="" />
-              </div>
-              <div className={styles["info-favourite"]}>
-                <h3>Марка и модель</h3>
-                <h3>2.000.000</h3>
-              </div>
-              <div className={styles["buttons-favourite"]}>
-                <h1 className={styles["best-price"]}>Справедливая цена</h1>
-              </div>
-            </div>
+          <Favourite />
 
-            <div className={styles["favourite"]}>
-              <div className={styles["photo-favourite"]}>
-                <img src="http://placehold.it/300x200" alt="" />
-              </div>
-              <div className={styles["info-favourite"]}>
-                <h3>Марка и модель</h3>
-                <h3>2.000.000</h3>
-              </div>
-              <div className={styles["buttons-favourite"]}>
-                <h1 className={styles["best-price"]}>Справедливая цена</h1>
-              </div>
-            </div>
-            
-
-            
+          <Favourite />
 
           </div>
-
-          
         </div>
       </div>
       <Footer />
