@@ -59,8 +59,8 @@ services:
     networks:
       frontend:
 
-volumes: 
-  db:
+volumes:
+  mysqldb:
 
 networks:
   backend:

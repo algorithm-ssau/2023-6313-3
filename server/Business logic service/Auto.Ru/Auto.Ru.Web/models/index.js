@@ -9,6 +9,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
+<<<<<<< HEAD
 let sequelize;
 sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
   host: config.host,
@@ -18,6 +19,14 @@ sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
         trustServerCertificate: true
       }, 
     }
+=======
+const sequelize = new Sequelize(
+    config.database, 
+    config.username,
+    config.password, {
+    host: config.host,
+    dialect: config.dialect
+>>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
 });
 
 fs
@@ -43,5 +52,34 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+<<<<<<< HEAD
+=======
+  
+// create the modal instance 
+db.users = require('./user.model')(sequelize, Sequelize);
+db.cars = require('./car.model')(sequelize, Sequelize);
+db.refreshTokens = require('./refresh-token.model')(sequelize, Sequelize);
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+console.log("Db sync...")
+  sequelize.sync({force: true})
+  .then(() => {
+    console.log("All models were synchronized successfully.")
+  })
+  .catch((err) => {
+    console.error('Error:', err);
+  });
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+>>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
 
 module.exports = db;

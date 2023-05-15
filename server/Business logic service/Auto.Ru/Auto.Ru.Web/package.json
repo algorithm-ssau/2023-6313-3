@@ -8,8 +8,12 @@
   },
   "scripts": {
     "start": "node app.js",
+<<<<<<< HEAD
     "migrate": "sequelize db:migrate",
     "prestart": "npm run migrate"
+=======
+    "migrate": "sequelize db:migrate"
+>>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
   },
   "devDependencies": {
     "eslint": "^8.21.0",
@@ -20,7 +24,10 @@
     "express": "^4.18.2",
     "mysql2": "^3.3.0",
     "sequelize": "^6.31.0",
+<<<<<<< HEAD
     "sequelize-auto-migrations": "^1.0.3",
+=======
+>>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
     "sequelize-mig": "^3.1.3",
     "tedious": "^16.0.0"
   }
