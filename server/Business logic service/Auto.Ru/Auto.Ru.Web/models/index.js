@@ -9,24 +9,12 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-<<<<<<< HEAD
-let sequelize;
-sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
-  host: config.host,
-  dialect: "mssql",
-  dialectOptions: {
-      options: {
-        trustServerCertificate: true
-      }, 
-    }
-=======
 const sequelize = new Sequelize(
     config.database, 
     config.username,
     config.password, {
     host: config.host,
     dialect: config.dialect
->>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
 });
 
 fs
@@ -52,8 +40,6 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-<<<<<<< HEAD
-=======
   
 // create the modal instance 
 db.users = require('./user.model')(sequelize, Sequelize);
@@ -80,6 +66,5 @@ console.log("Db sync...")
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
->>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
 
 module.exports = db;

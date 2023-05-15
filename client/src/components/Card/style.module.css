@@ -47,11 +47,7 @@
 	border-radius: 7px;
 	transition: all 0.1s ease-out;
 	color: white;
-<<<<<<< HEAD
-	background-color: rgb(219,55,39);
-=======
 	background-color: rgb(219, 55, 39);
->>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
 }
 
 .add-to-favourites:hover {
