@@ -1,6 +1,6 @@
 from fastapi import FastAPI
+from DatabaseConnect import Database
 from TokensWork import create_access_token, create_refresh_token, validate_access_token
-from UsersWork import hide_password
 
 
 app = FastAPI()
@@ -10,10 +10,10 @@ print('Started')
 
 @app.post("/registration")
 async def get_tokens(data: dict):
-    # username = data.get("username")
-    # password = hide_password(data.get("password"))
-    # email = data.get("email")
-    # INSERT INTO database. Needs database.
+    db = Database()
+    db.open_connection()
+    db.set_new_user(data)
+    db.close_connection()
     return {
         "access_token": create_access_token(data=data),
         "refresh_token": create_refresh_token()

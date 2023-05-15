@@ -1,13 +1,27 @@
 import os
 import hashlib
-from config import ALGORITHM, ENCODING, HASH_ITERATIONS, SALT_RANDOM_BYTES
+from config import ENCODING, SALT_RANDOM_BYTES
 
 
 def hide_password(password: str):
-    salt = os.urandom(SALT_RANDOM_BYTES)
-    key = hashlib.pbkdf2_hmac(ALGORITHM, password.encode(ENCODING), salt, HASH_ITERATIONS)
+    salt = os.urandom(SALT_RANDOM_BYTES).hex()
+    key = hashlib.sha256(salt.encode(ENCODING) + password.encode(ENCODING)).hexdigest() + ':' + salt
 
-    return salt + key
+    return key
+
+
+def validate_password(password: str):
+    result = True
+
+    if len(password) < 8:
+        result = False
+    else:
+        for char in password:
+            if not ((48 <= ord(char) <= 57) or (65 <= ord(char) <= 90) or (97 <= ord(char) <= 122)):
+                result = False
+                break
+
+    return result
 
 
 def verify_password(password: str):
