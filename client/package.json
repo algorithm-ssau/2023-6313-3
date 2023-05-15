@@ -6,12 +6,6 @@
     "@chakra-ui/react": "^2.6.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-<<<<<<< HEAD
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "bootstrap": "^5.2.3",
-=======
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -19,7 +13,6 @@
     "axios": "^1.3.6",
     "bootstrap": "^5.2.3",
     "formik": "^2.2.9",
->>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
     "framer-motion": "^10.12.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
@@ -29,12 +22,8 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "react-simple-image-slider": "^2.4.1",
-<<<<<<< HEAD
-    "web-vitals": "^2.1.4"
-=======
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
->>>>>>> 1babd244a7815d7467dbab4bdc73a54423ea047e
   },
   "scripts": {
     "start": "react-scripts start",
