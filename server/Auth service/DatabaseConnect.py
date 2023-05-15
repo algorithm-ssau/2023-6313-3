@@ -20,16 +20,26 @@ class Database(object):
             )
             print("Connected to database.")
 
+<<<<<<< HEAD
         except Exception:
             raise HTTPException(status_code=500, detail="No connection to database.")
+=======
+        except Exception as ex:
+            print("No connection to database.")
+>>>>>>> 4d0cdbe3eecc46d4f6e33c9fd9419529259f92b5
 
     def close_connection(self):
         try:
             self.connection.close()
             print("Connection closed.")
 
+<<<<<<< HEAD
         except Exception:
             raise HTTPException(status_code=500, detail="No database connected.")
+=======
+        except Exception as ex:
+            print("There is no connected database.")
+>>>>>>> 4d0cdbe3eecc46d4f6e33c9fd9419529259f92b5
 
     def set_new_user(self, data: dict):
         username = data.get("username")
