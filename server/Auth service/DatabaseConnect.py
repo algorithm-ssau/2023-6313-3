@@ -1,8 +1,6 @@
 from datetime import datetime
-
 import mysql.connector
 from fastapi import HTTPException
-
 from config import HOST, PORT, USER, PASSWORD, DATABASE
 from UsersWork import hide_password, validate_password
 
@@ -120,3 +118,11 @@ class Database(object):
         cursor.execute(sql_request, (username,))
 
         return cursor.fetchone()[0]
+
+    def get_user_refresh(self, refresh_token: str):
+        cursor = self.connection.cursor()
+
+        sql_request = "SELECT userId, expiresAt FROM `refresh-tokens` WHERE value = %s"
+        cursor.execute(sql_request, (refresh_token,))
+
+        return cursor.fetchone()

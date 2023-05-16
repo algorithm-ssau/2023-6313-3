@@ -63,3 +63,23 @@ def validate_access_token(token: str):
     else:
         database.close_connection()
         return False
+
+
+def check_both_tokens(tokens: dict):
+    refresh_token = tokens.get("refresh_token")
+
+    database = Database()
+    database.open_connection()
+
+    info_rt = database.get_user_refresh(refresh_token)
+    print(info_rt)
+
+    if info_rt[0] is not None and int(info_rt[1].timestamp()) >= int(datetime.now().timestamp()):
+        database.close_connection()
+        return info_rt[0]
+
+    database.close_connection()
+    return None
+
+
+
