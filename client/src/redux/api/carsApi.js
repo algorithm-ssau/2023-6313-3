@@ -18,12 +18,17 @@ export const carsApi = createApi({
   tagTypes: ['Cars'],
   endpoints: (build) => ({
     getCars: build.query({
-      query: () => 'cars',
-      providesTags: (result) => providesList(result, 'Cars'),
+      query: (args) => ({
+        url: '/cars',
+        params: {
+          page: args.page,
+          size: args.size,
+        },
+      }),
+      providesTags: (result) => providesList(result.items, 'Cars'),
     }),
     getCar: build.query({
-      query: (id) => `cars/${id}`,
-      providesTags: (result) => providesList(result, 'Cars'),
+      query: (id) => `/cars/${id}`,
     }),
     addCar: build.mutation({
       query: (body) => ({
@@ -43,7 +48,7 @@ export const carsApi = createApi({
     updateCar: build.mutation({
       query: (body) => ({
         url: `/cars/${body.id}`,
-        method: 'PATH',
+        method: 'PATCH',
         body: body,
       }),
       invalidatesTags: [{ type: 'Cars', id: 'LIST' }],
