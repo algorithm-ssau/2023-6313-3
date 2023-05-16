@@ -1,13 +1,17 @@
-const express = require('express')
-const app = express()
-const port = 1000
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const port = 1000;
 
-module.exports.env = app.get('env');
+module.exports.env = app.get("env");
 
 app.listen(port, () => {
-    console.log(`Server started on port ${port}`)
-})
+  console.log(`Server started on port ${port}`);
+});
 
 const cars = require("./routers/carsRouter");
 
-app.use("/api/cars", cars)
+app.use(cors());
+
+app.use(express.json());
+app.use("/api/cars", cars);
