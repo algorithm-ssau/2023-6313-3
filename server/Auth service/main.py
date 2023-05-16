@@ -12,11 +12,14 @@ print('Started')
 async def get_tokens(data: dict):
     db = Database()
     db.open_connection()
-    db.set_new_user(data)
+
+    user_id = int(db.set_new_user(data))
+    r_t = create_refresh_token(db, user_id)
+
     db.close_connection()
     return {
-        "access_token": create_access_token(data=data),
-        "refresh_token": create_refresh_token()
+        "access_token": create_access_token(user_id),
+        "refresh_token": r_t
     }
 
 
@@ -33,7 +36,7 @@ async def get_new_tokens(tokens: dict):
     # access_token = tokens.get("access_token")
     # refresh_token = tokens.get("refresh_token")
     # Here some validation for input tokens. Needs database.
-    access_token = create_access_token(data=tokens)
+    access_token = create_access_token()
     refresh_token = create_refresh_token()
     return {
         "access_token": access_token,
