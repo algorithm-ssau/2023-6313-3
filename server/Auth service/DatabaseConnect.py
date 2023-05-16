@@ -51,17 +51,9 @@ class Database(object):
             cursor.execute(sql_request, val)
             self.connection.commit()
             print("User has been added.")
-            return self.get_user_id(username)
+            return self.get_user_id(cursor, username)
         else:
             raise HTTPException(status_code=400, detail="User exists in database.")
-
-    def get_user_id(self, username: str):
-        cursor = self.connection.cursor()
-
-        sql_request = "SELECT id FROM users WHERE login = %s"
-        cursor.execute(sql_request, (username,))
-
-        return cursor.fetchone()[0]
 
     def set_token(self, tokens_data: dict):
         token = tokens_data.get("refresh_token")
@@ -76,6 +68,13 @@ class Database(object):
         cursor.execute(sql_request, val)
         self.connection.commit()
         print("Refresh token has been added.")
+
+    @staticmethod
+    def get_user_id(cursor, username):
+        sql_request = "SELECT id FROM users WHERE login = %s"
+        cursor.execute(sql_request, (username,))
+
+        return cursor.fetchone()[0]
 
     @staticmethod
     def check_existed_username(cursor, username):
