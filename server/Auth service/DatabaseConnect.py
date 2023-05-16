@@ -45,13 +45,13 @@ class Database(object):
 
         cursor = self.connection.cursor()
 
-        if not self.check_existed_username(cursor, username):
+        if not self.check_existed_username(username):
             sql_request = "INSERT INTO users (email, login, password_hash, createdAt, updatedAt) VALUES (%s, %s, %s, %s, %s)"
             val = (email, username, password, datetime.now(), datetime.now())
             cursor.execute(sql_request, val)
             self.connection.commit()
             print("User has been added.")
-            return self.get_user_id(cursor, username)
+            return self.get_user_id(username)
         else:
             raise HTTPException(status_code=400, detail="User exists in database.")
 
@@ -69,16 +69,40 @@ class Database(object):
         self.connection.commit()
         print("Refresh token has been added.")
 
-    @staticmethod
-    def get_user_id(cursor, username):
+    def update_token(self, tokens_data: dict):
+        token = tokens_data.get("refresh_token")
+        created_at = tokens_data.get("created_at")
+        expires_at = tokens_data.get("exp")
+        user_id = tokens_data.get("user_id")
+
+        cursor = self.connection.cursor()
+
+        sql_request = "UPDATE `refresh-tokens` SET value = %s, createdAt = %s, expiresAt = %s WHERE userId = %s"
+        val = (token, created_at, expires_at, user_id)
+        cursor.execute(sql_request, val)
+        self.connection.commit()
+        print("Refresh token has been updated.")
+
+    def check_exist_id(self, user_id: int):
+        cursor = self.connection.cursor()
+
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM users WHERE id = %s)", (user_id,))
+        result = cursor.fetchone()[0]
+
+        return result
+
+    def get_user_id(self, username):
+        cursor = self.connection.cursor()
+
         sql_request = "SELECT id FROM users WHERE login = %s"
         cursor.execute(sql_request, (username,))
 
         return cursor.fetchone()[0]
 
-    @staticmethod
-    def check_existed_username(cursor, username):
+    def check_existed_username(self, username):
         user_exists = False
+        cursor = self.connection.cursor()
+
         cursor.execute("SELECT login FROM users")
         rows = cursor.fetchall()
 
@@ -89,3 +113,10 @@ class Database(object):
 
         return user_exists
 
+    def get_password(self, username):
+        cursor = self.connection.cursor()
+
+        sql_request = "SELECT password_hash FROM users WHERE login = %s"
+        cursor.execute(sql_request, (username,))
+
+        return cursor.fetchone()[0]

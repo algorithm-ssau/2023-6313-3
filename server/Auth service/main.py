@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from DatabaseConnect import Database
-from TokensWork import create_access_token, create_refresh_token, validate_access_token
+from TokensWork import create_access_token, create_refresh_token, validate_access_token, update_refresh_token
+from UsersWork import check_password
 
 
 app = FastAPI()
@@ -25,17 +26,31 @@ async def get_tokens(data: dict):
 
 @app.post("/auth")
 async def authorization(data: dict):
-    # username = data.get("username")
-    # password = data.get("password")
-    # Checking in database...
-    return {"hello": "привет"}
+    db = Database()
+    db.open_connection()
+
+    if db.check_existed_username(username=data.get("username")):
+        print('User exists in database.')
+    else:
+        raise HTTPException(status_code=400, detail="User with this username doesn't exist.")
+
+    input_password = data.get("password")
+
+    if not check_password(db.get_password(data.get("username")), input_password):
+        raise HTTPException(status_code=400, detail="Wrong password.")
+
+    user_id = db.get_user_id(data.get("username"))
+    refresh_token = update_refresh_token(db, user_id)
+
+    db.close_connection()
+    return {
+        "access_token": create_access_token(user_id),
+        "refresh_token": refresh_token
+    }
 
 
 @app.post("/refresh")
 async def get_new_tokens(tokens: dict):
-    # access_token = tokens.get("access_token")
-    # refresh_token = tokens.get("refresh_token")
-    # Here some validation for input tokens. Needs database.
     access_token = create_access_token()
     refresh_token = create_refresh_token()
     return {
