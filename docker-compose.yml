@@ -8,7 +8,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
+      timeout: 5s
       retries: 10
     environment:
       MYSQL_DATABASE: auto.ru
@@ -50,7 +50,7 @@ services:
     
   client:
     depends_on:
-      - server-auth
+      - nginx-reverse-proxy
     container_name: frontend
     build: ./client/
     restart: always
@@ -59,8 +59,25 @@ services:
     networks:
       frontend:
 
+  nginx-reverse-proxy:
+    image: nginx:latest
+    depends_on:
+      - server-auth
+    container_name: nginx-reverse-proxy
+    restart: unless-stopped
+    ports:
+      - 80:80
+    links:
+      - server-auth
+      - server-business-logic
+    volumes:
+      - ./server/Nginx Reverse Proxy:/etc/nginx/conf.d
+    networks:
+      backend:
+
 volumes: 
   mysqldb:
+  nginx-reverse-proxy:
 
 networks:
   backend:
