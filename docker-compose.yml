@@ -27,7 +27,7 @@ services:
     depends_on:
       mysqldb:
         condition: service_healthy
-    container_name: backend-business-logic
+    container_name: server-business-logic
     build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
     restart: always
     ports:
@@ -38,7 +38,7 @@ services:
   server-auth:
     depends_on:
       - server-business-logic
-    container_name: backend-auth
+    container_name: server-auth
     build: ./server/Auth service/
     restart: always
     environment:

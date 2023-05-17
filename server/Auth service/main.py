@@ -21,7 +21,7 @@ app.add_middleware(
 print('Started')
 
 
-@app.post("api/users/registration")
+@app.post("/api/users/registration")
 async def get_tokens(data: dict):
     db = Database()
     try:
@@ -38,7 +38,7 @@ async def get_tokens(data: dict):
     }
 
 
-@app.post("api/users/auth")
+@app.post("/api/users/auth")
 async def authorization(data: dict):
     db = Database()
     try:
@@ -65,7 +65,7 @@ async def authorization(data: dict):
     }
 
 
-@app.post("api/users/refresh")
+@app.post("/api/users/refresh")
 async def get_new_tokens(tokens: dict):
     user_id = check_refresh_token(tokens)
 
@@ -86,6 +86,6 @@ async def get_new_tokens(tokens: dict):
     }
 
 
-@app.post("api/users/validate")
+@app.post("/api/users/validate")
 async def validate_token(token: dict):
     return {"success": validate_access_token(token.get("access_token"))}
