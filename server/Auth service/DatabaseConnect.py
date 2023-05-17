@@ -1,7 +1,7 @@
 from datetime import datetime
 import mysql.connector
 from fastapi import HTTPException
-from config import HOST, PORT, USER, PASSWORD, DATABASE
+from config import HOST, USER, PASSWORD, DATABASE
 from UsersWork import hide_password, validate_password
 
 

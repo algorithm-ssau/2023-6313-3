@@ -9,8 +9,6 @@ import string
 def create_access_token(user_id: int):
     payload = {"user_id": user_id}
 
-    print(ALGORITHM)
-
     expire = datetime.utcnow() + timedelta(minutes=TIME_DELTA_FOR_ACCESS)
     payload.update({"exp": expire})
     encoded_jwt = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
