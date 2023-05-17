@@ -19,7 +19,6 @@ class Database(object):
                 database=DATABASE
             )
             print("Connected to database.")
-
         except Exception:
             raise HTTPException(status_code=500, detail="No connection to database.")
 
@@ -27,7 +26,6 @@ class Database(object):
         try:
             self.connection.close()
             print("Connection closed.")
-
         except Exception:
             raise HTTPException(status_code=500, detail="No database connected.")
 
@@ -46,8 +44,10 @@ class Database(object):
         if not self.check_existed_username(username):
             sql_request = "INSERT INTO users (email, login, password_hash, createdAt, updatedAt) VALUES (%s, %s, %s, %s, %s)"
             val = (email, username, password, datetime.now(), datetime.now())
+
             cursor.execute(sql_request, val)
             self.connection.commit()
+
             print("User has been added.")
             return self.get_user_id(username)
         else:
@@ -63,8 +63,10 @@ class Database(object):
 
         sql_request = "INSERT INTO `refresh-tokens` (value, createdAt, expiresAt, userId) VALUES (%s, %s, %s, %s)"
         val = (token, created_at, expires_at, user_id)
+
         cursor.execute(sql_request, val)
         self.connection.commit()
+
         print("Refresh token has been added.")
 
     def update_token(self, tokens_data: dict):
@@ -77,8 +79,10 @@ class Database(object):
 
         sql_request = "UPDATE `refresh-tokens` SET value = %s, createdAt = %s, expiresAt = %s WHERE userId = %s"
         val = (token, created_at, expires_at, user_id)
+
         cursor.execute(sql_request, val)
         self.connection.commit()
+
         print("Refresh token has been updated.")
 
     def check_exist_id(self, user_id: int):
@@ -98,18 +102,12 @@ class Database(object):
         return cursor.fetchone()[0]
 
     def check_existed_username(self, username):
-        user_exists = False
         cursor = self.connection.cursor()
 
-        cursor.execute("SELECT login FROM users")
-        rows = cursor.fetchall()
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM users WHERE login = %s)", (username,))
+        result = cursor.fetchone()[0]
 
-        for row in rows:
-            if row[0] == username:
-                user_exists = True
-                break
-
-        return user_exists
+        return result
 
     def get_password(self, username):
         cursor = self.connection.cursor()
@@ -119,7 +117,7 @@ class Database(object):
 
         return cursor.fetchone()[0]
 
-    def get_user_refresh(self, refresh_token: str):
+    def get_info_about_refresh(self, refresh_token: str):
         cursor = self.connection.cursor()
 
         sql_request = "SELECT userId, expiresAt FROM `refresh-tokens` WHERE value = %s"
