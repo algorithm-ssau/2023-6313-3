@@ -1,35 +1,74 @@
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
 from config import ALGORITHM, TIME_DELTA_FOR_ACCESS, TIME_DELTA_FOR_REFRESH, SECRET_KEY, SYMBOLS_REFRESH_TOKEN
+from DatabaseConnect import Database
 import random
 import string
 
 
-def create_access_token(data: dict):
-    to_encode = data.copy()
+def create_access_token(user_id: int):
+    payload = {"user_id": user_id}
 
     expire = datetime.utcnow() + timedelta(minutes=TIME_DELTA_FOR_ACCESS)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    payload.update({"exp": expire})
+    encoded_jwt = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 
     return encoded_jwt
 
 
-def create_refresh_token():
-    to_encode = {}
+def create_refresh_token(user_id: int):
+    tokens_data = {}
 
     token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(SYMBOLS_REFRESH_TOKEN))
-    to_encode.update({"refresh_token": token})
+    tokens_data.update({"refresh_token": token})
+    tokens_data.update({"created_at": datetime.now()})
 
-    expire = datetime.utcnow() + timedelta(days=TIME_DELTA_FOR_REFRESH)
-    to_encode.update({"exp": expire})
+    expire = datetime.now() + timedelta(days=TIME_DELTA_FOR_REFRESH)
+    tokens_data.update({"exp": expire})
+    tokens_data.update({"user_id": user_id})
 
-    return to_encode.get("refresh_token")
+    return tokens_data
+
+
+def set_refresh_token(database: Database, user_id):
+    tokens_data = create_refresh_token(user_id)
+    database.set_token(tokens_data)
+
+    return tokens_data.get("refresh_token")
+
+
+def update_refresh_token(database: Database, user_id: int):
+    tokens_data = create_refresh_token(user_id)
+    database.update_token(tokens_data)
+
+    return tokens_data.get("refresh_token")
 
 
 def validate_access_token(token: str):
     try:
-        jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return True
+        data = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
     except JWTError:
         return False
+
+    return data.get("exp") >= int(datetime.utcnow().timestamp())
+
+
+def check_refresh_token(tokens: dict):
+    refresh_token = tokens.get("refresh_token")
+
+    database = Database()
+    try:
+        database.open_connection()
+
+        info_rt = database.get_info_about_refresh(refresh_token)
+        print(info_rt)
+
+        if info_rt is not None and int(info_rt[1].timestamp()) >= int(datetime.now().timestamp()):
+            database.close_connection()
+            return info_rt[0]
+    finally:
+        database.close_connection()
+    return None
+
+
+
