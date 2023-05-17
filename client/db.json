@@ -1,0 +1,16 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "name": "carName",
+      "imageUrl": "https://sun9-27.userapi.com/impg/24MqgSO_t2FdTWscpdTZZcHbDxXcJDFVLWsvnQ/mIBu7JnXqus.jpg?size=1280x663&quality=96&sign=1457e6fc08bd426e456831f5a7db3602&type=album",
+      "price": 12000
+    },
+    {
+      "id": 8,
+      "name": "carsdName",
+      "imageUrl": "https://sun9-27.userapi.com/impg/24MqgSO_t2FdTWscpdTZZcHbDxXcJDFVLWsvnQ/mIBu7JnXqus.jpg?size=1280x663&quality=96&sign=1457e6fc08bd426e456831f5a7db3602&type=album",
+      "price": 1200678760
+    }
+  ]
+}

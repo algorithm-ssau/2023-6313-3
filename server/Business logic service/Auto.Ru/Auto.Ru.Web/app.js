@@ -1,37 +1,17 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
-module.exports.env = app.get('env');
-
-const config = require('./config/config.json').development
-
-const Sequelize = require('sequelize');
-
-  const sequelize = new Sequelize('Auto.Ru', 'auto-ru-client', '12345', {
-    host: config.host,
-    dialect: "mssql",
-    dialectOptions: {
-        options: {
-          trustServerCertificate: true
-        }, 
-      }
-  });
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
-
+module.exports.env = app.get("env");
 
 app.listen(port, () => {
-    console.log(`Server started on port ${port}`)
-})
+  console.log(`Server started on port ${port}`);
+});
+
+const cars = require("./routers/carsRouter");
+
+app.use(cors());
+
+app.use(express.json());
+app.use("/api/cars", cars);
