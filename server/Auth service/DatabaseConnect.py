@@ -13,7 +13,6 @@ class Database(object):
         try:
             self.connection = mysql.connector.connect(
                 host=HOST,
-                port=PORT,
                 user=USER,
                 password=PASSWORD,
                 database=DATABASE
