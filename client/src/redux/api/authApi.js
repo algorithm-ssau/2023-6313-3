@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from './baseQuery';
 
-const BASE_URL = process.env.REACT_APP_AUTH_SERVICE_URL;
+const BASE_URL = process.env.REACT_APP_BACKEND_URL + '/users';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -10,7 +10,7 @@ export const authApi = createApi({
     registerUser: builder.mutation({
       query(data) {
         return {
-          url: 'register',
+          url: '/registration',
           method: 'POST',
           body: data,
           credentials: 'include',
@@ -20,7 +20,7 @@ export const authApi = createApi({
     loginUser: builder.mutation({
       query(data) {
         return {
-          url: 'login',
+          url: '/auth',
           method: 'POST',
           body: data,
           credentials: 'include',
@@ -30,7 +30,15 @@ export const authApi = createApi({
     logoutUser: builder.mutation({
       query() {
         return {
-          url: 'logout',
+          url: '/logout',
+          credentials: 'include',
+        };
+      },
+    }),
+    refreshToken: builder.mutation({
+      query() {
+        return {
+          url: '/refresh',
           credentials: 'include',
         };
       },

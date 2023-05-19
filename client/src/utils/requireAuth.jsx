@@ -1,12 +1,12 @@
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { selectCurrentToken } from '../redux/slices/authSlice.js';
+import { useAuth } from '../hooks/useAuth.js';
 
 const RequireAuth = () => {
-  const token = useSelector(selectCurrentToken);
+  const isAuth = useAuth();
   const location = useLocation();
+  console.log('auth is ' + isAuth);
 
-  return token ? (
+  return isAuth ? (
     <Outlet />
   ) : (
     <Navigate to='/register' state={{ from: location }} replace />

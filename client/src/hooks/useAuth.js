@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectCurrentUser } from '../redux/slices/authSlice';
+import { selectCurrentToken } from '../redux/slices/authSlice';
 
 export const useAuth = () => {
-  const user = useSelector(selectCurrentUser);
+  const token = useSelector(selectCurrentToken);
 
-  return useMemo(() => ({ user }), [user]);
+  return token !== null;
 };
