@@ -5,5 +5,12 @@
     "dialect": "mysql",
     "username": "root",
     "password": "K^rb%kVQH5$1I8WvL1CQerr"
+  },
+  "localDevelopment": {
+    "host" : "127.0.0.1",
+    "database": "auto.ru",
+    "dialect": "mysql",
+    "username": "root",
+    "password": "K^rb%kVQH5$1I8WvL1CQerr"
   }
 }
