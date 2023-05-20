@@ -6,10 +6,23 @@ const paginationExtensions = require("../extensions/pagination");
 // Home page route.
 router.get("/", async function (req, res) {
   const pagination = paginationExtensions.paginate(req);
+  const {Op} = require('sequelize');
+
+  let whereCondition = {};
+
+  if(req.query.searchPattern){
+    let searchPattern = String(req.query.searchPattern)
+    whereCondition = {
+      name: {
+        [Op.like]: '%' + searchPattern + '%'
+      }
+    };
+  }
 
   let cars = await db.cars.findAndCountAll({
     limit: pagination.size,
     offset: pagination.offset,
+    where: whereCondition,
   });
 
   res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
