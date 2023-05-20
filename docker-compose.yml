@@ -32,6 +32,8 @@ services:
     restart: always
     ports:
       - 1000:1000
+    environment:
+      - NODE_ENV=development
     networks:
       backend:
 
