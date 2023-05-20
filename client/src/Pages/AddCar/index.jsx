@@ -69,7 +69,7 @@ const AddCarPage = () => {
       <h1>Add Car</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='makeModel'>
-          <Form.Label>Make and Model</Form.Label>
+          <Form.Label>Марка и модель</Form.Label>
           <Form.Control
             type='text'
             name='makeModel'
@@ -79,35 +79,30 @@ const AddCarPage = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId='availability'>
-          <Form.Label>Availability</Form.Label>
+        <Form.Group controlId='price'>
+          <Form.Label>Цена</Form.Label>
           <Form.Control
-            as='select'
-            name='availability'
-            value={formValues.availability}
+            type='number'
+            name='price'
+            value={formValues.price}
             onChange={handleSelectChange}
             required
-          >
-            <option value=''>Select Availability</option>
-            <option value='100'>100</option>
-            <option value='200'>200</option>
-            <option value='300'>300</option>
-          </Form.Control>
+          />
         </Form.Group>
 
-        <Form.Group controlId='generation'>
-          <Form.Label>Generation</Form.Label>
+        <Form.Group controlId='imageUrl'>
+          <Form.Label>Фото</Form.Label>
           <Form.Control
             type='text'
-            name='generation'
-            value={formValues.generation}
+            name='imageUrl'
+            value={formValues.imageUrl}
             onChange={handleSelectChange}
             required
           />
         </Form.Group>
 
         <Form.Group controlId='year'>
-          <Form.Label>Year</Form.Label>
+          <Form.Label>Год</Form.Label>
           <Form.Control
             type='text'
             name='year'
@@ -118,7 +113,7 @@ const AddCarPage = () => {
         </Form.Group>
 
         <Form.Group controlId='mileage'>
-          <Form.Label>Mileage</Form.Label>
+          <Form.Label>Пробег</Form.Label>
           <Form.Control
             type='text'
             name='mileage'
@@ -128,19 +123,8 @@ const AddCarPage = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId='bodyType'>
-          <Form.Label>Body Type</Form.Label>
-          <Form.Control
-            type='text'
-            name='bodyType'
-            value={formValues.bodyType}
-            onChange={handleSelectChange}
-            required
-          />
-        </Form.Group>
-
         <Form.Group controlId='color'>
-          <Form.Label>Color</Form.Label>
+          <Form.Label>Цвет</Form.Label>
           <Form.Control
             type='text'
             name='color'
@@ -150,30 +134,43 @@ const AddCarPage = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId='engine'>
-          <Form.Label>Engine</Form.Label>
+        <Form.Group controlId='colorengineVolume'>
+          <Form.Label>Оъём двигателя</Form.Label>
           <Form.Control
             type='text'
-            name='engine'
-            value={formValues.engine}
+            name='engineVolume'
+            value={formValues.engineVolume}
             onChange={handleSelectChange}
             required
           />
         </Form.Group>
 
-        <Form.Group controlId='tax'>
-          <Form.Label>Tax</Form.Label>
+        <Form.Group controlId='enginePowers'>
+          <Form.Label>Мощность</Form.Label>
           <Form.Control
             type='text'
-            name='tax'
-            value={formValues.tax}
+            name='enginePowers'
+            value={formValues.enginePowers}
+            onChange={handleSelectChange}
+            required
+          />
+        </Form.Group>
+
+
+        {/* исправить */}
+        <Form.Group controlId='leftSteeringWheel'> 
+          <Form.Label>Левое рулевое колесо</Form.Label>
+          <Form.Control
+            type='text'
+            name='leftSteeringWheel'
+            value={formValues.leftSteeringWheel}
             onChange={handleSelectChange}
             required
           />
         </Form.Group>
 
         <Form.Group controlId='transmission'>
-          <Form.Label>Transmission</Form.Label>
+          <Form.Label>Коробка передач</Form.Label>
           <Form.Control
             as='select'
             name='transmission'
@@ -188,11 +185,11 @@ const AddCarPage = () => {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='drive'>
-          <Form.Label>Drive</Form.Label>
+        <Form.Group controlId='gear'>
+          <Form.Label>Привод</Form.Label>
           <Form.Control
             as='select'
-            name='drive'
+            name='gear'
             value={formValues.drive}
             onChange={handleSelectChange}
             required
@@ -200,41 +197,10 @@ const AddCarPage = () => {
             <option value=''>Select Drive</option>
             <option value='Front-wheel drive'>Front-wheel drive</option>
             <option value='Rear-wheel drive'>Rear-wheel drive</option>
-            <option value='All-wheel drive'>All-wheel drive</option>
+            <option value='Full'>Full</option>
           </Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId='steering'>
-          <Form.Label>Steering</Form.Label>
-          <Form.Control
-            as='select'
-            name='steering'
-            value={formValues.steering}
-            onChange={handleSelectChange}
-            required
-          >
-            <option value=''>Select Steering</option>
-            <option value='Left'>Left</option>
-            <option value='Right'>Right</option>
-          </Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId='condition'>
-          <Form.Label>Condition</Form.Label>
-          <Form.Control
-            as='select'
-            name='condition'
-            value={formValues.condition}
-            onChange={handleSelectChange}
-            required
-          >
-            <option value=''>Select Condition</option>
-            <option value='New'>New</option>
-            <option value='Used'>Used</option>
-            <option value='Reconditioned'>Reconditioned</option>
-          </Form.Control>
-        </Form.Group>
-
+        </Form.Group>      
+     
         <Button variant='primary' type='submit'>
           Submit
         </Button>
