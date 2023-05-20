@@ -30,6 +30,7 @@ router.get("/", use(async function (req, res) {
   res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
 }));
 
+// Get cars' details from database
 router.get("/:id/details", use(async function (req, res) {
   if (isNaN(req.params.id)) {
     res.status(400).send({
@@ -53,6 +54,7 @@ router.get("/:id/details", use(async function (req, res) {
   res.json(car);
 }));
 
+// Set cars' details to database
 router.post("/",use(async function (req, res) {
   console.log(req.body);
   const { name, price, imageUrl, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
@@ -77,7 +79,9 @@ router.post("/",use(async function (req, res) {
     currentTime,
     currentTime,
   });
-  res.json(car);
+
+  res.json({ "success" : true });
+
 }));
 
 module.exports = router;

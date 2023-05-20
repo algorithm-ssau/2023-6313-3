@@ -6,12 +6,14 @@ const port = 1000;
 module.exports.env = app.get("env");
 
 const cars = require("./routers/carsRouter");
+const favorites = require("./routers/favoritesRouter");
 
 app.use(cors());
 
 app.use(express.json());
 
 app.use("/api/cars", cars);
+app.use("/api/favorites", favorites);
 
 app.use(function(err, req, res, next){
   console.log(err);
