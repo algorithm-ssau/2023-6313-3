@@ -1,26 +1,34 @@
+import { Center } from '@chakra-ui/react';
 import styles from './style.module.css';
 
 export default function Footer() {
   return (
     <footer className={styles['footer']}>
       <div className={styles['hr1']}></div>
-
-      <ul className={styles['social']}>
-        <li>
-          <a href='#' className={styles['facebook']}>
-            <ion-icon name='logo-facebook'></ion-icon>
-          </a>
-          <a href='#' className={styles['twitter']}>
-            <ion-icon name='logo-twitter'></ion-icon>
-          </a>
+      <Center>
+        <ul className={styles['social']}>
+          <li>
+            <a href='#' className={styles['call']}>
+              <ion-icon name='call-outline'></ion-icon>
+            </a>
+          </li>
+          <li>
+            <a href='#' className={styles['github']}>
+              <ion-icon name='logo-github'></ion-icon>
+            </a>
+          </li>
+          <li>
           <a href='#' className={styles['vk']}>
             <ion-icon name='logo-vk'></ion-icon>
           </a>
-          <a href='#' className={styles['instagram']}>
-            <ion-icon name='logo-instagram'></ion-icon>
+          </li>
+          <li>
+          <a href='#' className={styles['whatsapp']}>
+            <ion-icon name='logo-whatsapp'></ion-icon>
           </a>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </Center>
       <ul className={styles['menu']}>
         <li>
           <a href='#'>Главная</a>
