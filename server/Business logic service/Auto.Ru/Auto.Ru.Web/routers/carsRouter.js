@@ -30,7 +30,7 @@ router.get("/", use(async function (req, res) {
   res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
 }));
 
-router.get("/:id/details", async function (req, res) {
+router.get("/:id/details", use(async function (req, res) {
   if (isNaN(req.params.id)) {
     res.status(400).send({
       message: "id должен быть числом",
@@ -51,9 +51,9 @@ router.get("/:id/details", async function (req, res) {
   }
   
   res.json(car);
-});
+}));
 
-router.post("/", async function (req, res) {
+router.post("/",use(async function (req, res) {
   console.log(req.body);
   const { name, price, imageUrl, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
   if (!(name && price && imageUrl && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear)) {
@@ -78,6 +78,6 @@ router.post("/", async function (req, res) {
     currentTime,
   });
   res.json(car);
-});
+}));
 
 module.exports = router;
