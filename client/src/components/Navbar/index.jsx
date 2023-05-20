@@ -1,8 +1,15 @@
 import { NavLink } from 'react-router-dom';
 
 import styles from './style.module.css';
+import { useAccordion } from '@chakra-ui/react';
+import { useAuth } from '../../hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { useLogoutUserMutation } from '../../redux/api/authApi';
+import { logout } from '../../redux/slices/authSlice';
 
 export default function Navbar() {
+  const isAuth = useAuth();
+  const dispath = useDispatch();
   return (
     <div>
       <div className={styles['hr']}></div>
@@ -12,7 +19,7 @@ export default function Navbar() {
             to='/cars'
             className={'navbar-brand ' + styles['navbar-brand']}
           >
-            Auto.Ru
+            DIGITAL DRIVE
           </NavLink>
           <div className={'navbar-wrap ' + styles['navbar-wrap']}>
             <ul className={'navbar-menu ' + styles['navbar-menu']}>
@@ -30,8 +37,17 @@ export default function Navbar() {
               </li>
             </ul>
             <NavLink to='/profile' className={'profile ' + styles['profile']}>
-              Личный кабинет
+              {isAuth ? 'Личный кабинет' : 'Войти'}
             </NavLink>
+            {isAuth && (
+              <NavLink
+                to='/cars'
+                className={'profile ' + styles['profile']}
+                onClick={() => dispath(logout())}
+              >
+                {'Выйти'}
+              </NavLink>
+            )}
           </div>
         </div>
       </nav>

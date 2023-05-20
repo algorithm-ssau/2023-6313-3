@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from './baseQuery';
 
-const BASE_URL = process.env.REACT_APP_SERVER_URL;
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 function providesList(resultsWithIds, tagType) {
   return resultsWithIds
