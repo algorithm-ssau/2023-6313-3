@@ -22,28 +22,45 @@ router.get("/:id/details", async function (req, res) {
     });
   }
 
-  await db.cars.findOne({
+  let car = await db.cars.findOne({
     where: {
       id : Number(req.params.id)
     },
     attributes: { exclude: ['createdAt', 'updatedAt'] }
-}).then(function(car) {
-    res.json(car);
-})
+});
+
+  if (!car) {
+    res.status(404).send({
+      message: "Такого id не существует",
+    });
+  }
+  
+  res.json(car);
 });
 
 router.post("/", async function (req, res) {
   console.log(req.body);
-  const { name, price, imageUrl } = req.body;
-  if (!(name && price && imageUrl)) {
+  const { name, price, imageUrl, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
+  if (!(name && price && imageUrl && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear)) {
     return res.status(400).send({
-      message: "невалидные данные",
+      message: "Невалидные данные",
     });
   }
+  var currentTime = new Date();
   let car = await db.cars.create({
     name,
     price,
     imageUrl,
+    year,
+    mileage,
+    color,
+    engineValue,
+    enginePowers,
+    leftSteeringWheel,
+    transmission,
+    gear,
+    currentTime,
+    currentTime,
   });
   res.json(car);
 });
