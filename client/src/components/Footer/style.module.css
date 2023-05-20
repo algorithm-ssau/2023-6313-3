@@ -55,7 +55,7 @@ footer {
   color: #5e5e5e;
   margin: 0 10px;
   display: inline-block;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 .menu li a {
@@ -84,7 +84,7 @@ footer p {
 }
 
 .github:hover {
-  color: rgb(55, 161, 248);
+  color: rgb(0, 0, 0);
 }
 
 .vk:hover {
@@ -92,9 +92,10 @@ footer p {
 }
 
 .whatsapp:hover {
-  color: rgb(223, 90, 2);
+  color: rgb(30, 255, 0);
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 0;
 }
