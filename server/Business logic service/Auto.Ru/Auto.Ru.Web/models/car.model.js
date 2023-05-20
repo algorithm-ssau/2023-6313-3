@@ -16,6 +16,39 @@ module.exports = (sequelize, Sequelize) => {
         imageUrl: {
             type: Sequelize.STRING,
             allowNull : false
+        },
+        year: {
+            type: Sequelize.STRING,
+            allowNull : false
+        },
+        mileage: {
+            type: Sequelize.STRING,
+            allowNull : false
+        },
+        color: {
+            type: Sequelize.STRING,
+            allowNull : false
+        },
+        engineValue: {
+            type: Sequelize.STRING,
+            allowNull : false
+        },
+        enginePowers: {
+            type: Sequelize.STRING,
+            allowNull : false
+        },
+        leftSteeringWheel: {
+            type: Sequelize.BOOLEAN,
+            allowNull : false,
+            default: true
+        },
+        transmission: {
+            type: Sequelize.STRING,
+            allowNull : false
+        },
+        gear: {
+            type: Sequelize.STRING,
+            allowNull : false
         }
     });
 
