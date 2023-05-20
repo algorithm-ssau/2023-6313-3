@@ -21,7 +21,7 @@ export default function Favourite() {
             
           </div>
 
-          <h1 className={styles['best-price']}>Справедливая цена</h1>
+          
         </div>
       </div>
 

@@ -28,15 +28,6 @@ h3{
     vertical-align: bottom;
 }
 
-.best-price{
-    background-color: #69fa4c;
-    padding: 15px 20px;
-    font-size: 20px;
-    font-weight: bolder;
-    border-radius: 10px;
-    border: 3px solid #000000;
-}
-
 .line{
     margin-left: 20px;
     height: 1px;
@@ -48,7 +39,7 @@ h3{
     height: 20px;
     width: 20px;
     position: relative;
-    bottom: 110px;
+    bottom: 180px;
     right: -240px;
     cursor: pointer;
 }
