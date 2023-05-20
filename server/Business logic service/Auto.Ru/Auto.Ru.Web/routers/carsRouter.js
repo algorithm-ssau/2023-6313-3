@@ -13,7 +13,7 @@ router.get("/", use(async function (req, res) {
   let whereCondition = {};
 
   if(req.query.searchPattern){
-    let searchPattern = String(req.query.searchPattern);
+    let searchPattern = String(req.query.searchPattern)
     whereCondition = {
       name: {
         [Op.like]: '%' + searchPattern + '%'
@@ -30,29 +30,52 @@ router.get("/", use(async function (req, res) {
   res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
 }));
 
-router.get("/:id", async function (req, res) {
+router.get("/:id/details", async function (req, res) {
   if (isNaN(req.params.id)) {
     res.status(400).send({
       message: "id должен быть числом",
     });
   }
 
-  let car = await db.cars.findByPk(Number(req.params.id));
+  let car = await db.cars.findOne({
+    where: {
+      id : Number(req.params.id)
+    },
+    attributes: { exclude: ['createdAt', 'updatedAt'] }
+});
+
+  if (!car) {
+    res.status(404).send({
+      message: "Такого id не существует",
+    });
+  }
+  
   res.json(car);
 });
 
 router.post("/", async function (req, res) {
   console.log(req.body);
-  const { name, price, imageUrl } = req.body;
-  if (!(name && price && imageUrl)) {
+  const { name, price, imageUrl, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
+  if (!(name && price && imageUrl && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear)) {
     return res.status(400).send({
-      message: "Invalid input",
+      message: "Невалидные данные",
     });
   }
+  var currentTime = new Date();
   let car = await db.cars.create({
     name,
     price,
     imageUrl,
+    year,
+    mileage,
+    color,
+    engineValue,
+    enginePowers,
+    leftSteeringWheel,
+    transmission,
+    gear,
+    currentTime,
+    currentTime,
   });
   res.json(car);
 });
