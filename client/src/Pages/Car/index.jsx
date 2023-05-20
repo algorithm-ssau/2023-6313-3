@@ -24,12 +24,25 @@ import { images } from '../../fake-db/fakeImages';
 import { car } from '../../fake-db/fakeCarData';
 import Footer from '../../components/Footer';
 import styles from './style.module.css';
+import { useGetCarQuery } from '../../redux/api/carsApi';
 
 export default function CarPage() {
   const [fav, setFav] = useState(false);
   const [isFullImage, setFullImage] = useState(false);
   const [curImage, setCurImage] = useState(0);
   const { id } = useParams();
+
+  const {
+    data: carDetails,
+    isFetching,
+    isLoading,
+    error,
+  } = useGetCarQuery(id, {
+    pollingInterval: 3000,
+    refetchOnMountOrArgChange: true,
+    skip: false,
+  });
+  console.log(carDetails);
 
   useEffect(() => {
     window.scrollTo({
@@ -38,10 +51,6 @@ export default function CarPage() {
     });
     console.log('scroll');
   }, []);
-
-  useEffect(() => {
-    console.log(`get car details by id: ${id}`);
-  }, [id]);
 
   return (
     <ChakraProvider resetCSS>
@@ -79,7 +88,7 @@ export default function CarPage() {
             </Center>
           </Flex>
           <Flex mt={10} justifyContent={'space-around'}>
-            <CarPageTable />
+            <CarPageTable carDetails={carDetails} />
             <Center>
               <Card p={5} ml={5}>
                 <Center>
@@ -111,56 +120,56 @@ export default function CarPage() {
   );
 }
 
-const CarPageTable = () => (
+const CarPageTable = ({ carDetails }) => (
   <Card p={3}>
     <Table size={'md'} fontSize={16} variant={'unstyled'}>
       <Tr>
         <Td>Наличие</Td>
-        <Td>{car.availability}</Td>
+        <Td>{carDetails.availability}</Td>
       </Tr>
       <Tr>
         <Td>Поколение</Td>
-        <Td>{car.generation}</Td>
+        <Td>{carDetails.generation}</Td>
       </Tr>
       <Tr>
         <Td>Год выпуска</Td>
-        <Td>{car.yearOfIssue}</Td>
+        <Td>{carDetails.yearOfIssue}</Td>
       </Tr>
       <Tr>
         <Td>Пробег</Td>
-        <Td>{car.mileage}</Td>
+        <Td>{carDetails.mileage}</Td>
       </Tr>
       <Tr>
         <Td>Кузов</Td>
-        <Td>{car.body}</Td>
+        <Td>{carDetails.body}</Td>
       </Tr>
       <Tr>
         <Td>Цвет</Td>
-        <Td>{car.color}</Td>
+        <Td>{carDetails.color}</Td>
       </Tr>
       <Tr>
         <Td>Двигатель</Td>
-        <Td>{car.engine}</Td>
+        <Td>{carDetails.engine}</Td>
       </Tr>
       <Tr>
         <Td>Налог</Td>
-        <Td>{car.tax}</Td>
+        <Td>{carDetails.tax}</Td>
       </Tr>
       <Tr>
         <Td>Коробка</Td>
-        <Td>{car.transmission}</Td>
+        <Td>{carDetails.transmission}</Td>
       </Tr>
       <Tr>
         <Td>Привод</Td>
-        <Td>{car.driveUnit}</Td>
+        <Td>{carDetails.driveUnit}</Td>
       </Tr>
       <Tr>
         <Td>Руль</Td>
-        <Td>{car.steeringWheel}</Td>
+        <Td>{carDetails.steeringWheel}</Td>
       </Tr>
       <Tr>
         <Td>Состояние</Td>
-        <Td>{car.healthStatus}</Td>
+        <Td>{carDetails.healthStatus}</Td>
       </Tr>
     </Table>
   </Card>

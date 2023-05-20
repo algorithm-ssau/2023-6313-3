@@ -3,7 +3,6 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const baseQuery = (url) =>
   fetchBaseQuery({
     baseUrl: url,
-    //credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {

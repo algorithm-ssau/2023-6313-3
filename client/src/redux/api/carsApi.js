@@ -28,11 +28,11 @@ export const carsApi = createApi({
       providesTags: (result) => providesList(result.items, 'Cars'),
     }),
     getCar: build.query({
-      query: (id) => `/cars/${id}`,
+      query: (id) => `/cars/${id}/details`,
     }),
     addCar: build.mutation({
       query: (body) => ({
-        url: '/cars',
+        url: '/cars/',
         method: 'POST',
         body: body,
       }),

@@ -23,7 +23,6 @@ export const authApi = createApi({
           url: '/auth',
           method: 'POST',
           body: data,
-          credentials: 'include',
         };
       },
     }),
