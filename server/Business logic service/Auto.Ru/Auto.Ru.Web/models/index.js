@@ -10,11 +10,11 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 const sequelize = new Sequelize(
-    config.database, 
-    config.username,
-    config.password, {
-    host: config.host,
-    dialect: config.dialect
+  config.database,
+  config.username,
+  config.password, {
+  host: config.host,
+  dialect: config.dialect
 });
 
 fs
@@ -40,7 +40,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-  
+
 // create the modal instance 
 db.users = require('./user.model')(sequelize, Sequelize);
 db.cars = require('./car.model')(sequelize, Sequelize);
@@ -56,7 +56,7 @@ sequelize
   });
 
 console.log("Db sync...")
-  sequelize.sync({force: true})
+sequelize.sync({ force: true })
   .then(() => {
     console.log("All models were synchronized successfully.")
   })
