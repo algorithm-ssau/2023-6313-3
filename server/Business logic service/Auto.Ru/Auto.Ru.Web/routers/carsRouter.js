@@ -3,16 +3,16 @@ const db = require("../models");
 const router = express.Router();
 const paginationExtensions = require("../extensions/pagination");
 
-const use = fn => (req,res,next) => Promise.resolve(fn(req,res,next)).catch(next);
+const filterExceptions = require("../extensions/exceptions").filterExceptions;
 
 // Home page route.
-router.get("/", use(async function (req, res) {
+router.get("/", filterExceptions(async function (req, res) {
   const pagination = paginationExtensions.paginate(req);
-  const {Op} = require('sequelize');
+  const { Op } = require('sequelize');
 
   let whereCondition = {};
 
-  if(req.query.searchPattern){
+  if (req.query.searchPattern) {
     let searchPattern = String(req.query.searchPattern)
     whereCondition = {
       name: {
@@ -30,7 +30,7 @@ router.get("/", use(async function (req, res) {
   res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
 }));
 
-router.get("/:id/details", use(async function (req, res) {
+router.get("/:id/details", filterExceptions(async function (req, res) {
   if (isNaN(req.params.id)) {
     res.status(400).send({
       message: "id должен быть числом",
@@ -39,21 +39,21 @@ router.get("/:id/details", use(async function (req, res) {
 
   let car = await db.cars.findOne({
     where: {
-      id : Number(req.params.id)
+      id: Number(req.params.id)
     },
     attributes: { exclude: ['createdAt', 'updatedAt'] }
-});
+  });
 
   if (!car) {
     res.status(404).send({
       message: "Такого id не существует",
     });
   }
-  
+
   res.json(car);
 }));
 
-router.post("/",use(async function (req, res) {
+router.post("/", filterExceptions(async function (req, res) {
   console.log(req.body);
   const { name, price, imageUrl, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
   if (!(name && price && imageUrl && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear)) {
