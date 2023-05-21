@@ -23,12 +23,13 @@ export const carsApi = createApi({
         params: {
           page: args.page,
           size: args.size,
+          searchPattern: args.searchPattern,
         },
       }),
       providesTags: (result) => providesList(result.items, 'Cars'),
     }),
     getCar: build.query({
-      query: (id) => `/cars/${id}`,
+      query: (id) => `/cars/${id}/details`,
     }),
     addCar: build.mutation({
       query: (body) => ({

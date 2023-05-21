@@ -32,7 +32,7 @@ export default function RegisterPage() {
         .unwrap()
         .then((response) => {
           console.log(response);
-          dispatch(setCredentials(response.data));
+          dispatch(setCredentials(response));
           navigate(-1);
         })
         .catch((error) => {
