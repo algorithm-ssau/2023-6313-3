@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from DatabaseConnect import Database
 from TokensWork import create_access_token, set_refresh_token, validate_access_token, update_refresh_token, \
     check_refresh_token
@@ -32,10 +33,9 @@ async def get_tokens(data: dict):
     finally:
         db.close_connection()
 
-    return {
-        "access_token": create_access_token(user_id),
-        "refresh_token": r_t
-    }
+    access_token = create_access_token(user_id)
+
+    return createResponse(access_token, r_t)
 
 
 @app.post("/api/users/auth")
@@ -59,10 +59,10 @@ async def authorization(data: dict):
     finally:
         db.close_connection()
 
-    return {
-        "access_token": create_access_token(user_id),
-        "refresh_token": refresh_token
-    }
+    access_token = create_access_token(user_id)
+
+    return createResponse(access_token, refresh_token)
+    
 
 
 @app.post("/api/users/refresh")
@@ -80,12 +80,23 @@ async def get_new_tokens(tokens: dict):
     finally:
         db.close_connection()
 
-    return {
-        "access_token": create_access_token(user_id),
-        "refresh_token": refresh_token
-    }
+    accessToken = create_access_token(user_id)
+
+    return createResponse(accessToken, refresh_token)
 
 
 @app.post("/api/users/validate")
 async def validate_token(token: dict):
     return {"success": validate_access_token(token.get("access_token"))}
+
+def createResponse(accessToken: str, refreshToken: str):
+    response = JSONResponse({
+        "access_token": accessToken,
+        "refresh_token": refreshToken
+    })
+
+    response.delete_cookie("accessToken")
+    response.delete_cookie("refreshToken")
+    response.set_cookie("accessToken", accessToken)
+    response.set_cookie("refreshToken", refreshToken)
+    return response
