@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className={'navbar-wrap ' + styles['navbar-wrap']}>
             <ul className={'navbar-menu ' + styles['navbar-menu']}>
               <li>
-                <a href='#'>О нас</a>
+                <a href='/about'>О нас</a>
               </li>
               <li>
                 <a href='#'>Новости</a>
