@@ -4,13 +4,15 @@
     "database": "auto.ru",
     "dialect": "mysql",
     "username": "root",
-    "password": "K^rb%kVQH5$1I8WvL1CQerr"
+    "password": "K^rb%kVQH5$1I8WvL1CQerr",
+    "authServiceHost": "server-auth"
   },
   "localDevelopment": {
     "host" : "127.0.0.1",
     "database": "auto.ru",
     "dialect": "mysql",
     "username": "root",
-    "password": "K^rb%kVQH5$1I8WvL1CQerr"
+    "password": "K^rb%kVQH5$1I8WvL1CQerr",
+    "authServiceHost": "127.0.0.1"
   }
 }
