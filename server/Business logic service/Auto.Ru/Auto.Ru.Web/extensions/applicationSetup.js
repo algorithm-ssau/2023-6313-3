@@ -7,6 +7,7 @@ const authMiddleware = require("./auth").authMiddleware;
 const filterExceptions = require("./exceptions").filterExceptions;
 
 function setupMiddlewares(app) {
+  
   const cars = require("../routers/carsRouter");
 
   app.use(
