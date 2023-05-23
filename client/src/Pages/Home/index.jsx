@@ -18,17 +18,21 @@ export default function HomePage() {
   const { data, isLoading } = useGetCarsQuery({
     page: currentPage,
     size: 12,
+    searchPattern: searchValue,
   });
 
   const filteredCars = data?.items.filter((car) =>
     car.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  };
   return (
     <ChakraProvider>
       <div className={styles['body']}>
         <Navbar />
-        <SearchField searchFn={(e) => setSearchValue(e.target.value)} />
+        <SearchField searchFn={handleSearch} />
         <div className='container mt-5'>
           {isLoading ? (
             <Center m={20}>
@@ -45,6 +49,7 @@ export default function HomePage() {
               {filteredCars.map((car) => (
                 <Card
                   key={car.id}
+                  id={car.id}
                   title={car.name}
                   price={car.price}
                   imageUrl={car.imageUrl}

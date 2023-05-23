@@ -2,14 +2,14 @@ import { useState } from 'react';
 import styles from './style.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function Card({ title, price, imageUrl }) {
+export default function Card({ id, title, price, imageUrl }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [favCar, setFavCar] = useState(false);
   return (
     <div
       className='col-md-3'
-      onClick={() => navigate(`/cars/${title}`, { state: { from: location } })}
+      onClick={() => navigate(`/cars/${id}`, { state: { from: location } })}
     >
       <div className={styles['product']}>
         <div className={styles['image']}>
