@@ -1,0 +1,69 @@
+.container {
+  position: relative;
+}
+
+
+.about {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 50px;
+  
+  text-align: center;
+}
+
+.animation-line{
+  display: block;
+  width: 2px;
+  height: 90px;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 1px);
+  z-index: 2;
+  background: rgb(255, 255, 255);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.container img{
+  transition: all 0.3s ease;
+  filter: brightness(60%)
+}
+
+.red-line{
+  border: none;
+	background-color: rgb(251, 61, 44);
+	height: 3px;
+}
+
+h1{
+  font-family:  'Gilroy', Arial, sans-serif;
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+
+.animation-line{
+  background: linear-gradient(rgb(78, 78, 78) 0%, rgb(255, 255, 255) 100% );
+  background-repeat: repeat-y;
+  animation: gradient 15s infinite linear;
+}
+
+@keyframes gradient{
+  to {
+    background-position: 0 1000px;
+  }
+}
+
+.text-about{
+  padding-top: 6;
+  padding-bottom: 6;
+  line-height: 1.8;
+  margin: auto;
+}
+
+.text-center{
+  width: 100%;
+  margin: auto;
+}
