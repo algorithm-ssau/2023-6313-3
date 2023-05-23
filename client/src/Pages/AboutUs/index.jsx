@@ -17,15 +17,24 @@ export default function ProfilePage() {
         </div>
         <div className={styles['animation-line']}></div>
       </div>
-      <div className={styles['red-line']}></div>
-      <div className={styles['text-about']}>
-        <div className={styles['text-center']}>
-          <p>Digital Drive. Автомобильный</p>
-          <p></p>
-          <p></p>
-        </div>
-      </div>
+      
 
+      <div className={styles['text-center']}>
+        <div className={styles['red-line']}></div>
+        <p>Digital Drive. Автомобильная компания</p>
+
+        <p>
+          Мы создали витрину самых выгодных предложений на рынке авто. Для этого
+          велась большая работа с ведущими автомобильными дилерами всех стран
+          Европы и Азии. Дилеры выставляют для Digital Drive самые
+          привлекательные цены, которые вообще могут быть. А покупатель
+          сравнивает лучшие предложения, которые есть в наличии.
+        </p>
+        <p>
+          <u>Ваше доверие - наша репутация.</u>
+        </p>
+        <div className={styles['red-line']}></div>
+      </div>
       <Footer />
     </div>
   );
