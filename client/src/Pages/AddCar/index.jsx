@@ -135,7 +135,7 @@ const AddCarPage = ({ handleSubmit }) => {
           </Form.Group>
 
           <Form.Group controlId='price'>
-            <Form.Label>Цена</Form.Label>
+            <Form.Label>Цена (₽)</Form.Label>
             <Form.Control
               type='number'
               name='price'
@@ -146,7 +146,7 @@ const AddCarPage = ({ handleSubmit }) => {
           </Form.Group>
 
           <Form.Group controlId='imageUrl'>
-            <Form.Label>Фото</Form.Label>
+            <Form.Label>Фото (ссылка)</Form.Label>
             <Form.Control
               type='text'
               name='imageUrl'
@@ -168,7 +168,7 @@ const AddCarPage = ({ handleSubmit }) => {
           </Form.Group>
 
           <Form.Group controlId='mileage'>
-            <Form.Label>Пробег</Form.Label>
+            <Form.Label>Пробег (км)</Form.Label>
             <Form.Control
               type='number'
               name='mileage'
@@ -188,9 +188,8 @@ const AddCarPage = ({ handleSubmit }) => {
               required
             />
           </Form.Group>
-
           <Form.Group controlId='engineValue'>
-            <Form.Label>Объём двигателя</Form.Label>
+            <Form.Label>Объём двигателя (см³)</Form.Label>
             <Form.Control
               type='number'
               name='engineValue'
@@ -201,7 +200,7 @@ const AddCarPage = ({ handleSubmit }) => {
           </Form.Group>
 
           <Form.Group controlId='enginePowers'>
-            <Form.Label>Мощность</Form.Label>
+            <Form.Label>Мощность (л.с.)</Form.Label>
             <Form.Control
               type='number'
               name='enginePowers'
