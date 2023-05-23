@@ -18,6 +18,13 @@ export default function ProfilePage() {
         <div className={styles['animation-line']}></div>
       </div>
       <div className={styles['red-line']}></div>
+      <div className={styles['text-about']}>
+        <div className={styles['text-center']}>
+          <p>Digital Drive. Автомобильный</p>
+          <p></p>
+          <p></p>
+        </div>
+      </div>
 
       <Footer />
     </div>
