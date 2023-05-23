@@ -3,6 +3,7 @@
 	height: 70px;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 	background-color: white;
+	font-family: "Noto Sans", sans-serif;
 }
 
 .navbar .container {
