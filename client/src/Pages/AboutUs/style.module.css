@@ -16,7 +16,7 @@
 
 .animation-line{
   display: block;
-  width: 2px;
+  width: 3px;
   height: 90px;
   position: absolute;
   bottom: 0;
@@ -56,14 +56,57 @@ h1{
   }
 }
 
-.text-about{
-  padding-top: 6;
-  padding-bottom: 6;
-  line-height: 1.8;
-  margin: auto;
+.text-center{
+  margin-top: 80px;
+  margin-bottom: 80px;
+  text-align: center;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
-.text-center{
+.text-center p{
+  font-size: 30px;
+}
+
+.collage {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Расположение по центру */
+  max-width: 1400px; /* Фиксированная ширина (можно задать любую) */
+  margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.collage img {
+  width: 119.1%;
+}
+
+.photos-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.photos-right img {
   width: 100%;
-  margin: auto;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.last-photo{
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Расположение по центру */
+  max-width: 1400px; /* Фиксированная ширина (можно задать любую) */
+  margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.text-center-last{
+  margin-top: 80px;
+  margin-bottom: 80px;
+  text-align: center;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.text-center-last p{
+  font-size: 30px;
 }
