@@ -8,8 +8,8 @@
 }
 
 .input {
+	color: black;
 	margin: auto;
-	display: block;
 	margin-top: 60px;
 	padding: 0 15px;
 	width: 534px;
@@ -27,6 +27,7 @@
 }
 
 .find {
+	margin-left: 10px;
 	border-radius: 10px;
 	height: 40px;
 	text-decoration: none;

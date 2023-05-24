@@ -1,35 +1,13 @@
-const express = require('express')
-const app = express()
-const port = 3000
+// Frameworks and libraries import
+const express = require("express");
+const { setupMiddlewares } = require("./extensions/applicationSetup");
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+// Create app
+const app = express();
+const port = 1000;
 
-module.exports.env = app.get('env');
-
-const config = require('./config/config.json')
-
-const Sequelize = require('sequelize');
-
-  const sequelize = new Sequelize(
-    config.development.database, 
-    config.development.username,
-    config.development.password, {
-    host: config.development.host,
-    dialect: config.development.dialect
-  });
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
-
+setupMiddlewares(app);
 
 app.listen(port, () => {
-    console.log(`Server started on port ${port}`)
-})
+  console.log(`Server started on port ${port}`);
+});

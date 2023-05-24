@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   mysqldb:
@@ -7,8 +7,8 @@ services:
     hostname: mysqldb
     command: --default-authentication-plugin=mysql_native_password
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
       retries: 10
     environment:
       MYSQL_DATABASE: auto.ru
@@ -27,18 +27,20 @@ services:
     depends_on:
       mysqldb:
         condition: service_healthy
-    container_name: backend-business-logic
+    container_name: server-business-logic
     build: ./server/Business logic service/Auto.Ru/Auto.Ru.Web/
     restart: always
     ports:
-      - 5000:3000
+      - 1000:1000
+    environment:
+      - NODE_ENV=development
     networks:
       backend:
 
   server-auth:
     depends_on:
       - server-business-logic
-    container_name: backend-auth
+    container_name: server-auth
     build: ./server/Auth service/
     restart: always
     environment:
@@ -47,10 +49,10 @@ services:
       - 8000:8000
     networks:
       backend:
-    
+
   client:
     depends_on:
-      - server-auth
+      - nginx-reverse-proxy
     container_name: frontend
     build: ./client/
     restart: always
@@ -59,11 +61,26 @@ services:
     networks:
       frontend:
 
-volumes: 
-  db:
+  nginx-reverse-proxy:
+    image: nginx:latest
+    depends_on:
+      - server-auth
+    container_name: nginx-reverse-proxy
+    restart: unless-stopped
+    ports:
+      - 80:80
+    links:
+      - server-business-logic:cars-server
+      - server-auth:auth-server
+    volumes:
+      - ./server/Nginx Reverse Proxy:/etc/nginx/conf.d
+    networks:
+      backend:
+
+volumes:
+  mysqldb:
+  nginx-reverse-proxy:
 
 networks:
   backend:
   frontend:
-
-    
