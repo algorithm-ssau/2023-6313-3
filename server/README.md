@@ -99,9 +99,39 @@
         <td></td>
     </tr>
     <tr>
-        <td>Получение избранных автомобиолей</td>
+        <td>Получение избранных автомобилей</td>
         <td><i>GET api/favourites</i></td>
         <td></td>
         <td>Базовая информация об избранных авто</td>
+    </tr>
+    <tr>
+        <td>Регистрация в приложении</td>
+        <td><i>POST api/users/registration</i></td>
+        <td>username (логин пользователя) <br> password (пароль) <br> email (почта)</td>
+        <td>accessToken <br> refreshToken</td>
+    </tr>
+    <tr>
+        <td>Авторизация в приложении</td>
+        <td><i>POST api/users/auth</i></td>
+        <td>username (логин пользователя) <br> password (пароль)</td>
+        <td>accessToken <br> refreshToken</td>
+    </tr>
+    <tr>
+        <td>Выход из аккаунта</td>
+        <td><i>POST api/users/logout</i></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Обновление токенов</td>
+        <td><i>POST api/users/refresh</i></td>
+        <td>refreshToken</td>
+        <td>accessToken <br> refreshToken</td>
+    </tr>
+    <tr>
+        <td>Проверка подлинности accessToken'a</td>
+        <td><i>POST api/users/validate</i></td>
+        <td>accessToken</td>
+        <td>true / false</td>
     </tr>
 </table>
