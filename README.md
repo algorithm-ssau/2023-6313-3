@@ -18,11 +18,22 @@
 ![Car](https://github.com/algorithm-ssau/2023-6313-3/assets/108864135/fe336493-e078-4e2c-a111-4e4e5e4f2f62)
 Рис.2 - Страница об авто
 
+
 ![Регистр](https://github.com/algorithm-ssau/2023-6313-3/assets/108864135/7ed0fb32-4fdd-48d5-803f-4f134c7f96cb)
 Рис.3 - Страница регистрации
 
+
+![profile](https://github.com/algorithm-ssau/2023-6313-3/assets/108864135/bb85295f-5355-4786-82c0-367d35c76da9)
+Рис.4 - Профиль пользоцвателя
+
+
+![add](https://github.com/algorithm-ssau/2023-6313-3/assets/108864135/9b5fdf03-90f6-47c5-9b84-9e382a6ecc7e)
+Рис.5 - Страница добавления объявления
+
+
 ![2023-05-24_12-08-57(11)](https://github.com/algorithm-ssau/2023-6313-3/assets/108864135/7d683e60-5fd4-4119-a8ee-a92f56b31f6a)
 Рис.6 - Страница о нас
+
 
 ![2023-05-24_12-08-57(2)](https://github.com/algorithm-ssau/2023-6313-3/assets/108864135/409345bd-31b7-43af-b7ec-d8d536110e8c)
 Рис.7 - Страница о нас (продолжение)
