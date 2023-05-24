@@ -6,13 +6,12 @@ const filterExceptions = require("../extensions/exceptions").filterExceptions;
 
 // SET favorites
 router.post("/add", filterExceptions(async function (req, res) {
-    console.log(req.body, req.cookies.accessToken)
-    var obj = JSON.parse(parseJwt(req.cookies.accessToken));
+    var obj = parseJwt(req.cookies.accessToken);
     
-    const userId = obj[0].userId;
+    const userId = obj.user_id;
     const carId = req.body.carId;
 
-    if (isNaN(carId) || isNaN(userId)) {
+    if (isNaN(carId)) {
         res.status(400).send({
             message: "id должен быть числом",
           });
@@ -46,38 +45,30 @@ router.post("/add", filterExceptions(async function (req, res) {
 }));
 
 // GET favorites
-router.get("/get", filterExceptions(async function (req, res) {
-    userId = req.body.userId // UPDATE FROM JWT BOGDAN 
+router.get("/", filterExceptions(async function (req, res) {
+    var obj = parseJwt(req.cookies.accessToken);
 
-    if (isNaN(userId)) {
-        res.status(400).send({
-            message: "id должен быть числом",
-          });
-    }
+    const userId = obj.user_id;
 
-    let favoritesCars = await db.favorites.findAll({
-        where: {
-          id : Number(userId)
-        },
-        attributes: { include: ['carId'] }
+    db.cars.hasMany(db.favorites);
+    db.favorites.belongsTo(db.cars, {foreignKey: 'id'});
+
+    var favoritesCars = await db.cars.findAll({
+        attributes: ['id', 'name', 'imageUrl', 'price'],
+        include: { 
+            model: db.favorites,
+            where: { userId : userId },
+            attributes : { exclude: ["id", "carId", "userId"] }
+        }
     });
     
-    if (!favoritesCars) {
+    if (!favoritesCars.length) {
         res.status(404).send({
           message: "Нет избранных автомобилей для текущего пользователя",
         });
     }
-    
-    db.cars.query("SELECT c.name, c.price, c.imageUrl FROM cars c\
-    JOIN favorites f ON f.carId = c.id WHERE f.userId = ?", [userId], function(err, results){
-        if (err) {
-            console.log(err.message);
-        }
-        res.json(results);
-    });
 
-
-
+    res.json({ items: favoritesCars});
 }));
 
 // DELETE favorites

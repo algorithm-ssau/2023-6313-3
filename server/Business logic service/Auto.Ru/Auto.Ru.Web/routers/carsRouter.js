@@ -25,6 +25,7 @@ router.get("/", filterExceptions(async function (req, res) {
     limit: pagination.size,
     offset: pagination.offset,
     where: whereCondition,
+    attributes: ['id', 'name', 'imageUrl', 'price']
   });
 
   res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
