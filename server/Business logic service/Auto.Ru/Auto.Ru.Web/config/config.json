@@ -12,6 +12,7 @@
     "database": "auto.ru",
     "dialect": "mysql",
     "username": "root",
-    "password": "sppn3003FIIT"
+    "password": "sppn3003FIIT",
+    "authServiceHost": "127.0.0.1"
   }
 }

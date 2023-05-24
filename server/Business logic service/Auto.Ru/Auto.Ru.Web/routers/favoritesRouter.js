@@ -1,14 +1,16 @@
 const express = require("express");
 const db = require("../models");
 const router = express.Router();
-const paginationExtensions = require("../extensions/pagination");
+const { parseJwt } = require("../extensions/parser-jwt")
+const filterExceptions = require("../extensions/exceptions").filterExceptions;
 
-const use = fn => (req,res,next) => Promise.resolve(fn(req,res,next)).catch(next);
-
-// Favorites block
 // SET favorites
-router.post("/add",use(async function (req, res) {
-    const { carId, userId } = req.body;
+router.post("/add", filterExceptions(async function (req, res) {
+    console.log(req.body, req.cookies.accessToken)
+    var obj = JSON.parse(parseJwt(req.cookies.accessToken));
+    
+    const userId = obj[0].userId;
+    const carId = req.body.carId;
 
     if (isNaN(carId) || isNaN(userId)) {
         res.status(400).send({
@@ -29,7 +31,6 @@ router.post("/add",use(async function (req, res) {
         });
     } 
     else {
-
         try {
             let favorite = await db.favorites.create({
                 carId,
@@ -39,14 +40,13 @@ router.post("/add",use(async function (req, res) {
             res.status(400).send({
                 message: "Некорректен id автомобиля и/или пользователя",
             });
-        }
-        
+        }        
         res.json({ success : true });
     }
 }));
 
 // GET favorites
-router.get("/get",use(async function (req, res) {
+router.get("/get", filterExceptions(async function (req, res) {
     userId = req.body.userId // UPDATE FROM JWT BOGDAN 
 
     if (isNaN(userId)) {
@@ -81,7 +81,7 @@ router.get("/get",use(async function (req, res) {
 }));
 
 // DELETE favorites
-router.post("/drop",use(async function (req, res) {
+router.post("/drop", filterExceptions(async function (req, res) {
     
 }));
 

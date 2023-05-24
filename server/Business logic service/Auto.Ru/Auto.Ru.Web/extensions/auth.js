@@ -54,6 +54,8 @@ async function authMiddleware(req, res, next) {
         res.status(403).send();
         return;
     };
+    res.locals.cookie.accessToken = refreshResponse.data.access_token;
+    res.locals.cookie.refreshToken = refreshResponse.data.refresh_token;
 
     // Update cookie after refresh
     res.clearCookie('accessToken');
