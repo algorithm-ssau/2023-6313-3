@@ -6,6 +6,7 @@ import ProfilePage from './Pages/Profile';
 import CarPage from './Pages/Car';
 import RequireAuth from './utils/requireAuth.jsx';
 import AdCarPage from './Pages/AddCar';
+import AboutUsPage from './Pages/AboutUs';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/register' element={<RegisterPage />} />
+        <Route path='/about' element={<AboutUsPage />} />
         <Route path='/cars' element={<HomePage />} />
         <Route path='/cars/:id' element={<CarPage />} />
         <Route element={<RequireAuth />}>

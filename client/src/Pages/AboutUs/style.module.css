@@ -1,0 +1,112 @@
+.container {
+  position: relative;
+}
+
+
+.about {
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 50px;
+  
+  text-align: center;
+}
+
+.animation-line{
+  display: block;
+  width: 3px;
+  height: 90px;
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 1px);
+  z-index: 2;
+  background: rgb(255, 255, 255);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.container img{
+  transition: all 0.3s ease;
+  filter: brightness(60%)
+}
+
+.red-line{
+  border: none;
+	background-color: rgb(251, 61, 44);
+	height: 3px;
+}
+
+h1{
+  font-family:  'Gilroy', Arial, sans-serif;
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+
+.animation-line{
+  background: linear-gradient(rgb(78, 78, 78) 0%, rgb(255, 255, 255) 100% );
+  background-repeat: repeat-y;
+  animation: gradient 15s infinite linear;
+}
+
+@keyframes gradient{
+  to {
+    background-position: 0 1000px;
+  }
+}
+
+.text-center{
+  margin-top: 80px;
+  margin-bottom: 80px;
+  text-align: center;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+.text-center p{
+  font-size: 30px;
+}
+
+.collage {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Расположение по центру */
+  max-width: 1400px; /* Фиксированная ширина (можно задать любую) */
+  margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.collage img {
+  width: 119.1%;
+}
+
+.photos-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.photos-right img {
+  width: 100%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.last-photo{
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Расположение по центру */
+  max-width: 1400px; /* Фиксированная ширина (можно задать любую) */
+  margin: 0 auto; /* Центрирование по горизонтали */
+}
+
+.text-center-last{
+  margin-top: 80px;
+  margin-bottom: 80px;
+  text-align: center;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.text-center-last p{
+  font-size: 30px;
+}

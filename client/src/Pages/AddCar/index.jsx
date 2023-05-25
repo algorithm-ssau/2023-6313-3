@@ -13,14 +13,45 @@ import {
   Heading,
   Select,
   VStack,
+  useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useFormik } from 'formik';
 
+import * as validation from './addCarValidationSchema.js';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { useAddCarMutation } from '../../redux/api/carsApi.js';
 
 export default function AdCarPage() {
+  const toast = useToast();
+
+  const [addCar] = useAddCarMutation();
+
+  const handleSubmit = async (values) => {
+    await addCar(values)
+      .unwrap()
+      .then((response) => {
+        console.log(response);
+        toast({
+          title: 'Success',
+          description: 'Автомобиль успешно добавлен',
+          status: 'success',
+          duration: 5000,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast({
+          title: 'Error',
+          description: error.data.detail,
+          status: 'error',
+          duration: 5000,
+        });
+      });
+  };
+
   return (
     <ChakraProvider resetCSS>
       <Navbar />
@@ -31,43 +62,60 @@ export default function AdCarPage() {
         </Heading>
       </Center>
       <Center>
-        <AddCarPage />
+        <AddCarPage handleSubmit={handleSubmit} />
       </Center>
       <Footer />
     </ChakraProvider>
   );
 }
 
-const AddCarPage = () => {
+const AddCarPage = ({ handleSubmit }) => {
   const [formValues, setFormValues] = useState({
-    makeModel: '',
-    availability: '',
-    generation: '',
+    name: '',
+    price: '',
+    imageUrl: '',
     year: '',
     mileage: '',
-    bodyType: '',
     color: '',
-    engine: '',
-    tax: '',
+    engineValue: '',
+    enginePowers: '',
+    leftSteeringWheel: false,
     transmission: '',
-    drive: '',
-    steering: '',
-    condition: '',
+    gear: '',
   });
 
   const handleSelectChange = (event) => {
     const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
+    if (name === 'leftSteeringWheel') {
+      const { checked } = event.target;
+      setFormValues({ ...formValues, [name]: checked });
+      return;
+    }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formValues); // Отправка данных на сервер
+    setFormValues({ ...formValues, [name]: value });
   };
 
   return (
     <div className='container mt-5'>
-      <Form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(formValues);
+          setFormValues({
+            name: '',
+            price: '',
+            imageUrl: '',
+            year: '',
+            mileage: '',
+            color: '',
+            engineValue: '',
+            enginePowers: '',
+            leftSteeringWheel: false,
+            transmission: '',
+            gear: '',
+          });
+        }}
+      >
         <VStack
           spacing={6}
           align='stretch'
@@ -79,7 +127,7 @@ const AddCarPage = () => {
             <Form.Label>Марка и модель</Form.Label>
             <Form.Control
               type='text'
-              name='makeModel'
+              name='name'
               value={formValues.makeModel}
               onChange={handleSelectChange}
               required
@@ -87,7 +135,7 @@ const AddCarPage = () => {
           </Form.Group>
 
           <Form.Group controlId='price'>
-            <Form.Label>Цена</Form.Label>
+            <Form.Label>Цена (₽)</Form.Label>
             <Form.Control
               type='number'
               name='price'
@@ -98,7 +146,7 @@ const AddCarPage = () => {
           </Form.Group>
 
           <Form.Group controlId='imageUrl'>
-            <Form.Label>Фото</Form.Label>
+            <Form.Label>Фото (ссылка)</Form.Label>
             <Form.Control
               type='text'
               name='imageUrl'
@@ -120,9 +168,9 @@ const AddCarPage = () => {
           </Form.Group>
 
           <Form.Group controlId='mileage'>
-            <Form.Label>Пробег</Form.Label>
+            <Form.Label>Пробег (км)</Form.Label>
             <Form.Control
-              type='text'
+              type='number'
               name='mileage'
               value={formValues.mileage}
               onChange={handleSelectChange}
@@ -140,22 +188,21 @@ const AddCarPage = () => {
               required
             />
           </Form.Group>
-
-          <Form.Group controlId='colorengineVolume'>
-            <Form.Label>Объём двигателя</Form.Label>
+          <Form.Group controlId='engineValue'>
+            <Form.Label>Объём двигателя (см³)</Form.Label>
             <Form.Control
-              type='text'
-              name='engineVolume'
-              value={formValues.engineVolume}
+              type='number'
+              name='engineValue'
+              value={formValues.engineValue}
               onChange={handleSelectChange}
               required
             />
           </Form.Group>
 
           <Form.Group controlId='enginePowers'>
-            <Form.Label>Мощность</Form.Label>
+            <Form.Label>Мощность (л.с.)</Form.Label>
             <Form.Control
-              type='text'
+              type='number'
               name='enginePowers'
               value={formValues.enginePowers}
               onChange={handleSelectChange}
@@ -165,12 +212,11 @@ const AddCarPage = () => {
 
           {/* исправить */}
           <Form.Group controlId='leftSteeringWheel'>
-            <Form.Label>Левое рулевое колесо</Form.Label>
-            <Form.Control
+            <Form.Check
+              type='checkbox'
               name='leftSteeringWheel'
-              value={formValues.leftSteeringWheel}
+              label='Левое рулевое колесо'
               onChange={handleSelectChange}
-              required
             />
           </Form.Group>
 
@@ -212,7 +258,7 @@ const AddCarPage = () => {
           <Button
             variant='primary'
             type='submit'
-            class='btn btn-primary btn-lg'
+            className='btn btn-primary btn-lg'
           >
             Опубликовать
           </Button>

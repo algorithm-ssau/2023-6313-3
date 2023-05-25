@@ -13,6 +13,7 @@ import {
   Card,
   Heading,
   Image,
+  Spinner,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import SimpleImageSlider from 'react-simple-image-slider';
@@ -24,6 +25,7 @@ import { images } from '../../fake-db/fakeImages';
 import { car } from '../../fake-db/fakeCarData';
 import Footer from '../../components/Footer';
 import styles from './style.module.css';
+import { useGetCarQuery } from '../../redux/api/carsApi';
 
 export default function CarPage() {
   const [fav, setFav] = useState(false);
@@ -31,78 +33,89 @@ export default function CarPage() {
   const [curImage, setCurImage] = useState(0);
   const { id } = useParams();
 
+  const { data: carDetails, isLoading } = useGetCarQuery(id);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: 'instant',
     });
-    console.log('scroll');
   }, []);
-
-  useEffect(() => {
-    console.log(`get car details by id: ${id}`);
-  }, [id]);
 
   return (
     <ChakraProvider resetCSS>
       <Navbar />
       <Container maxW={1320} mt={50}>
-        <Card p={10}>
-          <Flex>
+        <Card p={10} boxShadow={'lg'}>
+          {isLoading ? (
+            <Center m={20}>
+              <Spinner
+                thickness='4px'
+                speed='0.4s'
+                emptyColor='gray.200'
+                color='red.500'
+                size='xl'
+              />
+            </Center>
+          ) : (
             <Box>
-              <Heading color={'black'} fontSize={30}>
-                Porsche Panamera GTS
-              </Heading>
-              <Text color={'black'} fontSize={20}>
-                2 000 000 <small>₽</small>
-              </Text>
-            </Box>
-            <Spacer />
-            <Center>
-              <Box>
-                {fav ? (
-                  <MdFavorite
-                    size={50}
-                    color='red'
-                    onClick={() => setFav((prev) => !prev)}
-                  />
-                ) : (
-                  <MdFavoriteBorder
-                    size={50}
-                    onClick={() => setFav((prev) => !prev)}
-                  />
-                )}
-              </Box>
-              <Button size={'lg'} bgColor={'red'} ml={7}>
-                Связаться с нами
-              </Button>
-            </Center>
-          </Flex>
-          <Flex mt={10} justifyContent={'space-around'}>
-            <CarPageTable />
-            <Center>
-              <Card p={5} ml={5}>
+              <Flex>
+                <Box>
+                  <Heading color={'black'} fontSize={30}>
+                    {carDetails.name}
+                  </Heading>
+                  <Text color={'black'} fontSize={20}>
+                    {carDetails.price} <small>₽</small>
+                  </Text>
+                </Box>
+                <Spacer />
                 <Center>
-                  <SimpleImageSlider
-                    width={700}
-                    height={500}
-                    images={images}
-                    showBullets={true}
-                    onClickBullets={(idx) => setCurImage(idx)}
-                    onClick={() => setFullImage(!isFullImage)}
-                    showNavs={false}
-                  />
-                  {isFullImage ? (
-                    <Image
-                      className={styles['enlarged-image']}
-                      src={images[curImage].url}
-                      onClick={() => setFullImage(!isFullImage)}
-                    ></Image>
-                  ) : null}
+                  <Box>
+                    {fav ? (
+                      <MdFavorite
+                        size={50}
+                        color='red'
+                        onClick={() => setFav((prev) => !prev)}
+                      />
+                    ) : (
+                      <MdFavoriteBorder
+                        size={50}
+                        onClick={() => setFav((prev) => !prev)}
+                      />
+                    )}
+                  </Box>
+                  <Button size={'lg'} bgColor={'red'} ml={7}>
+                    Связаться с нами
+                  </Button>
                 </Center>
-              </Card>
-            </Center>
-          </Flex>
+              </Flex>
+              <Flex mt={10} justifyContent={'space-around'}>
+                <CarPageTable carDetails={carDetails} />
+                <Center>
+                  <Card p={5} ml={5}>
+                    <Center>
+                      <SimpleImageSlider
+                        width={700}
+                        height={500}
+                        images={[carDetails.imageUrl]}
+                        showBullets={true}
+                        onClickBullets={(idx) => setCurImage(idx)}
+                        onClick={() => setFullImage(!isFullImage)}
+                        showNavs={false}
+                      />
+                      {isFullImage ? (
+                        <Image
+                          className={styles['enlarged-image']}
+                          src={carDetails.imageUrl}
+                          onClick={() => setFullImage(!isFullImage)}
+                        ></Image>
+                      ) : null}
+                    </Center>
+                  </Card>
+                </Center>
+              </Flex>
+            </Box>
+          )}
         </Card>
       </Container>
 
@@ -111,56 +124,45 @@ export default function CarPage() {
   );
 }
 
-const CarPageTable = () => (
+const CarPageTable = ({ carDetails }) => (
   <Card p={3}>
+    <Center m={5}>
+      <Heading as='h2' size='md'>
+        Характеристики
+      </Heading>
+    </Center>
     <Table size={'md'} fontSize={16} variant={'unstyled'}>
       <Tr>
-        <Td>Наличие</Td>
-        <Td>{car.availability}</Td>
-      </Tr>
-      <Tr>
-        <Td>Поколение</Td>
-        <Td>{car.generation}</Td>
-      </Tr>
-      <Tr>
         <Td>Год выпуска</Td>
-        <Td>{car.yearOfIssue}</Td>
+        <Td>{carDetails.year}</Td>
       </Tr>
       <Tr>
         <Td>Пробег</Td>
-        <Td>{car.mileage}</Td>
-      </Tr>
-      <Tr>
-        <Td>Кузов</Td>
-        <Td>{car.body}</Td>
+        <Td>{carDetails.mileage}</Td>
       </Tr>
       <Tr>
         <Td>Цвет</Td>
-        <Td>{car.color}</Td>
+        <Td>{carDetails.color}</Td>
       </Tr>
       <Tr>
-        <Td>Двигатель</Td>
-        <Td>{car.engine}</Td>
+        <Td>Мощность двигатель</Td>
+        <Td>{carDetails.enginePowers}</Td>
       </Tr>
       <Tr>
-        <Td>Налог</Td>
-        <Td>{car.tax}</Td>
+        <Td>Объем двигателя</Td>
+        <Td>{carDetails.engineValue}</Td>
       </Tr>
       <Tr>
         <Td>Коробка</Td>
-        <Td>{car.transmission}</Td>
+        <Td>{carDetails.transmission}</Td>
       </Tr>
       <Tr>
         <Td>Привод</Td>
-        <Td>{car.driveUnit}</Td>
+        <Td>{carDetails.gear}</Td>
       </Tr>
       <Tr>
         <Td>Руль</Td>
-        <Td>{car.steeringWheel}</Td>
-      </Tr>
-      <Tr>
-        <Td>Состояние</Td>
-        <Td>{car.healthStatus}</Td>
+        <Td>{carDetails.leftSteeringWheel ? 'Левый' : 'Правый'}</Td>
       </Tr>
     </Table>
   </Card>

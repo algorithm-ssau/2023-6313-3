@@ -20,13 +20,13 @@ function setupMiddlewares(app) {
       })
     );
 
-    app.use(express.json());
+  app.use(express.json());
 
-    app.use(cookieParser());
+  app.use(cookieParser());
 
-    app.use(filterExceptions(authMiddleware));
+  app.use(filterExceptions(authMiddleware));
 
-    app.use("/api/cars", cars);
+  app.use("/api/cars", cars);
 
     app.use("/api/favorites", favorites)
 
@@ -37,4 +37,4 @@ function setupMiddlewares(app) {
       });
 }
 
-module.exports = {setupMiddlewares};
+module.exports = { setupMiddlewares };
