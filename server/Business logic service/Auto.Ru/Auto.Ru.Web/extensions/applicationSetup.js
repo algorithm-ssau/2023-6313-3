@@ -28,13 +28,13 @@ function setupMiddlewares(app) {
 
   app.use("/api/cars", cars);
 
-    app.use("/api/favorites", favorites)
+  app.use("/api/favorites", favorites)
 
-    app.use(function(err, req, res, next){
-        console.log(err);
-        res.status(500);
-        res.send({ message: err.message});
-      });
+  app.use(function(err, req, res, next){
+      console.log(err);
+      res.status(500);
+      res.send({ message: err.message});
+    });
 }
 
 module.exports = { setupMiddlewares };
