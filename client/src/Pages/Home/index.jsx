@@ -43,7 +43,7 @@ export default function HomePage() {
                 size='xl'
               />
             </Center>
-          ) : !filteredCars.length ? (
+          ) : (
             <div className={'row'}>
               {filteredCars.map((car) => (
                 <Card
@@ -55,10 +55,6 @@ export default function HomePage() {
                 />
               ))}
             </div>
-          ) : (
-            <Center>
-              <Heading>Таких машин не найдено</Heading>
-            </Center>
           )}
         </div>
         <PaginationNums
