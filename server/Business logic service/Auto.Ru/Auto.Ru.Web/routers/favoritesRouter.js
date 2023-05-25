@@ -23,8 +23,8 @@ router.post("/add", filterExceptions(async function (req, res) {
     if (!result) {
         try {
             await db.favorites.create({
-                carId,
-                userId
+                carId: carId,
+                userId: userId
             });
         } catch (err) {
             res.status(400).send({
@@ -59,9 +59,7 @@ router.get("/", filterExceptions(async function (req, res) {
     });
     
     if (!favoritesCars.length) {
-        res.status(404).send({
-          message: "Нет избранных автомобилей для текущего пользователя",
-        });
+        res.status(204).send();
     }
 
     res.json({ items: favoritesCars});
