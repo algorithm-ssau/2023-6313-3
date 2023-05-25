@@ -46,9 +46,6 @@ router.get("/", filterExceptions(async function (req, res) {
 
     const userId = obj.user_id;
 
-    db.cars.hasMany(db.favorites);
-    db.favorites.belongsTo(db.cars, {foreignKey: 'id'});
-
     var favoritesCars = await db.cars.findAll({
         attributes: ['id', 'name', 'imageUrl', 'price'],
         include: { 
