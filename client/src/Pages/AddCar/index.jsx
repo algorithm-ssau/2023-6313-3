@@ -30,7 +30,6 @@ export default function AdCarPage() {
   const [addCar] = useAddCarMutation();
 
   const handleSubmit = async (values) => {
-    console.log(values);
     await addCar(values)
       .unwrap()
       .then((response) => {
