@@ -1,6 +1,8 @@
 const express = require("express");
 const db = require("../models");
 const router = express.Router();
+const { existRow } = require("../extensions/row-finder");
+const { parseJwt } = require("../extensions/parser-jwt");
 const paginationExtensions = require("../extensions/pagination");
 
 const filterExceptions = require("../extensions/exceptions").filterExceptions;
@@ -9,6 +11,9 @@ const filterExceptions = require("../extensions/exceptions").filterExceptions;
 router.get("/", filterExceptions(async function (req, res) {
   const pagination = paginationExtensions.paginate(req);
   const { Op } = require('sequelize');
+
+  var obj = parseJwt(req.cookies.accessToken);    
+  const userId = obj.user_id;
 
   let whereCondition = {};
 
@@ -27,6 +32,18 @@ router.get("/", filterExceptions(async function (req, res) {
     where: whereCondition,
     attributes: ['id', 'name', 'imageUrl', 'price']
   });
+
+  let favoriteCars = await db.favorites.findAll({
+    where: { userId : userId },
+    attributes: ['carId']
+  });
+
+  for (let i = 0; i < cars.count; i++) {
+    let resultSearch = true;
+    if (favoriteCars.find(o => o.carId === cars.rows[i].id) === undefined)
+      resultSearch = false;
+    cars.rows[i].dataValues.inFavorites = resultSearch;
+  }
 
   res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
 }));
@@ -65,7 +82,7 @@ router.post("/", filterExceptions(async function (req, res) {
     });
   }
   var currentTime = new Date();
-  let car = await db.cars.create({
+  await db.cars.create({
     name,
     price,
     imageUrl,

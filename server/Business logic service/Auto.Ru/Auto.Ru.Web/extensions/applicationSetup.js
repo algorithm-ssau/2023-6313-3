@@ -11,7 +11,14 @@ function setupMiddlewares(app) {
     const cars = require("../routers/carsRouter");
     const favorites = require("../routers/favoritesRouter");
 
-    app.use(cors());
+    app.use(
+      cors({
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
+      })
+    );
 
     app.use(express.json());
 
