@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChakraProvider, Center, Heading } from '@chakra-ui/react';
+import { ChakraProvider, Center } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 
 import Navbar from '../../components/Navbar';
@@ -20,6 +20,7 @@ export default function HomePage() {
     size: 12,
     searchPattern: searchValue,
   });
+
   const filteredCars = data?.items.filter((car) =>
     car.name.toLowerCase().includes(searchValue.toLowerCase())
   );

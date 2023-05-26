@@ -19,7 +19,6 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 
-import * as validation from './addCarValidationSchema.js';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useAddCarMutation } from '../../redux/api/carsApi.js';
