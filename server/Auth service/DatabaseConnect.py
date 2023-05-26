@@ -15,10 +15,12 @@ class Database(object):
                 host=HOST,
                 user=USER,
                 password=PASSWORD,
-                database=DATABASE
+                database=DATABASE,
+                auth_plugin='mysql_native_password'
             )
             print("Connected to database.")
-        except Exception:
+        except Exception as err:
+            print(err)
             raise HTTPException(status_code=500, detail="No connection to database.")
 
     def close_connection(self):

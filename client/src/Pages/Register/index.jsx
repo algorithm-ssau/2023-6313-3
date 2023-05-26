@@ -33,7 +33,7 @@ export default function RegisterPage() {
         .then((response) => {
           console.log(response);
           dispatch(setCredentials(response));
-          navigate(-1);
+          navigate('/cars');
         })
         .catch((error) => {
           console.log(error);
@@ -59,7 +59,7 @@ export default function RegisterPage() {
         .then((response) => {
           console.log(response);
           dispatch(setCredentials(response));
-          navigate(-1);
+          navigate('/cars');
         })
         .catch((error) => {
           console.log(error);

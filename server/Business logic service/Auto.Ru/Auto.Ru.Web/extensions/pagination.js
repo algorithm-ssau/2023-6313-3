@@ -10,7 +10,9 @@ function paginate(request){
 
 function generatePaginationResponse(items, pagination){
     return {
-        items: items.rows,
+        items: {
+            attributes: items.rows
+        },
         paginationContext: {
             page: pagination.page,
             totalItems: items.count,

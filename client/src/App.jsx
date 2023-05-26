@@ -12,12 +12,12 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<HomePage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/about' element={<AboutUsPage />} />
-        <Route path='/cars' element={<HomePage />} />
-        <Route path='/cars/:id' element={<CarPage />} />
         <Route element={<RequireAuth />}>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/cars' element={<HomePage />} />
+          <Route path='/cars/:id' element={<CarPage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/adding' element={<AdCarPage />} />
         </Route>
