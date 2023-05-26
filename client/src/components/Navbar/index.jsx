@@ -30,7 +30,7 @@ export default function Navbar() {
                 <a href='#'>Новости</a>
               </li>
               <li>
-                <a href='#'>Контакты</a>
+                <a href='#contacts'>Контакты</a>
               </li>
               <li>
                 <NavLink to='/adding'>Разместить объявление</NavLink>
