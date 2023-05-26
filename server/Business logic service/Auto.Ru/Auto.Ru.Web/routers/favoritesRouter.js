@@ -23,8 +23,8 @@ router.post("/add", filterExceptions(async function (req, res) {
     if (!result) {
         try {
             await db.favorites.create({
-                carId,
-                userId
+                carId: carId,
+                userId: userId
             });
         } catch (err) {
             console.log(err);
