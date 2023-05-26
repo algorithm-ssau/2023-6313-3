@@ -45,13 +45,13 @@ router.get("/", filterExceptions(async function (req, res) {
     cars.rows[i].dataValues.inFavorites = resultSearch;
   }
 
-  res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
+  return res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
 }));
 
 // Get cars' details from database
 router.get("/:id/details", filterExceptions(async function (req, res) {
   if (isNaN(req.params.id)) {
-    res.status(400).send({
+    return res.status(400).send({
       message: "id должен быть числом",
     });
   }
@@ -64,12 +64,12 @@ router.get("/:id/details", filterExceptions(async function (req, res) {
   });
 
   if (!car) {
-    res.status(404).send({
+    return res.status(404).send({
       message: "Такого id не существует",
     });
   }
 
-  res.json(car);
+  return res.json(car);
 }));
 
 // Set cars' details to database
@@ -98,7 +98,7 @@ router.post("/", filterExceptions(async function (req, res) {
     currentTime,
   });
 
-  res.json({ "success" : true });
+  return res.json({ "success" : true });
 
 }));
 
