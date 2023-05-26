@@ -88,19 +88,19 @@
     </tr>
     <tr>
         <td>Добавление авто в избранное</td>
-        <td><i>POST api/favourites/add</i></td>
+        <td><i>POST api/favorites/add</i></td>
         <td>carId (идентификатор автомобиля)</td>
         <td></td>
     </tr>
     <tr>
         <td>Удаление авто из избранного</td>
-        <td><i>POST api/favourites/delete</i></td>
+        <td><i>POST api/favorites/drop</i></td>
         <td>carId (идентификатор автомобиля)</td>
         <td></td>
     </tr>
     <tr>
         <td>Получение избранных автомобилей</td>
-        <td><i>GET api/favourites</i></td>
+        <td><i>GET api/favorites</i></td>
         <td></td>
         <td>Базовая информация об избранных авто</td>
     </tr>
