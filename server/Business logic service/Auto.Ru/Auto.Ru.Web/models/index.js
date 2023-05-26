@@ -39,7 +39,7 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.cars.hasMany(db.favorites);
-db.favorites.belongsTo(db.cars, {foreignKey: 'id'});
+db.favorites.belongsTo(db.cars);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
