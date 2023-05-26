@@ -15,7 +15,7 @@ router.post(
     const carId = req.body.carId;
 
     if (isNaN(carId)) {
-      res.status(400).send({
+      return res.status(400).send({
         message: "id должен быть числом",
       });
     }
@@ -29,13 +29,14 @@ router.post(
           userId: userId,
         });
       } catch (err) {
-        res.status(400).send({
+        console.log(err);
+        return res.status(400).send({
           message: "Некорректен id автомобиля и/или пользователя",
         });
       }
-      res.json({ success: true });
+      return res.json({ success: true });
     } else {
-      res.status(400).send({
+      return res.status(400).send({
         message: "Уже в избранном!",
       });
     }
@@ -60,16 +61,16 @@ router.get(
     });
 
     if (!favoritesCars.length) {
-      res.status(204).send();
+      return res.status(204).send();
     }
 
-    res.json({ items: favoritesCars });
+    return res.json({ items: favoritesCars });
   })
 );
 
 // DELETE favorites
 router.delete(
-  "/delete",
+  "/drop",
   filterExceptions(async function (req, res) {
     var obj = parseJwt(req.cookies.accessToken);
 
@@ -77,7 +78,7 @@ router.delete(
     const carId = req.body.carId;
 
     if (isNaN(carId)) {
-      res.status(400).send({
+      return res.status(400).send({
         message: "id должен быть числом",
       });
     }
@@ -93,13 +94,13 @@ router.delete(
           },
         });
       } catch (err) {
-        res.status(400).send({
+        return res.status(400).send({
           message: "Некорректен id автомобиля и/или пользователя",
         });
       }
-      res.json({ success: true });
+      return res.json({ success: true });
     } else {
-      res.status(404).send({
+      return res.status(404).send({
         message: "Отсутствует в избранном!",
       });
     }
