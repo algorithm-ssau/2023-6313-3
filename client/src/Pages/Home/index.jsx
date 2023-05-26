@@ -53,6 +53,7 @@ export default function HomePage() {
                   title={car.name}
                   price={car.price}
                   imageUrl={car.imageUrl}
+                  inFavorite={car.inFavorites}
                 />
               ))}
             </div>

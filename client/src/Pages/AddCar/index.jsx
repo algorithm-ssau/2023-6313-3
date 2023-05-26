@@ -1,23 +1,13 @@
 import {
-  Box,
   ChakraProvider,
-  Text,
-  Flex,
   Container,
-  Spacer,
   Center,
-  Table,
-  Tr,
-  Td,
-  Card,
   Heading,
-  Select,
   VStack,
   useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useFormik } from 'formik';
 
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -25,14 +15,12 @@ import { useAddCarMutation } from '../../redux/api/carsApi.js';
 
 export default function AdCarPage() {
   const toast = useToast();
-
   const [addCar] = useAddCarMutation();
 
   const handleSubmit = async (values) => {
     await addCar(values)
       .unwrap()
       .then((response) => {
-        console.log(response);
         toast({
           title: 'Success',
           description: 'Автомобиль успешно добавлен',

@@ -20,7 +20,7 @@ export const baseQuery = (url) =>
   });
 
 export const baseQueryWithHandle = (url) => async (args, api, extraOptions) => {
-  let result = await baseQuery(url)(args, api, extraOptions);
+  const result = await baseQuery(url)(args, api, extraOptions);
   if (result.error && result.error.status === 403) {
     window.location.pathname = '/register';
   }
