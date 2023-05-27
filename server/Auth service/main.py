@@ -96,7 +96,7 @@ async def exit_from_acc(request: Request):
     finally:
         db.close_connection()
 
-    return response;
+    return response
     
 
 @app.post("/api/users/refresh")
@@ -124,6 +124,35 @@ async def validate_token(token: dict):
     return {"success": validate_access_token(token.get("access_token"))}
 
 
+@app.get("/api/users/current")
+async def return_user_info(request: Request):
+    cookies = request.headers.get("Cookie")
+    if not cookies:
+        raise HTTPException(status_code=401, detail="User not recognized.")
+
+    access_token, refresh_token = cookies.split(";")
+    access_token = access_token.split("=")[1]
+    refresh_token = refresh_token.split("=")[1]
+
+    db = Database()
+    try:
+        db.open_connection()
+        user_id_rt = check_refresh_token({"refresh_token": refresh_token})
+        if user_id_rt is None:
+            raise HTTPException(status_code=400, detail="The token is corrupted.")
+        user_id_at = get_user_id(access_token)
+        if user_id_at != user_id_rt:
+            raise HTTPException(status_code=400, detail="User information is incorrect.")
+
+        user_info = db.get_users_info(user_id_rt)
+    finally:
+        db.close_connection()
+
+    return JSONResponse({
+        "username": user_info[0],
+        "email": user_info[1]
+    })
+
 def createResponse(accessToken: str, refreshToken: str):
     response = JSONResponse({
         "access_token": accessToken,
@@ -132,10 +161,8 @@ def createResponse(accessToken: str, refreshToken: str):
 
     response.delete_cookie("accessToken")
     response.delete_cookie("refreshToken")
+
     response.set_cookie("accessToken", accessToken)
     response.set_cookie("refreshToken", refreshToken)
+
     return response
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)

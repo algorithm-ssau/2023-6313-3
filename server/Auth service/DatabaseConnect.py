@@ -133,3 +133,11 @@ class Database(object):
         cursor.execute(sql_request, (refresh_token,))
 
         return cursor.fetchone()
+
+    def get_users_info(self, user_id: int):
+        cursor = self.connection.cursor()
+
+        sql_request = "SELECT login, email FROM `users` WHERE id = %s"
+        cursor.execute(sql_request, (user_id,))
+
+        return cursor.fetchone()
