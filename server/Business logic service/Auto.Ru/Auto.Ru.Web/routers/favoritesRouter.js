@@ -60,9 +60,9 @@ router.get(
       },
     });
 
-    if (!favoritesCars.length) {
-      return res.status(204).send();
-    }
+    // if (!favoritesCars.length) {
+    //   return res.status(204).send();
+    // }
 
     return res.json({ items: favoritesCars });
   })

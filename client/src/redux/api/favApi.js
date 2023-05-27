@@ -21,7 +21,9 @@ export const favsApi = createApi({
       query: () => ({
         url: 'favorites',
       }),
-      providesTags: (result) => providesList(result, 'Favs'),
+      providesTags: ({ items }) => {
+        return providesList(items, 'Favs');
+      },
     }),
     addFav: build.mutation({
       query: (body) => ({
@@ -33,7 +35,7 @@ export const favsApi = createApi({
     }),
     removeFav: build.mutation({
       query: (body) => ({
-        url: `/favorites/delete`,
+        url: `/favorites/drop`,
         method: 'DELETE',
         body: body,
       }),

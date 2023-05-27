@@ -8,7 +8,6 @@ import { useGetFavsQuery } from '../../redux/api/favApi';
 
 export default function ProfilePage() {
   const { data, isLoading } = useGetFavsQuery();
-  console.log(data);
 
   return (
     <div className={styles['body']}>
@@ -47,15 +46,15 @@ export default function ProfilePage() {
                 />
               </Center>
             ) : (
-              <>
-                <Favourite />
-
-                <Favourite />
-
-                <Favourite />
-
-                <Favourite />
-              </>
+              data.items.map((car) => (
+                <Favourite
+                  key={car.id}
+                  id={car.id}
+                  imageUrl={car.imageUrl}
+                  name={car.name}
+                  price={car.price}
+                />
+              ))
             )}
           </div>
         </div>

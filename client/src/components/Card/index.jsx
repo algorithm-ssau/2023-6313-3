@@ -17,13 +17,10 @@ export default function Card({ id, title, price, imageUrl, inFavorite }) {
   useEffectAfterMount(() => {
     async function fetchData() {
       try {
-        console.log(isFav);
         if (isFav) {
-          const res = await addFav({ carId: id }).unwrap();
-          console.log(res);
+          await addFav({ carId: id }).unwrap();
         } else {
-          const res = await removeFav({ carId: id }).unwrap();
-          console.log(res);
+          await removeFav({ carId: id }).unwrap();
         }
       } catch (error) {
         console.log(error);
