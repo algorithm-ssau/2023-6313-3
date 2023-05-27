@@ -86,6 +86,14 @@ class Database(object):
 
         print("Refresh token has been updated.")
 
+    def delete_refresh_token(self, user_id: int):
+        cursor = self.connection.cursor()
+
+        cursor.execute("DELETE FROM `refresh-tokens` WHERE userId = %s", (user_id,))
+        self.connection.commit()
+
+        print("Refresh token has been deleted.")
+
     def check_exist_id(self, user_id: int):
         cursor = self.connection.cursor()
 
