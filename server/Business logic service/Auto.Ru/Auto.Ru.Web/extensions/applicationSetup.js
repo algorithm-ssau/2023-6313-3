@@ -20,7 +20,7 @@ function setupMiddlewares(app) {
       })
     );
 
-  app.use(express.json());
+  app.use(express.json({limit: '25mb'}));
 
   app.use(cookieParser());
 
