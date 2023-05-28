@@ -36,6 +36,7 @@ export const carsApi = createApi({
         url: '/cars',
         method: 'POST',
         body: body,
+        formData: true,
       }),
       invalidatesTags: [{ type: 'Cars', id: 'LIST' }],
     }),
