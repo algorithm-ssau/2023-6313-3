@@ -90,7 +90,7 @@ router.post("/", upload.any(), filterExceptions(async function (req, res) {
   car.imageUrl = imageUrl;
   await car.save();
 
-  res.json(car);
+  res.json({success: true});
 }));
 
 // Get cars' details from database
