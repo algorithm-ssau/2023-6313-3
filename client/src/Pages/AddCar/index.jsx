@@ -12,7 +12,7 @@ import { Form, Button } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useAddCarMutation } from '../../redux/api/carsApi.js';
-import DropzoneComponent from '../../components/Dropzone';
+import DropzoneComponent from '../../components/Dropzone/index.jsx';
 
 export default function AdCarPage() {
   const toast = useToast();
