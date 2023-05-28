@@ -13,87 +13,85 @@ const yandexS3Service = new YandexS3Service();
 const filterExceptions = require("../extensions/exceptions").filterExceptions;
 
 // Home page route.
-router.get(
-  "/",
-  filterExceptions(async function (req, res) {
-    const pagination = paginationExtensions.paginate(req);
-    const { Op } = require("sequelize");
+router.get("/", filterExceptions(async function (req, res) {
+  const pagination = paginationExtensions.paginate(req);
+  const { Op } = require("sequelize");
 
-    var obj = parseJwt(req.cookies.accessToken);
-    const userId = obj.user_id;
+  var obj = parseJwt(req.cookies.accessToken);
+  const userId = obj.user_id;
 
-    let whereCondition = {};
+  let whereCondition = {};
 
-    if (req.query.searchPattern) {
-      let searchPattern = String(req.query.searchPattern);
-      whereCondition = {
-        name: {
-          [Op.like]: "%" + searchPattern + "%",
-        },
-      };
-    }
+  if (req.query.searchPattern) {
+    let searchPattern = String(req.query.searchPattern);
+    whereCondition = {
+      name: {
+        [Op.like]: "%" + searchPattern + "%",
+      },
+    };
+  }
 
-    let cars = await db.cars.findAndCountAll({
-      limit: pagination.size,
-      offset: pagination.offset,
-      where: whereCondition,
-      attributes: ["id", "name", "imageUrl", "price"],
+  let cars = await db.cars.findAndCountAll({
+    limit: pagination.size,
+    offset: pagination.offset,
+    where: whereCondition,
+    attributes: ["id", "name", "imageUrl", "price"],
+  });
+
+  let favoriteCars = await db.favorites.findAll({
+    where: { userId: userId },
+    attributes: ["carId"],
+  });
+
+  for (let i = 0; i < cars.count; i++) {
+    let resultSearch = true;
+    if (favoriteCars.find((o) => o.carId === cars.rows[i].id) === undefined)
+      resultSearch = false;
+    cars.rows[i].dataValues.inFavorites = resultSearch;
+  }
+
+  res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
+}));
+
+router.post("/", upload.any(), filterExceptions(async function (req, res) {
+
+  const imageFile = req.files.find(x => x.fieldname == "image");
+  const { name, price, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
+
+  if (!(name && price && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear && imageFile)) {
+    return res.status(400).send({
+      message: "Invalid input.",
     });
+  }
 
-    let favoriteCars = await db.favorites.findAll({
-      where: { userId: userId },
-      attributes: ["carId"],
-    });
+  var currentTime = new Date();
 
-    for (let i = 0; i < cars.count; i++) {
-      let resultSearch = true;
-      if (favoriteCars.find((o) => o.carId === cars.rows[i].id) === undefined)
-        resultSearch = false;
-      cars.rows[i].dataValues.inFavorites = resultSearch;
-    }
+  let car = await db.cars.create({
+    name,
+    price,
+    imageUrl: null,
+    year,
+    mileage,
+    color,
+    engineValue,
+    enginePowers,
+    leftSteeringWheel,
+    transmission,
+    gear,
+    currentTime,
+    currentTime,
+  });
 
-    router.post("/", upload.any(), filterExceptions(async function (req, res) {
+  let imageUrl = await yandexS3Service.uploadFile(
+    car.dataValues.id,
+    imageFile
+  );
 
-      const imageFile = req.files.find(x => x.fieldname == "image");
-      const { name, price, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
+  car.imageUrl = imageUrl;
+  await car.save();
 
-      if (!(name && price && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear && imageFile)) {
-        return res.status(400).send({
-          message: "Invalid input.",
-        });
-      }
-
-      var currentTime = new Date();
-
-      let car = await db.cars.create({
-        name,
-        price,
-        imageUrl: null,
-        year,
-        mileage,
-        color,
-        engineValue,
-        enginePowers,
-        leftSteeringWheel,
-        transmission,
-        gear,
-        currentTime,
-        currentTime,
-      });
-
-      let imageUrl = await yandexS3Service.uploadFile(
-        car.dataValues.id,
-        imageFile
-      );
-
-      car.imageUrl = imageUrl;
-      await car.save();
-
-      res.json(car);
-    }));
-    res.json(paginationExtensions.generatePaginationResponse(cars, pagination));
-  })
-);
+  res.json(car);
+}));
 
 // Get cars' details from database
 router.get(
