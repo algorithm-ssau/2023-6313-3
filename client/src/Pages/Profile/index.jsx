@@ -1,9 +1,14 @@
-import styles from "./style.module.css";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import Favourite from "../../components/Favourite";
+import { Center, Spinner } from '@chakra-ui/react';
+
+import styles from './style.module.css';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
+import Favourite from '../../components/Favourite';
+import { useGetFavsQuery } from '../../redux/api/favApi';
 
 export default function ProfilePage() {
+  const { data, isLoading } = useGetFavsQuery();
+
   return (
     <div className={styles['body']}>
       <Navbar />
@@ -30,13 +35,27 @@ export default function ProfilePage() {
           <h1 className={styles['favourites']}>Избранное</h1>
 
           <div className={styles['wrap-favourite']}>
-            <Favourite />
-
-            <Favourite />
-
-            <Favourite />
-
-            <Favourite />
+            {isLoading ? (
+              <Center m={20}>
+                <Spinner
+                  thickness='4px'
+                  speed='0.4s'
+                  emptyColor='gray.200'
+                  color='red.500'
+                  size='xl'
+                />
+              </Center>
+            ) : (
+              data.items.map((car) => (
+                <Favourite
+                  key={car.id}
+                  id={car.id}
+                  imageUrl={car.imageUrl}
+                  name={car.name}
+                  price={car.price}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

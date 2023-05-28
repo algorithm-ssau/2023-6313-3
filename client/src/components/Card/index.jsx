@@ -1,11 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './style.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  useAddFavMutation,
+  useRemoveFavMutation,
+} from '../../redux/api/favApi';
+import useEffectAfterMount from '../../hooks/useEffectAfterMount';
 
-export default function Card({ id, title, price, imageUrl }) {
+export default function Card({ id, title, price, imageUrl, inFavorite }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const [favCar, setFavCar] = useState(false);
+  const [isFav, setFav] = useState(inFavorite);
+  const [addFav] = useAddFavMutation();
+  const [removeFav] = useRemoveFavMutation();
+
+  useEffectAfterMount(() => {
+    async function fetchData() {
+      try {
+        if (isFav) {
+          await addFav({ carId: id }).unwrap();
+        } else {
+          await removeFav({ carId: id }).unwrap();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [isFav]);
+
   return (
     <div
       className='col-md-3'
@@ -43,10 +66,10 @@ export default function Card({ id, title, price, imageUrl }) {
               className={styles['add-to-favourites']}
               onClick={(e) => {
                 e.stopPropagation();
-                setFavCar(!favCar);
+                setFav(!isFav);
               }}
             >
-              <ion-icon name={favCar ? 'heart' : 'heart-outline'}></ion-icon>
+              <ion-icon name={isFav ? 'heart' : 'heart-outline'}></ion-icon>
             </button>
           </div>
         </div>

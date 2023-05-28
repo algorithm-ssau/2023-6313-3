@@ -4,21 +4,21 @@ import Cookies from 'js-cookie';
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    accessToken: localStorage.getItem('access_token') || null,
-    refreshToken: localStorage.getItem('refresh_token') || null,
+    accessToken: Cookies.get('accessToken') || null,
+    refreshToken: Cookies.get('refreshToken') || null,
   },
   reducers: {
     setCredentials: (state, { payload: { access_token, refresh_token } }) => {
       state.accessToken = access_token;
       state.refreshToken = refresh_token;
-      localStorage.setItem('access_token', access_token);
-      localStorage.setItem('refresh_token', access_token);
+      Cookies.set('accessToken', access_token);
+      Cookies.set('refreshToken', refresh_token);
     },
     logout: (state) => {
       state.accessToken = null;
       state.refreshToken = null;
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
+      // localStorage.removeItem('access_token');
+      // localStorage.removeItem('refresh_token');
       Cookies.remove('accessToken');
       Cookies.remove('refreshToken');
     },
