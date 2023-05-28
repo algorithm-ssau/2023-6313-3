@@ -1,6 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from './baseQuery';
-import { Navigate } from 'react-router-dom';
+import { baseQueryWithHandle } from './baseQuery';
 
 const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -15,13 +14,7 @@ function providesList(resultsWithIds, tagType) {
 
 export const carsApi = createApi({
   reducerPath: 'carsApi',
-  onError: (error, dispatch) => {
-    if (error.status === 403) {
-      console.error('Access denied');
-      Navigate()('/profile');
-    }
-  },
-  baseQuery: baseQuery(BASE_URL),
+  baseQuery: baseQueryWithHandle(BASE_URL),
   tagTypes: ['Cars'],
   endpoints: (build) => ({
     getCars: build.query({

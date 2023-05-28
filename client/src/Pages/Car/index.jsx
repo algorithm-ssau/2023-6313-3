@@ -21,8 +21,6 @@ import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 
 import Navbar from '../../components/Navbar';
-import { images } from '../../fake-db/fakeImages';
-import { car } from '../../fake-db/fakeCarData';
 import Footer from '../../components/Footer';
 import styles from './style.module.css';
 import { useGetCarQuery } from '../../redux/api/carsApi';
