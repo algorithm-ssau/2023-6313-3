@@ -1,9 +1,11 @@
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.requests import Request
 from DatabaseConnect import Database
 from TokensWork import create_access_token, set_refresh_token, validate_access_token, update_refresh_token, \
-    check_refresh_token
+    check_refresh_token, get_user_id
 from UsersWork import check_password
 
 
@@ -62,8 +64,40 @@ async def authorization(data: dict):
     access_token = create_access_token(user_id)
 
     return createResponse(access_token, refresh_token)
-    
 
+
+@app.post("/api/users/logout")
+async def exit_from_acc(request: Request):
+    cookies = request.headers.get("Cookie")
+    if not cookies:
+        raise HTTPException(status_code=401, detail="User not recognized.")
+
+    access_token, refresh_token = cookies.split(";")
+    access_token = access_token.split("=")[1]
+    refresh_token = refresh_token.split("=")[1]
+
+    db = Database()
+    try:
+        db.open_connection()
+        user_id_rt = check_refresh_token({"refresh_token": refresh_token})
+        if user_id_rt is None:
+            raise HTTPException(status_code=400, detail="The token is corrupted.")
+        user_id_at = get_user_id(access_token)
+        if user_id_at != user_id_rt:
+            raise HTTPException(status_code=400, detail="User information is incorrect.")
+
+        db.delete_refresh_token(user_id_at)
+
+        response = JSONResponse({"success": True})
+
+        response.delete_cookie("accessToken")
+        response.delete_cookie("refreshToken")
+
+    finally:
+        db.close_connection()
+
+    return response
+    
 
 @app.post("/api/users/refresh")
 async def get_new_tokens(tokens: dict):
@@ -89,6 +123,36 @@ async def get_new_tokens(tokens: dict):
 async def validate_token(token: dict):
     return {"success": validate_access_token(token.get("access_token"))}
 
+
+@app.get("/api/users/current")
+async def return_user_info(request: Request):
+    cookies = request.headers.get("Cookie")
+    if not cookies:
+        raise HTTPException(status_code=401, detail="User not recognized.")
+
+    access_token, refresh_token = cookies.split(";")
+    access_token = access_token.split("=")[1]
+    refresh_token = refresh_token.split("=")[1]
+
+    db = Database()
+    try:
+        db.open_connection()
+        user_id_rt = check_refresh_token({"refresh_token": refresh_token})
+        if user_id_rt is None:
+            raise HTTPException(status_code=400, detail="The token is corrupted.")
+        user_id_at = get_user_id(access_token)
+        if user_id_at != user_id_rt:
+            raise HTTPException(status_code=400, detail="User information is incorrect.")
+
+        user_info = db.get_users_info(user_id_rt)
+    finally:
+        db.close_connection()
+
+    return JSONResponse({
+        "username": user_info[0],
+        "email": user_info[1]
+    })
+
 def createResponse(accessToken: str, refreshToken: str):
     response = JSONResponse({
         "access_token": accessToken,
@@ -97,6 +161,8 @@ def createResponse(accessToken: str, refreshToken: str):
 
     response.delete_cookie("accessToken")
     response.delete_cookie("refreshToken")
+
     response.set_cookie("accessToken", accessToken)
     response.set_cookie("refreshToken", refreshToken)
+
     return response
