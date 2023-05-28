@@ -5,7 +5,13 @@
     "dialect": "mysql",
     "username": "root",
     "password": "K^rb%kVQH5$1I8WvL1CQerr",
-    "authServiceHost": "server-auth"
+    "authServiceHost": "server-auth",
+    "yandexCloudSettings": {
+      "accessKeyId": "YCAJEwQs38v6CYJtqmi6oqH8s",
+      "secretAccessKey": "YCN0oj7Be1RRoFyFdjJRxJHyL-sdN9HVCGcs2xWH",
+      "bucketName": "digital-drive-bucket",
+      "debug": false
+    }
   },
   "localDevelopment": {
     "host" : "127.0.0.1",
@@ -13,6 +19,12 @@
     "dialect": "mysql",
     "username": "root",
     "password": "K^rb%kVQH5$1I8WvL1CQerr",
-    "authServiceHost": "127.0.0.1"
+    "authServiceHost": "127.0.0.1",
+    "yandexCloudSettings": {
+      "accessKeyId": "YCAJEwQs38v6CYJtqmi6oqH8s",
+      "secretAccessKey": "YCN0oj7Be1RRoFyFdjJRxJHyL-sdN9HVCGcs2xWH",
+      "bucketName": "digital-drive-bucket",
+      "debug": true
+    }
   }
 }

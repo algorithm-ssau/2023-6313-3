@@ -14,8 +14,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull : false
         },
         imageUrl: {
-            type: Sequelize.STRING,
-            allowNull : false
+            type: Sequelize.STRING
         },
         year: {
             type: Sequelize.STRING,
