@@ -21,6 +21,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
     });
 
     await queryInterface.createTable('cars', {
@@ -73,6 +81,14 @@ module.exports = {
       gear: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
       }
     });
 
@@ -102,10 +118,8 @@ module.exports = {
           key: 'id'
         }
       }
-    },
-      {
-        timestamps: false
-      });
+    });
+
     queryInterface.createTable('favorites', {
       id: {
         type: Sequelize.INTEGER,
@@ -128,16 +142,13 @@ module.exports = {
           key: 'id'
         }
       }
-    },
-      {
-        timestamps: false
-      })
+    })
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('favorites');
+    await queryInterface.dropTable('refresh-tokens');
     await queryInterface.dropTable('users');
     await queryInterface.dropTable('cars');
-    await queryInterface.dropTable('refresh-tokens');
-    await queryInterface.dropTable('favorites');
   }
 };
