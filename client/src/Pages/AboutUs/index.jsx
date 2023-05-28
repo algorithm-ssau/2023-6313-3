@@ -17,7 +17,6 @@ export default function ProfilePage() {
         </div>
         <div className={styles['animation-line']}></div>
       </div>
-      
 
       <div className={styles['text-center']}>
         <div className={styles['red-line']}></div>
@@ -31,7 +30,7 @@ export default function ProfilePage() {
           сравнивает лучшие предложения, которые есть в наличии.
         </p>
         <p>
-          <u>Ваше доверие - наша репутация.</u>
+          <u>Води без ограничений!</u>
         </p>
         <div className={styles['red-line']}></div>
       </div>
@@ -60,6 +59,9 @@ export default function ProfilePage() {
           Пользуясь нашими услугами, вы экономите на платных
           диагностиках/проверках и избегаете недобросовестных продавцов. При
           покупке у нас, мы гарантируем 100% соответствие вашим требованиям.
+        </p>
+        <p>
+          <u>Ваше доверие - наша репутация.</u>
         </p>
         <div className={styles['red-line']}></div>
       </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChakraProvider, Center } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 
@@ -15,7 +15,7 @@ export default function HomePage() {
   const [searchValue, setSearchValue] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading } = useGetCarsQuery({
+  const { data, refetch, isFetching } = useGetCarsQuery({
     page: currentPage,
     size: 12,
     searchPattern: searchValue,
@@ -24,6 +24,10 @@ export default function HomePage() {
   const filteredCars = data?.items.filter((car) =>
     car.name.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const handleSearch = (value) => {
     setSearchValue(value);
@@ -34,7 +38,7 @@ export default function HomePage() {
         <Navbar />
         <SearchField searchFn={handleSearch} />
         <div className='container mt-5'>
-          {isLoading ? (
+          {isFetching ? (
             <Center m={20}>
               <Spinner
                 thickness='4px'
@@ -53,6 +57,7 @@ export default function HomePage() {
                   title={car.name}
                   price={car.price}
                   imageUrl={car.imageUrl}
+                  inFavorite={car.inFavorites}
                 />
               ))}
             </div>

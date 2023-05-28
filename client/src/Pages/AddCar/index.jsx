@@ -1,39 +1,39 @@
 import {
-  Box,
   ChakraProvider,
-  Text,
-  Flex,
   Container,
-  Spacer,
   Center,
-  Table,
-  Tr,
-  Td,
-  Card,
   Heading,
-  Select,
   VStack,
   useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useFormik } from 'formik';
 
-import * as validation from './addCarValidationSchema.js';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useAddCarMutation } from '../../redux/api/carsApi.js';
+import DropzoneComponent from '../../components/Dropzone/index.jsx';
 
 export default function AdCarPage() {
   const toast = useToast();
-
   const [addCar] = useAddCarMutation();
 
   const handleSubmit = async (values) => {
-    await addCar(values)
+    const formData = new FormData();
+    formData.append('image', values.image);
+    formData.append('name', values.name);
+    formData.append('price', values.price);
+    formData.append('year', values.year);
+    formData.append('mileage', values.mileage);
+    formData.append('color', values.color);
+    formData.append('engineValue', values.engineValue);
+    formData.append('enginePowers', values.enginePowers);
+    formData.append('leftSteeringWheel', values.leftSteeringWheel);
+    formData.append('transmission', values.transmission);
+    formData.append('gear', values.gear);
+    await addCar(formData)
       .unwrap()
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         toast({
           title: 'Success',
           description: 'Автомобиль успешно добавлен',
@@ -73,7 +73,7 @@ const AddCarPage = ({ handleSubmit }) => {
   const [formValues, setFormValues] = useState({
     name: '',
     price: '',
-    imageUrl: '',
+    image: null,
     year: '',
     mileage: '',
     color: '',
@@ -91,8 +91,12 @@ const AddCarPage = ({ handleSubmit }) => {
       setFormValues({ ...formValues, [name]: checked });
       return;
     }
-
     setFormValues({ ...formValues, [name]: value });
+  };
+
+  const setUploadFiles = (files) => {
+    const image = files[0];
+    setFormValues((prev) => ({ ...prev, image }));
   };
 
   return (
@@ -104,7 +108,7 @@ const AddCarPage = ({ handleSubmit }) => {
           setFormValues({
             name: '',
             price: '',
-            imageUrl: '',
+            image: null,
             year: '',
             mileage: '',
             color: '',
@@ -145,16 +149,19 @@ const AddCarPage = ({ handleSubmit }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId='imageUrl'>
-            <Form.Label>Фото (ссылка)</Form.Label>
+          <DropzoneComponent setUploadFiles={setUploadFiles} />
+
+          {/* <Form.Group controlId='image'>
+            <Form.Label>Фото</Form.Label>
             <Form.Control
-              type='text'
-              name='imageUrl'
-              value={formValues.imageUrl}
-              onChange={handleSelectChange}
+              type='file'
+              name='image'
+              multiple
+              onChange={onChangeFile}
+              accept='image/*'
               required
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Form.Group controlId='year'>
             <Form.Label>Год</Form.Label>
@@ -215,7 +222,7 @@ const AddCarPage = ({ handleSubmit }) => {
             <Form.Check
               type='checkbox'
               name='leftSteeringWheel'
-              label='Левое рулевое колесо'
+              label='Правое рулевое колесо'
               onChange={handleSelectChange}
             />
           </Form.Group>

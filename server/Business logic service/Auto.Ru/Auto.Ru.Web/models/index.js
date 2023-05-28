@@ -38,13 +38,11 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+db.cars.hasMany(db.favorites);
+db.favorites.belongsTo(db.cars);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-// create the modal instance 
-db.users = require('./user.model')(sequelize, Sequelize);
-db.cars = require('./car.model')(sequelize, Sequelize);
-db.refreshTokens = require('./refresh-token.model')(sequelize, Sequelize);
 
 sequelize
   .authenticate()
@@ -53,15 +51,6 @@ sequelize
   })
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
-  });
-
-console.log("Db sync...")
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log("All models were synchronized successfully.")
-  })
-  .catch((err) => {
-    console.error('Error:', err);
   });
 
 db.sequelize = sequelize;

@@ -7,25 +7,28 @@ export default function Footer() {
       <div className={styles['hr1']}></div>
       <Center>
         <ul className={styles['social']}>
-          <li>
+          <li id="contacts">
             <a href='#' className={styles['call']}>
               <ion-icon name='call-outline'></ion-icon>
             </a>
           </li>
           <li>
-            <a href='#' className={styles['github']}>
+            <a
+              href='https://github.com/algorithm-ssau/2023-6313-3'
+              className={styles['github']}
+            >
               <ion-icon name='logo-github'></ion-icon>
             </a>
           </li>
           <li>
-          <a href='#' className={styles['vk']}>
-            <ion-icon name='logo-vk'></ion-icon>
-          </a>
+            <a href='https://vk.com/dancev198392' className={styles['vk']}>
+              <ion-icon name='logo-vk'></ion-icon>
+            </a>
           </li>
           <li>
-          <a href='#' className={styles['whatsapp']}>
-            <ion-icon name='logo-whatsapp'></ion-icon>
-          </a>
+            <a href='https://t.me/cutenodoubt' className={styles['telegram']}>
+              <ion-icon name='send-outline'></ion-icon>
+            </a>
           </li>
         </ul>
       </Center>

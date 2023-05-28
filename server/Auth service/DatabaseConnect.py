@@ -15,10 +15,12 @@ class Database(object):
                 host=HOST,
                 user=USER,
                 password=PASSWORD,
-                database=DATABASE
+                database=DATABASE,
+                auth_plugin='mysql_native_password'
             )
             print("Connected to database.")
-        except Exception:
+        except Exception as err:
+            print(err)
             raise HTTPException(status_code=500, detail="No connection to database.")
 
     def close_connection(self):
@@ -84,6 +86,14 @@ class Database(object):
 
         print("Refresh token has been updated.")
 
+    def delete_refresh_token(self, user_id: int):
+        cursor = self.connection.cursor()
+
+        cursor.execute("DELETE FROM `refresh-tokens` WHERE userId = %s", (user_id,))
+        self.connection.commit()
+
+        print("Refresh token has been deleted.")
+
     def check_exist_id(self, user_id: int):
         cursor = self.connection.cursor()
 
@@ -121,5 +131,13 @@ class Database(object):
 
         sql_request = "SELECT userId, expiresAt FROM `refresh-tokens` WHERE value = %s"
         cursor.execute(sql_request, (refresh_token,))
+
+        return cursor.fetchone()
+
+    def get_users_info(self, user_id: int):
+        cursor = self.connection.cursor()
+
+        sql_request = "SELECT login, email FROM `users` WHERE id = %s"
+        cursor.execute(sql_request, (user_id,))
 
         return cursor.fetchone()

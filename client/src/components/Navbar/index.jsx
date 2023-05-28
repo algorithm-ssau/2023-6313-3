@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
 import styles from './style.module.css';
-import { useAccordion } from '@chakra-ui/react';
 import { useAuth } from '../../hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { useLogoutUserMutation } from '../../redux/api/authApi';
@@ -10,6 +9,7 @@ import { logout } from '../../redux/slices/authSlice';
 export default function Navbar() {
   const isAuth = useAuth();
   const dispath = useDispatch();
+  const [logoutUser] = useLogoutUserMutation();
   return (
     <div>
       <div className={styles['hr']}></div>
@@ -24,13 +24,13 @@ export default function Navbar() {
           <div className={'navbar-wrap ' + styles['navbar-wrap']}>
             <ul className={'navbar-menu ' + styles['navbar-menu']}>
               <li>
-                <a href='/about'>О нас</a>
+                <NavLink to='/about'>О нас</NavLink>
               </li>
               <li>
                 <a href='#'>Новости</a>
               </li>
               <li>
-                <a href='#'>Контакты</a>
+                <a href='#contacts'>Контакты</a>
               </li>
               <li>
                 <NavLink to='/adding'>Разместить объявление</NavLink>
@@ -43,7 +43,16 @@ export default function Navbar() {
               <NavLink
                 to='/cars'
                 className={'profile ' + styles['profile']}
-                onClick={() => dispath(logout())}
+                onClick={async () => {
+                  try {
+                    const res = await logoutUser().unwrap();
+                    if (res.success) {
+                      dispath(logout());
+                    }
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
               >
                 {'Выйти'}
               </NavLink>

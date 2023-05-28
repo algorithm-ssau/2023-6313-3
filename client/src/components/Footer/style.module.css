@@ -80,7 +80,7 @@ footer p {
 }
 
 .call:hover {
-  color: rgb(0, 103, 187);
+  color: rgb(0, 255, 13);
 }
 
 .github:hover {
@@ -88,11 +88,11 @@ footer p {
 }
 
 .vk:hover {
-  color: rgb(0, 110, 201);
+  color: rgb(0, 94, 171);
 }
 
-.whatsapp:hover {
-  color: rgb(30, 255, 0);
+.telegram:hover {
+  color: rgb(0, 157, 255);
 }
 
 ol,
