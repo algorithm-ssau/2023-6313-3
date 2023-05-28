@@ -53,15 +53,6 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-console.log("Db sync...")
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log("All models were synchronized successfully.")
-  })
-  .catch((err) => {
-    console.error('Error:', err);
-  });
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
