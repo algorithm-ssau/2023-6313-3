@@ -222,7 +222,7 @@ const AddCarPage = ({ handleSubmit }) => {
             <Form.Check
               type='checkbox'
               name='leftSteeringWheel'
-              label='Левое рулевое колесо'
+              label='Правое рулевое колесо'
               onChange={handleSelectChange}
             />
           </Form.Group>

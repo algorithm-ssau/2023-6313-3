@@ -23,7 +23,7 @@ export default function Favourite({ id, name, imageUrl, price }) {
     <div onClick={() => navigate(`/cars/${id}`, { state: { from: location } })}>
       <div className={styles['favourite']}>
         <div className={styles['photo-favourite']}>
-          <img src={imageUrl} alt='car' />
+          <img src={imageUrl} alt='car' width='300' height='200' />
         </div>
         <div className={styles['info-favourite']}>
           <h3>{name}</h3>
