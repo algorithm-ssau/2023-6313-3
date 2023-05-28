@@ -1,7 +1,12 @@
 const express = require("express");
+const multer  = require('multer')
+const upload = multer();
+
 const db = require("../models");
 const router = express.Router();
 const paginationExtensions = require("../extensions/pagination");
+const YandexS3Service = require("../services/YandexS3/yandexS3Client");
+const yandexS3Service = new YandexS3Service();
 
 const filterExceptions = require("../extensions/exceptions").filterExceptions;
 
@@ -53,19 +58,24 @@ router.get("/:id/details", filterExceptions(async function (req, res) {
   res.json(car);
 }));
 
-router.post("/", filterExceptions(async function (req, res) {
-  console.log(req.body);
-  const { name, price, imageUrl, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
-  if (!(name && price && imageUrl && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear)) {
+router.post("/", upload.any(), filterExceptions(async function (req, res) {
+
+  const imageFile = req.files.find(x => x.fieldname == "image");
+  const { name, price, year, mileage, color, engineValue, enginePowers, leftSteeringWheel, transmission, gear } = req.body;
+
+  if (!(name && price && year && mileage && color && engineValue && enginePowers && leftSteeringWheel && transmission && gear && imageFile)) {
     return res.status(400).send({
-      message: "Невалидные данные",
+      message: "Invalid input.",
     });
   }
+
+
   var currentTime = new Date();
+
   let car = await db.cars.create({
     name,
     price,
-    imageUrl,
+    imageUrl: null,
     year,
     mileage,
     color,
@@ -77,6 +87,15 @@ router.post("/", filterExceptions(async function (req, res) {
     currentTime,
     currentTime,
   });
+
+  let imageUrl = await yandexS3Service.uploadFile(
+    car.dataValues.id,
+    imageFile
+  );
+
+  car.imageUrl = imageUrl;
+  await car.save();
+
   res.json(car);
 }));
 

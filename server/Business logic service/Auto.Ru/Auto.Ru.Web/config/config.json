@@ -10,7 +10,7 @@
       "accessKeyId": "YCAJEwQs38v6CYJtqmi6oqH8s",
       "secretAccessKey": "YCN0oj7Be1RRoFyFdjJRxJHyL-sdN9HVCGcs2xWH",
       "bucketName": "digital-drive-bucket",
-      "debug": true
+      "debug": false
     }
   },
   "localDevelopment": {
