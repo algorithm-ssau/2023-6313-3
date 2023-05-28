@@ -21,8 +21,6 @@ export default function HomePage() {
     searchPattern: searchValue,
   });
 
-  console.log(data);
-
   const filteredCars = data?.items.filter((car) =>
     car.name.toLowerCase().includes(searchValue.toLowerCase())
   );

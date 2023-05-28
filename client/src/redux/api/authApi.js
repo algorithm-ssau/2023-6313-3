@@ -31,17 +31,13 @@ export const authApi = createApi({
       query() {
         return {
           url: '/logout',
+          method: 'POST',
           credentials: 'include',
         };
       },
     }),
-    refreshToken: builder.mutation({
-      query() {
-        return {
-          url: '/refresh',
-          credentials: 'include',
-        };
-      },
+    getUser: builder.query({
+      query: () => '/current',
     }),
   }),
 });
@@ -50,4 +46,5 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useLogoutUserMutation,
+  useGetUserQuery,
 } = authApi;

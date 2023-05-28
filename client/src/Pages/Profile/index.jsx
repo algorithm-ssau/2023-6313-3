@@ -5,9 +5,11 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Favourite from '../../components/Favourite';
 import { useGetFavsQuery } from '../../redux/api/favApi';
+import { useGetUserQuery } from '../../redux/api/authApi';
 
 export default function ProfilePage() {
   const { data, isLoading } = useGetFavsQuery();
+  const { data: userData, isLoading: isUserLoading } = useGetUserQuery();
 
   return (
     <div className={styles['body']}>
@@ -21,10 +23,15 @@ export default function ProfilePage() {
             src='https://hombex.com/assets/img/icon_profile.png'
             alt=''
           />
-          <h1 className={styles['name']}>Василий</h1>
+          {isUserLoading || (
+            <h1 className={styles['name']}>{userData.username}</h1>
+          )}
+
           <h1 className={styles['number']}>Телефон: +7(937)xxx-xx-xx</h1>
 
-          <h1 className={styles['mail']}>e-mail: xxxxxx@mail.ru</h1>
+          {isUserLoading || (
+            <h1 className={styles['mail']}>e-mail: {userData.email}</h1>
+          )}
 
           <a href='#' className={styles['info']}>
             О пользователе

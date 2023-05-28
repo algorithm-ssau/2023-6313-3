@@ -72,9 +72,8 @@ async def exit_from_acc(request: Request):
     if not cookies:
         raise HTTPException(status_code=401, detail="User not recognized.")
 
-    access_token, refresh_token = cookies.split(";")
-    access_token = access_token.split("=")[1]
-    refresh_token = refresh_token.split("=")[1]
+    access_token = request.cookies.get('accessToken')
+    refresh_token = request.cookies.get('refreshToken')
 
     db = Database()
     try:
@@ -130,9 +129,8 @@ async def return_user_info(request: Request):
     if not cookies:
         raise HTTPException(status_code=401, detail="User not recognized.")
 
-    access_token, refresh_token = cookies.split(";")
-    access_token = access_token.split("=")[1]
-    refresh_token = refresh_token.split("=")[1]
+    access_token = request.cookies.get('accessToken')
+    refresh_token = request.cookies.get('refreshToken')
 
     db = Database()
     try:
