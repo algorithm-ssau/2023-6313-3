@@ -86,6 +86,14 @@ class Database(object):
 
         print("Refresh token has been updated.")
 
+    def delete_refresh_token(self, user_id: int):
+        cursor = self.connection.cursor()
+
+        cursor.execute("DELETE FROM `refresh-tokens` WHERE userId = %s", (user_id,))
+        self.connection.commit()
+
+        print("Refresh token has been deleted.")
+
     def check_exist_id(self, user_id: int):
         cursor = self.connection.cursor()
 
@@ -123,5 +131,13 @@ class Database(object):
 
         sql_request = "SELECT userId, expiresAt FROM `refresh-tokens` WHERE value = %s"
         cursor.execute(sql_request, (refresh_token,))
+
+        return cursor.fetchone()
+
+    def get_users_info(self, user_id: int):
+        cursor = self.connection.cursor()
+
+        sql_request = "SELECT login, email FROM `users` WHERE id = %s"
+        cursor.execute(sql_request, (user_id,))
 
         return cursor.fetchone()

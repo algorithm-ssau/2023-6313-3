@@ -39,7 +39,11 @@ def set_refresh_token(database: Database, user_id):
 
 def update_refresh_token(database: Database, user_id: int):
     tokens_data = create_refresh_token(user_id)
-    database.update_token(tokens_data)
+    existing = database.get_info_about_refresh(tokens_data.get("refresh_token"))
+    if not existing:
+        database.set_token(tokens_data)
+    else:
+        database.update_token(tokens_data)
 
     return tokens_data.get("refresh_token")
 
@@ -71,4 +75,11 @@ def check_refresh_token(tokens: dict):
     return None
 
 
+def get_user_id(token: str):
+    try:
+        user_id = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except JWTError:
+        return False
+
+    return user_id.get("user_id")
 
