@@ -11,7 +11,7 @@ from UsersWork import check_password
 
 app = FastAPI()
 
-origins = ["http://localhost:3000"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
