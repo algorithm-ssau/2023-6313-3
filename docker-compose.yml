@@ -57,7 +57,7 @@ services:
     build: ./client/
     restart: always
     ports:
-      - 3000:3000
+      - 3000:80
     networks:
       frontend:
 
