@@ -38,10 +38,10 @@ services:
       backend:
 
   server-auth:
+    image: radikuchiha1/auth-service
     depends_on:
       - server-business-logic
     container_name: server-auth
-    build: ./server/Auth service/
     restart: always
     environment:
       PORT: 8000
