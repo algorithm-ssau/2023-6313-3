@@ -4,7 +4,7 @@
     "database": "auto.ru",
     "dialect": "mysql",
     "username": "root",
-    "password": "K^rb%kVQH5$1I8WvL1CQerr",
+    "password": "KrbkVQH5$1I8WvL1CQerr",
     "authServiceHost": "server-auth",
     "yandexCloudSettings": {
       "accessKeyId": "YCAJEwQs38v6CYJtqmi6oqH8s",

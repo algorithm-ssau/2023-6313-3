@@ -12,7 +12,7 @@ services:
       retries: 10
     environment:
       MYSQL_DATABASE: auto.ru
-      MYSQL_ROOT_PASSWORD: K^rb%kVQH5$1I8WvL1CQerr
+      MYSQL_ROOT_PASSWORD: KrbkVQH5$1I8WvL1CQerr
     env_file:
       - ./.env
     restart: unless-stopped
