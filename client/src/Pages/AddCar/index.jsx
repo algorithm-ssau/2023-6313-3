@@ -80,7 +80,7 @@ const AddCarPage = ({ handleSubmit }) => {
     color: '',
     engineValue: '',
     enginePowers: '',
-    leftSteeringWheel: false,
+    leftSteeringWheel: true,
     transmission: '',
     gear: '',
   });
@@ -144,7 +144,7 @@ const AddCarPage = ({ handleSubmit }) => {
             color: '',
             engineValue: '',
             enginePowers: '',
-            leftSteeringWheel: false,
+            leftSteeringWheel: true,
             transmission: '',
             gear: '',
           });
