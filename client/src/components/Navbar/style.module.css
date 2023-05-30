@@ -85,3 +85,48 @@
 .hidden {
 	display: none;
 }
+
+/* Стили для мобильных устройств */
+@media (max-width: 767px) {
+
+	.navbar-brand {
+		margin: 0 auto;
+
+	}
+
+	.navbar-menu {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 30px;
+		margin-bottom: 10px;
+
+	}
+
+	.navbar-menu li {
+		text-align: center;
+		display: block;
+		width: 100%;
+	}
+
+	.navbar {
+		height: auto;
+	}
+
+	.auth-elements {
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.profile {
+		margin: 0 0;
+	}
+
+	.navbar-wrap {
+		display: flex;
+		flex-flow: wrap;
+		justify-content: center;
+	}
+
+
+}

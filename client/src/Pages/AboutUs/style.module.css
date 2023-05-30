@@ -2,7 +2,6 @@
   position: relative;
 }
 
-
 .about {
   position: absolute;
   top: 85%;
@@ -118,4 +117,17 @@ h1 {
 
 .text-center-last p {
   font-size: 30px;
+}
+
+@media (max-width: 767px) {
+
+  .text-center {
+    margin: 0 auto;
+    padding: 0;
+    width: auto;
+  }
+
+  .text-center p {
+    font-size: 20px;
+  }
 }

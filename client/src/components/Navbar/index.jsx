@@ -23,40 +23,42 @@ export default function Navbar() {
           </NavLink>
           <div className={'navbar-wrap ' + styles['navbar-wrap']}>
             <ul className={'navbar-menu ' + styles['navbar-menu']}>
-              <li>
+              <li className='nav-list'>
                 <NavLink to='/about'>О нас</NavLink>
               </li>
-              <li>
+              <li className='nav-list'>
                 <a href='#'>Новости</a>
               </li>
-              <li>
+              <li className='nav-list'>
                 <a href='#contacts'>Контакты</a>
               </li>
-              <li>
+              <li className='nav-list'>
                 <NavLink to='/adding'>Разместить объявление</NavLink>
               </li>
             </ul>
-            <NavLink to='/profile' className={'profile ' + styles['profile']}>
-              {isAuth ? 'Личный кабинет' : 'Войти'}
-            </NavLink>
-            {isAuth && (
-              <NavLink
-                to='/cars'
-                className={'profile ' + styles['profile']}
-                onClick={async () => {
-                  try {
-                    const res = await logoutUser().unwrap();
-                    if (res.success) {
-                      dispath(logout());
-                    }
-                  } catch (error) {
-                    console.log(error);
-                  }
-                }}
-              >
-                {'Выйти'}
+            <div className={styles['auth-elements']}>
+              <NavLink to='/profile' className={'profile ' + styles['profile']}>
+                {isAuth ? 'Личный кабинет' : 'Войти'}
               </NavLink>
-            )}
+              {isAuth && (
+                <NavLink
+                  to='/cars'
+                  className={'profile ' + styles['profile']}
+                  onClick={async () => {
+                    try {
+                      const res = await logoutUser().unwrap();
+                      if (res.success) {
+                        dispath(logout());
+                      }
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
+                >
+                  {'Выйти'}
+                </NavLink>
+              )}
+            </div>
           </div>
         </div>
       </nav>

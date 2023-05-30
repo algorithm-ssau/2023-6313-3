@@ -117,3 +117,41 @@
     font-size: 30px;
     margin-left: 30px;
 }
+
+@media (max-width: 767px) {
+
+    .wrap {
+        width: auto;
+        height: auto;
+        text-align: center;
+        margin: 0 0;
+        padding: 0 0;
+    }
+
+    .container {
+        display: block;
+        margin: 0 auto;
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    .info {
+        margin: 0 auto;
+    }
+
+    .wrap-favourite {
+        height: auto;
+        width: auto;
+    }
+
+    .container_like {
+        display: block;
+        margin: 0 auto;
+        height: auto;
+        width: auto;
+
+    }
+
+
+
+}

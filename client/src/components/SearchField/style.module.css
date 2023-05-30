@@ -43,3 +43,22 @@
 	box-shadow: 0 7px 7px rgba(128, 128, 128, 0.5);
 	color: rgb(0, 0, 0);
 }
+
+@media (max-width: 767px) {
+
+	.searching-line {
+		margin: 30px 10px;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		width: auto;
+	}
+
+	.input {
+		margin: 0 0;
+		margin-right: 30px;
+		width: auto;
+	}
+
+
+}

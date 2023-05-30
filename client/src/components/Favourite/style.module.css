@@ -1,15 +1,14 @@
-
-.favourite{
+.favourite {
     margin: 20px;
     background-color: #ffffff;
 }
 
-.photo-favourite{
+.photo-favourite {
     display: inline-block;
     vertical-align: bottom;
 }
 
-.info-favourite{
+.info-favourite {
     display: inline-block;
     margin-left: 20px;
     height: 200px;
@@ -17,18 +16,18 @@
     vertical-align: bottom;
 }
 
-h3{
+h3 {
     font-weight: bolder;
     font-size: 25px;
 }
 
-.buttons-favourite{
+.buttons-favourite {
     display: inline-block;
     margin-left: 70px;
     vertical-align: bottom;
 }
 
-.line{
+.line {
     margin-left: 20px;
     height: 1px;
     width: 850px;
@@ -42,4 +41,16 @@ h3{
     bottom: 180px;
     right: -240px;
     cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .info-favourite {
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .photo-favourite {
+        display: block;
+        margin: 0 auto;
+    }
 }
