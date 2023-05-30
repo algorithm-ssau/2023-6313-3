@@ -180,23 +180,14 @@ const AddCarPage = ({ handleSubmit }) => {
             />
           </Form.Group>
 
-          <DropzoneComponent
-            setUploadFiles={setUploadFiles}
-            setFiles={setFiles}
-            files={files}
-          />
-
-          {/* <Form.Group controlId='image'>
+          <Form.Group controlId='image'>
             <Form.Label>Фото</Form.Label>
-            <Form.Control
-              type='file'
-              name='image'
-              multiple
-              onChange={onChangeFile}
-              accept='image/*'
-              required
+            <DropzoneComponent
+              setUploadFiles={setUploadFiles}
+              setFiles={setFiles}
+              files={files}
             />
-          </Form.Group> */}
+          </Form.Group>
 
           <Form.Group controlId='year'>
             <Form.Label>Год</Form.Label>
