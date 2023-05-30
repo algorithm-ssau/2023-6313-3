@@ -42,6 +42,7 @@ export default function ProfilePage() {
         />
         <div className={styles['photos-right']}>
           <img
+            className={styles['col-photo']}
             src='https://gamerwall.pro/uploads/posts/2022-06/1655895053_43-gamerwall-pro-p-mersedes-osenyu-oboi-47.jpg'
             alt='Photo 2'
           />
