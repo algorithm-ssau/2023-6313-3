@@ -142,6 +142,7 @@
     .wrap-favourite {
         height: auto;
         width: auto;
+        margin: 0 auto;
     }
 
     .container_like {
