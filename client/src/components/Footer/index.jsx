@@ -7,7 +7,7 @@ export default function Footer() {
       <div className={styles['hr1']}></div>
       <Center>
         <ul className={styles['social']}>
-          <li id="contacts">
+          <li id='contacts'>
             <a href='#' className={styles['call']}>
               <ion-icon name='call-outline'></ion-icon>
             </a>
@@ -49,7 +49,7 @@ export default function Footer() {
           <a href='#'>Контакты</a>
         </li>
       </ul>
-      <p>©2023 Auto.Ru | All Rights Reserved</p>
+      <p>©2023 Digital Drive | All Rights Reserved</p>
     </footer>
   );
 }
