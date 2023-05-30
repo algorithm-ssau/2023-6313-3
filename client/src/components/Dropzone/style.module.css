@@ -1,0 +1,36 @@
+.dropzone {
+	border: 2px dashed #ccc;
+	/* установка пунктирной рамки */
+	padding: 20px;
+	/* добавление отступов внутри контейнера */
+	text-align: center;
+	/* выравнивание содержимого по центру контейнера */
+	font-size: 18px;
+	/* установка размера шрифта */
+	color: #999;
+	/* установка цвета текста */
+	background-color: #f7f7f7;
+	/* установка фона контейнера */
+	border-radius: 7px;
+}
+
+.dropzone:hover {}
+
+.image-container {
+	display: flex;
+	align-items: center;
+}
+
+.delete-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}
+
+.label {
+	cursor: pointer;
+}

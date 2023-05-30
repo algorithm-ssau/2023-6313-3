@@ -13,9 +13,8 @@ function setupMiddlewares(app) {
 
     app.use(
       cors({
-        origin: "http://localhost:3000",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
+        origin: "http://51.250.54.133:3000",
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
         credentials: true,
       })
     );

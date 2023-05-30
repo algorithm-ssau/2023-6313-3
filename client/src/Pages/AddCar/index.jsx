@@ -19,6 +19,7 @@ export default function AdCarPage() {
   const [addCar] = useAddCarMutation();
 
   const handleSubmit = async (values) => {
+    console.log(values);
     const formData = new FormData();
     formData.append('image', values.image);
     formData.append('name', values.name);
@@ -70,6 +71,8 @@ export default function AdCarPage() {
 }
 
 const AddCarPage = ({ handleSubmit }) => {
+  const toast = useToast();
+  const [files, setFiles] = useState([]);
   const [formValues, setFormValues] = useState({
     name: '',
     price: '',
@@ -79,7 +82,7 @@ const AddCarPage = ({ handleSubmit }) => {
     color: '',
     engineValue: '',
     enginePowers: '',
-    leftSteeringWheel: false,
+    leftSteeringWheel: true,
     transmission: '',
     gear: '',
   });
@@ -88,7 +91,7 @@ const AddCarPage = ({ handleSubmit }) => {
     const { name, value } = event.target;
     if (name === 'leftSteeringWheel') {
       const { checked } = event.target;
-      setFormValues({ ...formValues, [name]: checked });
+      setFormValues({ ...formValues, [name]: !checked });
       return;
     }
     setFormValues({ ...formValues, [name]: value });
@@ -97,6 +100,35 @@ const AddCarPage = ({ handleSubmit }) => {
   const setUploadFiles = (files) => {
     const image = files[0];
     setFormValues((prev) => ({ ...prev, image }));
+  };
+
+  const isFilledFilds = ({
+    name,
+    price,
+    image,
+    year,
+    mileage,
+    color,
+    enginePowers,
+    engineValue,
+    transmission,
+    gear,
+  }) => {
+    if (
+      name &&
+      price &&
+      image &&
+      year &&
+      mileage &&
+      color &&
+      enginePowers &&
+      engineValue &&
+      transmission &&
+      gear
+    ) {
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -114,10 +146,11 @@ const AddCarPage = ({ handleSubmit }) => {
             color: '',
             engineValue: '',
             enginePowers: '',
-            leftSteeringWheel: false,
+            leftSteeringWheel: true,
             transmission: '',
             gear: '',
           });
+          setFiles([]);
         }}
       >
         <VStack
@@ -127,12 +160,12 @@ const AddCarPage = ({ handleSubmit }) => {
           m='auto'
           fontSize='20px'
         >
-          <Form.Group controlId='makeModel'>
+          <Form.Group controlId='name'>
             <Form.Label>Марка и модель</Form.Label>
             <Form.Control
               type='text'
               name='name'
-              value={formValues.makeModel}
+              value={formValues.name}
               onChange={handleSelectChange}
               required
             />
@@ -149,19 +182,14 @@ const AddCarPage = ({ handleSubmit }) => {
             />
           </Form.Group>
 
-          <DropzoneComponent setUploadFiles={setUploadFiles} />
-
-          {/* <Form.Group controlId='image'>
+          <Form.Group controlId='image'>
             <Form.Label>Фото</Form.Label>
-            <Form.Control
-              type='file'
-              name='image'
-              multiple
-              onChange={onChangeFile}
-              accept='image/*'
-              required
+            <DropzoneComponent
+              setUploadFiles={setUploadFiles}
+              setFiles={setFiles}
+              files={files}
             />
-          </Form.Group> */}
+          </Form.Group>
 
           <Form.Group controlId='year'>
             <Form.Label>Год</Form.Label>
@@ -249,7 +277,7 @@ const AddCarPage = ({ handleSubmit }) => {
             <Form.Control
               as='select'
               name='gear'
-              value={formValues.drive}
+              value={formValues.gear}
               onChange={handleSelectChange}
               required
             >
@@ -266,6 +294,7 @@ const AddCarPage = ({ handleSubmit }) => {
             variant='primary'
             type='submit'
             className='btn btn-primary btn-lg'
+            disabled={isFilledFilds(formValues)}
           >
             Опубликовать
           </Button>

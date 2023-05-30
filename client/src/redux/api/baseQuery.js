@@ -1,5 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { logout } from '../slices/authSlice';
 
 export const baseQuery = (url) =>
   fetchBaseQuery({
@@ -19,10 +21,16 @@ export const baseQuery = (url) =>
     },
   });
 
-export const baseQueryWithHandle = (url) => async (args, api, extraOptions) => {
-  const result = await baseQuery(url)(args, api, extraOptions);
-  if (result.error && result.error.status === 403) {
-    window.location.pathname = '/register';
-  }
-  return result;
-};
+export const baseQueryWithHandle =
+  (url) =>
+  async (args, { signal, dispatch, getState }, extraOptions) => {
+    const result = await baseQuery(url)(
+      args,
+      { signal, dispatch, getState },
+      extraOptions
+    );
+    if (result.error && result.error.status === 403) {
+      useDispatch()(logout());
+    }
+    return result;
+  };

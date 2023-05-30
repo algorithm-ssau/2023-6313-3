@@ -10,11 +10,11 @@
   transform: translate(-50%, -50%);
   color: #fff;
   font-size: 50px;
-  
+
   text-align: center;
 }
 
-.animation-line{
+.animation-line {
   display: block;
   width: 3px;
   height: 90px;
@@ -27,36 +27,36 @@
   transition: all 0.3s ease;
 }
 
-.container img{
+.container img {
   transition: all 0.3s ease;
   filter: brightness(60%)
 }
 
-.red-line{
+.red-line {
   border: none;
-	background-color: rgb(251, 61, 44);
-	height: 3px;
+  background-color: rgb(251, 61, 44);
+  height: 3px;
 }
 
-h1{
-  font-family:  'Gilroy', Arial, sans-serif;
+h1 {
+  font-family: 'Gilroy', Arial, sans-serif;
   font-weight: lighter;
   text-transform: uppercase;
 }
 
-.animation-line{
-  background: linear-gradient(rgb(78, 78, 78) 0%, rgb(255, 255, 255) 100% );
+.animation-line {
+  background: linear-gradient(rgb(78, 78, 78) 0%, rgb(255, 255, 255) 100%);
   background-repeat: repeat-y;
   animation: gradient 15s infinite linear;
 }
 
-@keyframes gradient{
+@keyframes gradient {
   to {
     background-position: 0 1000px;
   }
 }
 
-.text-center{
+.text-center {
   margin-top: 80px;
   margin-bottom: 80px;
   text-align: center;
@@ -64,20 +64,23 @@ h1{
   padding-right: 60px;
 }
 
-.text-center p{
+.text-center p {
   font-size: 30px;
 }
 
 .collage {
   display: flex;
   align-items: center;
-  justify-content: center; /* Расположение по центру */
-  max-width: 1400px; /* Фиксированная ширина (можно задать любую) */
-  margin: 0 auto; /* Центрирование по горизонтали */
+  justify-content: center;
+  /* Расположение по центру */
+  max-width: 1400px;
+  /* Фиксированная ширина (можно задать любую) */
+  margin: 0 auto;
+  /* Центрирование по горизонтали */
 }
 
 .collage img {
-  width: 119.1%;
+  width: 118%;
 }
 
 .photos-right {
@@ -87,19 +90,25 @@ h1{
 
 .photos-right img {
   width: 100%;
-  margin-bottom: 10px;
   margin-left: 10px;
 }
 
-.last-photo{
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Расположение по центру */
-  max-width: 1400px; /* Фиксированная ширина (можно задать любую) */
-  margin: 0 auto; /* Центрирование по горизонтали */
+.col-photo {
+  margin-bottom: 10px;
 }
 
-.text-center-last{
+.last-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Расположение по центру */
+  max-width: 1400px;
+  /* Фиксированная ширина (можно задать любую) */
+  margin: 0 auto;
+  /* Центрирование по горизонтали */
+}
+
+.text-center-last {
   margin-top: 80px;
   margin-bottom: 80px;
   text-align: center;
@@ -107,6 +116,6 @@ h1{
   padding-right: 200px;
 }
 
-.text-center-last p{
+.text-center-last p {
   font-size: 30px;
 }

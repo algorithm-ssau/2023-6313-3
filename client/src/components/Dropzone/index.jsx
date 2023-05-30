@@ -1,6 +1,36 @@
-import { Box, Flex, Image } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { CloseIcon } from '@chakra-ui/icons';
+
+import styles from './style.module.css';
+
+const baseStyle = {
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '20px',
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: '#eeeeee',
+  borderStyle: 'dashed',
+  backgroundColor: '#fafafa',
+  color: '#bdbdbd',
+  outline: 'none',
+  transition: 'border .24s ease-in-out',
+};
+
+const focusedStyle = {
+  borderColor: '#2196f3',
+};
+
+const acceptStyle = {
+  borderColor: '#00e676',
+};
+
+const rejectStyle = {
+  borderColor: '#ff1744',
+};
 
 const thumbsContainer = {
   display: 'flex',
@@ -10,7 +40,10 @@ const thumbsContainer = {
 };
 
 const thumb = {
-  display: 'inline-flex',
+  position: 'relative',
+  cursor: 'auto',
+  display: 'flex',
+  alignItems: 'center',
   borderRadius: 2,
   border: '1px solid #eaeaea',
   marginBottom: 8,
@@ -33,9 +66,15 @@ const img = {
   height: '100%',
 };
 
-function Previews({ setUploadFiles }) {
-  const [files, setFiles] = useState([]);
-  const { getRootProps, getInputProps } = useDropzone({
+function Previews({ setUploadFiles, setFiles, files }) {
+  const {
+    getRootProps,
+    getInputProps,
+    open,
+    isFocused,
+    isDragAccept,
+    isDragReject,
+  } = useDropzone({
     accept: {
       'image/*': [],
     },
@@ -47,11 +86,29 @@ function Previews({ setUploadFiles }) {
           })
         )
       );
-      setUploadFiles(acceptedFiles);
+      setUploadFiles(acceptedFiles, setFiles);
     },
+    maxFiles: 1,
+    multiple: false,
   });
 
-  const thumbs = files.map((file) => (
+  const removeFile = (fileIndex) => {
+    const newFiles = [...files];
+    newFiles.splice(fileIndex, 1);
+    setFiles(newFiles);
+  };
+
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isFocused ? focusedStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    [isFocused, isDragAccept, isDragReject]
+  );
+
+  const thumbs = files.map((file, index) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img
@@ -63,6 +120,17 @@ function Previews({ setUploadFiles }) {
           }}
         />
       </div>
+      <CloseIcon
+        position={'absolute'}
+        top={0}
+        right={0}
+        boxSize={4}
+        color='red'
+        paddingRight={'6px'}
+        paddingTop={'5px'}
+        onClick={() => removeFile(index)}
+        cursor={'pointer'}
+      />
     </div>
   ));
 
@@ -72,10 +140,12 @@ function Previews({ setUploadFiles }) {
   }, []);
 
   return (
-    <section className='container'>
-      <div {...getRootProps({ className: 'dropzone' })}>
+    <section className={styles['dropzone']}>
+      <div {...getRootProps()}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p className={styles['label']}>
+          Перетащите файлы сюда или нажмите, чтобы выбрать файлы для загрузки
+        </p>
       </div>
       <aside style={thumbsContainer}>{thumbs}</aside>
     </section>
