@@ -28,11 +28,13 @@ export default function ProfilePage() {
           )}
 
           <Center>
-            <h1 className={styles['number']}>Телефон: +7(937)xxx-xx-xx</h1>
+            <div>
+              <h1 className={styles['number']}>Телефон: +7(937)xxx-xx-xx</h1>
 
-            {isUserLoading || (
-              <h1 className={styles['mail']}>e-mail: {userData.email}</h1>
-            )}
+              {isUserLoading || (
+                <h1 className={styles['mail']}>e-mail: {userData.email}</h1>
+              )}
+            </div>
           </Center>
 
           <a href='#' className={styles['info']}>
