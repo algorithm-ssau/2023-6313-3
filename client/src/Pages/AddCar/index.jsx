@@ -70,6 +70,7 @@ export default function AdCarPage() {
 }
 
 const AddCarPage = ({ handleSubmit }) => {
+  const [files, setFiles] = useState([]);
   const [formValues, setFormValues] = useState({
     name: '',
     price: '',
@@ -99,6 +100,35 @@ const AddCarPage = ({ handleSubmit }) => {
     setFormValues((prev) => ({ ...prev, image }));
   };
 
+  const isFilledFilds = ({
+    name,
+    price,
+    image,
+    year,
+    mileage,
+    color,
+    enginePowers,
+    engineValue,
+    transmission,
+    gear,
+  }) => {
+    if (
+      name &&
+      price &&
+      image &&
+      year &&
+      mileage &&
+      color &&
+      enginePowers &&
+      engineValue &&
+      transmission &&
+      gear
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <div className='container mt-5'>
       <Form
@@ -118,6 +148,7 @@ const AddCarPage = ({ handleSubmit }) => {
             transmission: '',
             gear: '',
           });
+          setFiles([]);
         }}
       >
         <VStack
@@ -127,12 +158,12 @@ const AddCarPage = ({ handleSubmit }) => {
           m='auto'
           fontSize='20px'
         >
-          <Form.Group controlId='makeModel'>
+          <Form.Group controlId='name'>
             <Form.Label>Марка и модель</Form.Label>
             <Form.Control
               type='text'
               name='name'
-              value={formValues.makeModel}
+              value={formValues.name}
               onChange={handleSelectChange}
               required
             />
@@ -149,7 +180,11 @@ const AddCarPage = ({ handleSubmit }) => {
             />
           </Form.Group>
 
-          <DropzoneComponent setUploadFiles={setUploadFiles} />
+          <DropzoneComponent
+            setUploadFiles={setUploadFiles}
+            setFiles={setFiles}
+            files={files}
+          />
 
           {/* <Form.Group controlId='image'>
             <Form.Label>Фото</Form.Label>
@@ -249,7 +284,7 @@ const AddCarPage = ({ handleSubmit }) => {
             <Form.Control
               as='select'
               name='gear'
-              value={formValues.drive}
+              value={formValues.gear}
               onChange={handleSelectChange}
               required
             >
@@ -266,6 +301,7 @@ const AddCarPage = ({ handleSubmit }) => {
             variant='primary'
             type='submit'
             className='btn btn-primary btn-lg'
+            disabled={isFilledFilds(formValues)}
           >
             Опубликовать
           </Button>

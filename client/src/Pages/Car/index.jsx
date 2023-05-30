@@ -26,7 +26,7 @@ import styles from './style.module.css';
 import { useGetCarQuery } from '../../redux/api/carsApi';
 
 export default function CarPage() {
-  const [fav, setFav] = useState(false);
+  //const [fav, setFav] = useState(false);
   const [isFullImage, setFullImage] = useState(false);
   const [curImage, setCurImage] = useState(0);
   const { id } = useParams();
@@ -68,7 +68,7 @@ export default function CarPage() {
                 </Box>
                 <Spacer />
                 <Center>
-                  <Box>
+                  {/* <Box>
                     {fav ? (
                       <MdFavorite
                         size={50}
@@ -81,7 +81,7 @@ export default function CarPage() {
                         onClick={() => setFav((prev) => !prev)}
                       />
                     )}
-                  </Box>
+                  </Box> */}
                   <Button size={'lg'} bgColor={'red'} ml={7}>
                     Связаться с нами
                   </Button>

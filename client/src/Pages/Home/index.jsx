@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ChakraProvider, Center } from '@chakra-ui/react';
+import { ChakraProvider, Center, Heading } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
 
 import Navbar from '../../components/Navbar';
@@ -48,7 +48,7 @@ export default function HomePage() {
                 size='xl'
               />
             </Center>
-          ) : (
+          ) : filteredCars.length ? (
             <div className={'row'}>
               {filteredCars.map((car) => (
                 <Card
@@ -61,6 +61,12 @@ export default function HomePage() {
                 />
               ))}
             </div>
+          ) : (
+            <Center m={100}>
+              <Heading color={'blackAlpha.700'} fontSize={30} fontWeight={500}>
+                Таких машин не нашлось
+              </Heading>
+            </Center>
           )}
         </div>
         <PaginationNums
