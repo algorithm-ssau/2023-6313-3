@@ -19,6 +19,7 @@ export default function AdCarPage() {
   const [addCar] = useAddCarMutation();
 
   const handleSubmit = async (values) => {
+    console.log(values);
     const formData = new FormData();
     formData.append('image', values.image);
     formData.append('name', values.name);
@@ -70,6 +71,7 @@ export default function AdCarPage() {
 }
 
 const AddCarPage = ({ handleSubmit }) => {
+  const toast = useToast();
   const [files, setFiles] = useState([]);
   const [formValues, setFormValues] = useState({
     name: '',
@@ -89,7 +91,7 @@ const AddCarPage = ({ handleSubmit }) => {
     const { name, value } = event.target;
     if (name === 'leftSteeringWheel') {
       const { checked } = event.target;
-      setFormValues({ ...formValues, [name]: checked });
+      setFormValues({ ...formValues, [name]: !checked });
       return;
     }
     setFormValues({ ...formValues, [name]: value });
