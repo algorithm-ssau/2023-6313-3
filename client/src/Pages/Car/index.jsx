@@ -122,46 +122,74 @@ export default function CarPage() {
   );
 }
 
-const CarPageTable = ({ carDetails }) => (
-  <Card p={3}>
-    <Center m={5}>
-      <Heading as='h2' size='md'>
-        Характеристики
-      </Heading>
-    </Center>
-    <Table size={'md'} fontSize={16} variant={'unstyled'}>
-      <Tr>
-        <Td>Год выпуска</Td>
-        <Td>{carDetails.year}</Td>
-      </Tr>
-      <Tr>
-        <Td>Пробег</Td>
-        <Td>{carDetails.mileage}</Td>
-      </Tr>
-      <Tr>
-        <Td>Цвет</Td>
-        <Td>{carDetails.color}</Td>
-      </Tr>
-      <Tr>
-        <Td>Мощность двигатель</Td>
-        <Td>{carDetails.enginePowers}</Td>
-      </Tr>
-      <Tr>
-        <Td>Объем двигателя</Td>
-        <Td>{carDetails.engineValue}</Td>
-      </Tr>
-      <Tr>
-        <Td>Коробка</Td>
-        <Td>{carDetails.transmission}</Td>
-      </Tr>
-      <Tr>
-        <Td>Привод</Td>
-        <Td>{carDetails.gear}</Td>
-      </Tr>
-      <Tr>
-        <Td>Руль</Td>
-        <Td>{carDetails.leftSteeringWheel ? 'Левый' : 'Правый'}</Td>
-      </Tr>
-    </Table>
-  </Card>
-);
+const CarPageTable = ({ carDetails }) => {
+  const transformTransmission = (transmission) => {
+    switch (transmission) {
+      case 'Manual':
+        return 'Механика';
+      case 'Automatic':
+        return 'Автомат';
+      case 'Variator':
+        return 'Вариатор';
+      case 'Robot':
+        return 'Робот';
+      default:
+        return 'Некорректные данные';
+    }
+  };
+  const transformGear = (gear) => {
+    switch (gear) {
+      case 'Front-wheel drive':
+        return 'Передний привод';
+      case 'Rear-wheel drive':
+        return 'Задний привод';
+      case 'Full':
+        return 'Полный привод';
+      default:
+        return 'Некорректные данные';
+    }
+  };
+  return (
+    <Card p={3}>
+      <Center m={5}>
+        <Heading as='h2' size='md'>
+          Характеристики
+        </Heading>
+      </Center>
+      <Table size={'md'} fontSize={16} variant={'unstyled'}>
+        <Tr>
+          <Td>Год выпуска</Td>
+          <Td>{carDetails.year}</Td>
+        </Tr>
+        <Tr>
+          <Td>Пробег</Td>
+          <Td>{carDetails.mileage}</Td>
+        </Tr>
+        <Tr>
+          <Td>Цвет</Td>
+          <Td>{carDetails.color}</Td>
+        </Tr>
+        <Tr>
+          <Td>Мощность двигатель</Td>
+          <Td>{carDetails.enginePowers}</Td>
+        </Tr>
+        <Tr>
+          <Td>Объем двигателя</Td>
+          <Td>{carDetails.engineValue}</Td>
+        </Tr>
+        <Tr>
+          <Td>Коробка</Td>
+          <Td>{transformTransmission(carDetails.transmission)}</Td>
+        </Tr>
+        <Tr>
+          <Td>Привод</Td>
+          <Td>{transformGear(carDetails.gear)}</Td>
+        </Tr>
+        <Tr>
+          <Td>Руль</Td>
+          <Td>{carDetails.leftSteeringWheel ? 'Левый' : 'Правый'}</Td>
+        </Tr>
+      </Table>
+    </Card>
+  );
+};

@@ -265,10 +265,10 @@ const AddCarPage = ({ handleSubmit }) => {
               required
             >
               <option value=''>Выбрать</option>
-              <option value='Механика'>Механика</option>
-              <option value='Автомат'>Автомат</option>
-              <option value='Вариатор'>Вариатор</option>
-              <option value='Робот'>Робот</option>
+              <option value='Manual'>Механика</option>
+              <option value='Automatic'>Автомат</option>
+              <option value='Variator'>Вариатор</option>
+              <option value='Robot'>Робот</option>
             </Form.Control>
           </Form.Group>
 
@@ -282,9 +282,9 @@ const AddCarPage = ({ handleSubmit }) => {
               required
             >
               <option value=''>Выбрать</option>
-              <option value='Передний привод'>Передний привод</option>
-              <option value='Задний привод'>Задний привод</option>
-              <option value='Полный привод'>Полный привод</option>
+              <option value='Front-wheel drive'>Передний привод</option>
+              <option value='Rear-wheel drive'>Задний привод</option>
+              <option value='Full'>Полный привод</option>
             </Form.Control>
           </Form.Group>
         </VStack>
