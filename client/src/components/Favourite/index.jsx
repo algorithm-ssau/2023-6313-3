@@ -29,11 +29,14 @@ export default function Favourite({ id, name, imageUrl, price }) {
           <h3>{name}</h3>
           <h3>{price}</h3>
         </div>
-        {/* <div className={styles['buttons-favourite']}> */}
-        <div onClick={removeFavHandler} className={styles['remove']}>
-          <ion-icon className={styles['icon']} name='close-outline'></ion-icon>
+        <div className={styles['buttons-favourite']}>
+          <div onClick={removeFavHandler} className={styles['remove']}>
+            <ion-icon
+              className={styles['icon']}
+              name='close-outline'
+            ></ion-icon>
+          </div>
         </div>
-        {/* </div> */}
       </div>
 
       <div className={styles['line']}></div>

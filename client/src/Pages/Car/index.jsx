@@ -40,6 +40,22 @@ export default function CarPage() {
     });
   }, []);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const isMobile = () => {
+    return windowWidth < 767;
+  };
+
   return (
     <ChakraProvider resetCSS>
       <Navbar />
@@ -57,7 +73,11 @@ export default function CarPage() {
             </Center>
           ) : (
             <Box>
-              <Flex>
+              <Flex
+                flexDirection={isMobile() ? 'column' : ''}
+                flexWrap={isMobile() ? 'wrap' : ''}
+                alignItems={isMobile() ? 'center' : ''}
+              >
                 <Box>
                   <Heading color={'black'} fontSize={30}>
                     {carDetails.name}
@@ -87,16 +107,16 @@ export default function CarPage() {
                   </Button>
                 </Center>
               </Flex>
-              <Flex mt={10} justifyContent={'space-around'}>
+              <Flex flexWrap={'wrap'} mt={10} justifyContent={'space-around'}>
                 <CarPageTable carDetails={carDetails} />
                 <Center>
-                  <Card p={5} ml={5}>
+                  <Card p={5} ml={isMobile() ? 0 : 5} mt={isMobile() ? 5 : 0}>
                     <Center>
                       <SimpleImageSlider
-                        width={700}
-                        height={500}
+                        className={styles['slider']}
+                        width={isMobile() ? windowWidth - 100 : 700}
+                        height={isMobile() ? (windowWidth - 100) / 1.8 : 500}
                         images={[carDetails.imageUrl]}
-                        showBullets={true}
                         onClickBullets={(idx) => setCurImage(idx)}
                         onClick={() => setFullImage(!isFullImage)}
                         showNavs={false}

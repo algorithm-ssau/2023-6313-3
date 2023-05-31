@@ -49,17 +49,19 @@
 	.searching-line {
 		margin: 30px 10px;
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		flex-wrap: wrap;
 		width: auto;
+		align-items: baseline;
 	}
 
 	.input {
 		margin: 0 0;
-		margin-right: 30px;
 		width: auto;
 		margin-bottom: 10px;
 	}
 
-
+	.find {
+		margin-left: 0;
+	}
 }

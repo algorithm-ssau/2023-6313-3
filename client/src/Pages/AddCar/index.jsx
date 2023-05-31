@@ -6,7 +6,7 @@ import {
   VStack,
   useToast,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 import Navbar from '../../components/Navbar';
@@ -53,12 +53,28 @@ export default function AdCarPage() {
       });
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const isMobile = () => {
+    return windowWidth < 767;
+  };
+
   return (
     <ChakraProvider resetCSS>
       <Navbar />
       <Container maxW={1320} mt={50}></Container>
       <Center>
-        <Heading as='h1' size='xl'>
+        <Heading as='h1' size={isMobile() ? 'md' : 'xl'}>
           Размещение объявления
         </Heading>
       </Center>
